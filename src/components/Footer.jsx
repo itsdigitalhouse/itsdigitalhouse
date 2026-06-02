@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#0a0a0a] text-white w-full h-screen overflow-hidden flex flex-col items-center justify-center border-t border-white/5">
+    <footer className="relative bg-[#0a0a0a] text-white w-full min-h-screen overflow-hidden flex flex-col items-center justify-center border-t border-white/5 py-12 md:py-0">
       
       {/* Background Pattern */}
       <motion.div 
@@ -41,45 +41,44 @@ const Footer = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.3 }} 
-        className="container mx-auto px-4 relative z-10 h-full flex flex-col items-center justify-center"
+        className="container mx-auto px-4 relative z-10 w-full flex flex-col items-center justify-center"
       >
         
         <motion.p 
           variants={itemVariants}
-          className="text-base md:text-xl font-medium mb-4 md:mb-6 text-gray-400 tracking-[0.2em] uppercase"
+          className="text-base md:text-xl font-medium mb-4 md:mb-6 text-gray-400 tracking-[0.2em] uppercase text-center"
         >
           Hello, Lets Talk
         </motion.p>
 
-        {/* PROJECT HEADING WITH HOVER TRIGGER */}
+        {/* PROJECT HEADING WITH HOVER TRIGGER - w-fit kiya taake container sirf text ki width le */}
         <motion.div 
           variants={itemVariants}
-          className="relative inline-block group cursor-pointer mb-10 md:mb-16 text-center w-fit mx-auto"
+          className="relative inline-block group cursor-pointer mb-10 md:mb-16 text-center w-fit mx-auto overflow-hidden"
           initial="initial"
           whileHover="hovered"
         >
-          {/* Text Fix: Added padding and block display to prevent italic cutting */}
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[110px] xl:text-[130px] font-[1000] uppercase tracking-tighter leading-[0.85] mb-8 italic px-8 md:px-12">
+          {/* h2 se padding-x hata di taake line end-to-end text ke barabar ho */}
+          <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-[100px] xl:text-[130px] font-[1000] uppercase tracking-tighter leading-[0.9] sm:leading-[0.85] mb-8">
             <span 
                style={{ 
                  backgroundImage: neonGradient, 
                  WebkitBackgroundClip: 'text', 
                  WebkitTextFillColor: 'transparent',
                  backgroundClip: 'text',
-                 display: 'inline-block',
-                 paddingRight: '15px' // Extra safety for 'T'
+                 display: 'inline-block'
                }}
             >
               TELL US ABOUT <br /> YOUR PROJECT
             </span>
           </h2>
 
-          {/* LINE: Increased height to 20px + Stronger Glow */}
+          {/* LINE - Ab ye automatically h2 text ke size tak hi generate hogi */}
           <motion.div 
             className="rounded-full shadow-[0_0_40px_rgba(255,255,255,0.3)]"
             style={{ 
               background: neonGradient,
-              height: '20px', // Extra height as requested
+              height: '20px', 
               width: '100%',
               margin: '0 auto'
             }}

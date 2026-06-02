@@ -43,9 +43,11 @@ const DigitalPartners = () => {
     { name: 'Aldo Partners', img: aldo }
   ];
 
+  const duplicatedPartners = [...partners, ...partners];
+
   return (
-    <section className="relative w-full min-h-screen bg-white flex flex-col justify-center items-center py-20">
-      <div className="container mx-auto px-4 md:px-6">
+    <section className="relative w-full min-h-screen bg-white flex flex-col justify-center items-center py-20 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
         
         {/* HEADING */}
         <motion.h2 
@@ -60,7 +62,7 @@ const DigitalPartners = () => {
           OUR PARTNERS IN DIGITAL JOURNEY
         </motion.h2>
 
-        {/* TESTIMONIAL SLIDER - Perfectly Centered */}
+        {/* TESTIMONIAL SLIDER */}
         <div className="w-full flex flex-col items-center justify-center mb-24">
           <span className="text-[#D24A8A] text-5xl md:text-8xl font-serif text-center w-full">"</span>
           <div className="max-w-4xl w-full px-4 text-center">
@@ -84,13 +86,37 @@ const DigitalPartners = () => {
           </div>
         </div>
 
-        {/* LOGO GRID */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 border-t border-l border-gray-100">
-          {partners.map((partner, i) => (
-            <div key={i} className="h-32 md:h-40 flex items-center justify-center p-6 border-r border-b border-gray-100 hover:bg-gray-50 transition-colors">
-              <img src={partner.img} alt={partner.name} className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity" />
-            </div>
-          ))}
+        {/* MARQUEE CONTAINER */}
+        <div className="relative w-full max-w-7xl overflow-hidden py-10 border-y border-gray-100 bg-gray-50/30 rounded-2xl">
+          
+          {/* Deep Left Shadow Effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          
+          {/* Deep Right Shadow Effect */}
+          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+          <motion.div 
+            className="flex space-x-16 md:space-x-24 w-max items-center px-10"
+            animate={{ x: [0, "-50%"] }}
+            transition={{
+              ease: "linear",
+              duration: 30, 
+              repeat: Infinity,
+            }}
+          >
+            {duplicatedPartners.map((partner, i) => (
+              <div 
+                key={i} 
+                className="w-40 h-20 md:w-56 md:h-28 flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-105"
+              >
+                <img 
+                  src={partner.img} 
+                  alt={partner.name} 
+                  className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 transition-all duration-300" 
+                />
+              </div>
+            ))}
+          </motion.div>
         </div>
 
       </div>

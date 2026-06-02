@@ -1,89 +1,110 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const OurTeam = () => {
-  const teamMembers = [
-    {
-      role: "Designer",
-      name: "Alex Rivera",
-      specialty: "UI/UX & Brand Systems",
-      img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+  const neonGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
+
+  // Ultra-stable global image links with strict cross-origin parameters (No Face Reveal)
+  const squad = [
+    { 
+      name: "Jamshed", 
+      role: "Senior Web & App Developer", 
+      image: "https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80" // Verified Dev IDE Setup
     },
-    {
-      role: "Developer",
-      name: "Jamshed Khan",
-      specialty: "Senior Web & App Architect",
-      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+    { 
+      name: "UI/UX Architecture Unit", 
+      role: "Lead Product Designers & Brand Strategists", 
+      image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=600&q=80" // Highly stable Interface Sketch & Layout
     },
-    {
-      role: "Marketer",
-      name: "Sarah Jenkins",
-      specialty: "Digital Growth & Strategy",
-      img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80"
+    { 
+      name: "Growth & SEO Squad", 
+      role: "Algorithmic Ranking Experts & Data Analysts", 
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" // Data & Search Charts Layout
+    },
+    { 
+      name: "Social Media & Content Hub", 
+      role: "Campaign Managers & Creative Copywriters", 
+      image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" // Global Media App Matrices
+    },
+    { 
+      name: "Performance Marketing Lab", 
+      role: "Paid Ads Managers & Direct-Response Specialists", 
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" // Marketing Campaigns & Funnels
+    },
+    { 
+      name: "Project Management Core", 
+      role: "Agile Scrum Masters & Delivery Operations", 
+      image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80" // Agile Dashboard Wireframes
     }
   ];
 
-  // Aapki bheji hui exact sequence ka gradient style
-  const customGradientStyle = {
-    background: 'linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  };
-
   return (
-    <section className="py-24 md:py-32 bg-white w-full overflow-hidden">
-      {/* Team Header Section */}
-      <div className="w-full px-4 sm:px-6 md:px-12 mb-16 md:mb-24 flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8">
-        <div>
-          <span className="inline-block text-[#ee3444] font-bold tracking-[0.3em] text-[10px] sm:text-[11px] uppercase mb-3 md:mb-4">
-            The Minds Behind The Magic
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black text-slate-950 leading-[1] md:leading-[0.95]">
-            Meet our team of<br />
-            {/* Gradient applied exactly on experts & creative */}
-            <span style={customGradientStyle} className="inline-block">
-              experts & creative
-            </span><br />
-            <span className="text-slate-950">innovators</span>
-          </h2>
+    <section className="relative w-full bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-50">
+      <div className="container mx-auto max-w-7xl">
+        
+        <div className="text-center mb-20">
+          <p className="text-xs sm:text-sm font-black tracking-[0.3em] uppercase mb-4" style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            THE ALCHEMISTS
+          </p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            className="text-3xl sm:text-5xl font-[1000] uppercase tracking-tighter text-[#0a0a0a]"
+          >
+            Meet Our Elite Departments
+          </motion.h2>
         </div>
-        <div className="h-1 w-20 md:w-24 bg-gradient-to-r from-[#e1b054] to-[#ee3444] md:mb-4 shrink-0" />
-      </div>
 
-      {/* Team Cards Grid */}
-      <div className="w-full px-4 sm:px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto">
-        {teamMembers.map((member, index) => (
-          <div key={index} className="group flex flex-col w-full">
-            
-            {/* Image Container */}
-            <div className="w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-slate-100 relative mb-6">
-              <img 
-                src={member.img} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt={member.name} 
-              />
-              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full shadow-sm">
-                <span className="text-[#ee3444] font-bold tracking-wider text-[10px] uppercase">
-                  {member.role}
-                </span>
+        {/* Responsive Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-7xl mx-auto">
+          {squad.map((member, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: (idx % 3) * 0.12 }}
+              whileHover={{ y: -10 }}
+              className="bg-gray-50/30 rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
+            >
+              {/* Cover Asset Frame with CSS Fallback Gradient */}
+              <div className="w-full h-[220px] overflow-hidden relative bg-gradient-to-br from-[#111] to-[#222]">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-30 hover:opacity-60 transition-opacity duration-300" />
+                
+                <img 
+                  src={member.image} 
+                  alt={member.name} 
+                  loading="lazy"
+                  crossOrigin="anonymous"
+                  className="w-full h-full object-cover opacity-85 transform hover:scale-105 transition-transform duration-700 ease-out filter grayscale hover:grayscale-0"
+                  onError={(e) => {
+                    // Quick fix if Unsplash fails locally: transforms into a premium geometric placeholder background
+                    e.target.style.display = 'none';
+                  }}
+                />
+                
+                {/* Fallback Core Graphic if Image breaks */}
+                <div className="absolute inset-0 flex items-center justify-center p-4 text-center select-none pointer-events-none">
+                  <span className="text-white/5 text-4xl font-black uppercase tracking-widest block">
+                    {member.name.split(' ')[0]}
+                  </span>
+                </div>
               </div>
-            </div>
-
-            {/* Member Details */}
-            <div className="px-2">
-              <h3 className="text-2xl font-black text-slate-950 mb-1 transition-colors duration-300 group-hover:text-[#ee3444]">
-                {member.name}
-              </h3>
-              <p className="text-sm font-medium text-slate-500 mb-4">
-                {member.specialty}
-              </p>
               
-              <div className="w-12 h-[2px] bg-slate-200 transition-all duration-300 group-hover:w-20 group-hover:bg-[#e1b054]" />
-            </div>
+              {/* Description Block */}
+              <div className="p-6 text-center bg-white border-t border-gray-50 flex-grow flex flex-col justify-center">
+                <h3 className="text-base sm:text-lg font-black text-[#0a0a0a] uppercase tracking-tight mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-xs font-bold uppercase tracking-wider" style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', display: 'inline-block' }}>
+                  {member.role}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-          </div>
-        ))}
       </div>
     </section>
   );

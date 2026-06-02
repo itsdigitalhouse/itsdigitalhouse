@@ -42,14 +42,14 @@ const ScreenSolutions = () => {
     <section 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full bg-white py-12 lg:py-24 overflow-hidden font-sans cursor-default"
+      className="relative w-full bg-white overflow-hidden font-sans cursor-default"
       style={{ perspective: "1500px" }} // Increased perspective for deeper 3D
     >
       <motion.div 
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="w-full h-full"
       >
-        <div className="w-full px-6 lg:px-20 flex flex-col-reverse lg:flex-row items-center gap-12 relative">
+        <div className="w-full px-6 lg:px-10 flex flex-col-reverse lg:flex-row items-center gap-12 relative">
           
           {/* LEFT SIDE: CONTENT */}
           <div 

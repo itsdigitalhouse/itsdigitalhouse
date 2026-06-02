@@ -1,9 +1,32 @@
 // data/servicesData.js
+import iosImg from '../assets/ios-development.jpeg'; // Yahan import add karein
+import androidImg from '../assets/android-app-development.jpeg';
+import crossPlatformImg from '../assets/cross-platform-app-development.jpeg';
+import aiImg from '../assets/ai-development.jpeg';
+import aiChatbotImg from '../assets/ai-chatbot.jpeg';
+import generativeAiImg from '../assets/generative-app-development.jpeg';
+import machineLearningImg from '../assets/machine-learning.jpeg';
+import computerVisionImg from '../assets/computer-vision.jpeg';
+import naturalLanguageProcessorImg from '../assets/natural-language-processor.jpeg';
+import webPortalImg from '../assets/web-portal.jpeg';
+import ecommerceDevelopmentImg from '../assets/e-commerce-development.jpeg';
+import cmsDevelopmentImg from '../assets/cms-development.jpeg';
+import integrationServicesImg from '../assets/integrated-services.jpeg';
+import cloudMigrationImg from '../assets/cloud-migration.jpeg';
+import cloudMaintenanceImg from '../assets/cloud-maintenance.jpeg';
+import erpSolutionImg from '../assets/erp-solution.jpeg';
+import crmSolutionImg from '../assets/crm-solution.jpeg';
+import lmsSolutionImg from '../assets/lms-solutions.jpeg';
+import seoImg from '../assets/seo.jpeg';
+import smmImg from '../assets/smm.jpeg';
+import paidAdsManagementImg from '../assets/paid-ads-management.jpeg';
+import contentCreationImg from '../assets/content-creation.jpeg';
+
 export const serviceContent = {
   "ios-app-development": {
     title: "iOS App Development",
     description: "We craft high-performance, intuitive, and secure applications tailored for the Apple ecosystem. From iPhones to Apple Watches, we ensure your app delivers a seamless, native experience that keeps users engaged.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=800&q=80",
+    image: iosImg, // Yahan variable use karein
     techStack: ["Swift", "SwiftUI", "Combine", "Core Data", "UIKit"],
     features: ["Custom UI/UX", "Native Performance", "Secure API Integration", "App Store Optimization"],
     process: [
@@ -31,7 +54,7 @@ export const serviceContent = {
   "android-app-development": {
     title: "Android App Development",
     description: "High-performance apps jo har Android device par chalein. Built on robust codebases ensuring maximum engagement and seamless user interaction.",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+    image: androidImg,
     techStack: ["Kotlin", "Jetpack Compose", "Coroutines & Flow", "Room", "Retrofit", "Dagger Hilt"],
     features: [
       "Kotlin & Java Development",
@@ -64,7 +87,7 @@ export const serviceContent = {
   "cross-platform-app-development": {
     title: "Cross Platform App Development",
     description: "Build once, deploy everywhere. High-performance, native-like mobile applications for both iOS and Android platforms using a single shared codebase.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    image: crossPlatformImg,
     techStack: ["React Native", "Flutter", "Dart", "JavaScript", "TypeScript"],
     features: [
       "Single Codebase Deployment",
@@ -96,7 +119,7 @@ export const serviceContent = {
   "web-portal-development": {
     title: "Web Portal Development",
     description: "Secure, scalable, and high-performance enterprise portals tailored for your business operations. From advanced customer hubs to complex internal management dashboards, we build systems that streamline workflows.",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+    image: webPortalImg,
     techStack: ["React", "Next.js", "Node.js", "Tailwind CSS", "REST/GraphQL", "PostgreSQL"],
     features: [
       "Role-Based Access Control (RBAC)",
@@ -128,8 +151,7 @@ export const serviceContent = {
   "e-commerce-development": {
     title: "E-Commerce Development",
     description: "High-converting, secure, and lightning-fast online stores engineered to maximize your digital sales. From seamless product customizers to optimized single-page checkout flows, we build scalable digital storefronts.",
-    // servicesData.js ke andar "e-commerce-development" wale block me image link change karein:
-image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
+    image: ecommerceDevelopmentImg,
     techStack: ["Next.js", "WooCommerce", "Shopify Liquid", "Tailwind CSS", "GraphQL", "Stripe API"],
     features: [
       "Custom Product Configurators",
@@ -161,7 +183,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "cms-development": {
     title: "CMS Development",
     description: "Empower your team with flexible, secure, and user-friendly Content Management Systems. Whether you need a custom WordPress setup or a modern Headless CMS, we build architectures that make content updates effortless.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    image: cmsDevelopmentImg,
     techStack: ["WordPress", "Strapi", "Sanity.io", "PHP", "React / Next.js", "GraphQL"],
     features: [
       "Custom Gutenberg & ACF Blocks",
@@ -193,7 +215,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "integration-services": {
     title: "Integration Services",
     description: "Connect your digital ecosystem with secure, real-time API integrations and enterprise middleware. We bridge the gap between your applications, CRMs, ERPs, and third-party platforms to automate workflows seamlessly.",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    image: integrationServicesImg,
     techStack: ["REST APIs", "GraphQL", "Webhooks", "Node.js", "AWS Lambda", "Zapier / Make"],
     features: [
       "Custom API Architecture",
@@ -225,7 +247,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "erp-solution": {
     title: "ERP Solution",
     description: "Streamline your enterprise operations with custom ERP software designed to automate workflows. From real-time inventory tracking and supply chain management to financial ledgers and HR operations, we build centralized systems that scale your business efficiency.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    image: erpSolutionImg,
     techStack: ["React / Next.js", "Node.js", "Python", "PostgreSQL", "Docker", "AWS / Cloud Infrastructure"],
     features: [
       "Automated Resource Planning",
@@ -257,7 +279,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "crm-solution": {
     title: "CRM Solution",
     description: "Empower your sales and support teams with a custom CRM platform designed to optimize customer lifecycles. Track leads, automate follow-ups, monitor pipeline metrics, and manage customer communications from a unified dashboard tailored to your sales strategy.",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+    image: crmSolutionImg,
     techStack: ["React / Next.js", "Node.js", "Python", "MongoDB / PostgreSQL", "Redis", "AWS / Firebase"],
     features: [
       "Dynamic Lead Funnel Tracking",
@@ -289,7 +311,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "lms-solution": {
     title: "LMS Solution",
     description: "Architect a modern, high-performance Learning Management System tailored for corporate training or educational institutions. Deliver seamless video streaming, interactive course modules, automated quiz engines, and comprehensive student progress tracking inside a unified portal.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80",
+    image: lmsSolutionImg,
     techStack: ["React / Next.js", "Node.js", "Python / Django", "PostgreSQL", "Redis", "AWS S3 / CloudFront"],
     features: [
       "Modular Course Builder",
@@ -321,7 +343,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "ai-development": {
     title: "AI Development",
     description: "Transform your business operations with intelligent, automated AI solutions. From fine-tuning Large Language Models (LLMs) and training predictive Machine Learning models to engineering autonomous agent workflows and Computer Vision pipelines, we build smart software that turns complex data into actionable outcomes.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=800&q=80",
+    image: aiImg,
     techStack: ["Python", "PyTorch / TensorFlow", "OpenAI API", "LangChain / LlamaIndex", "FastAPI", "Vector DBs (Pinecone/Chroma)"],
     features: [
       "Custom LLM Fine-Tuning & RAG",
@@ -353,7 +375,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "ai-chatbot-development": {
     title: "AI Chatbot Development",
     description: "Deploy highly intelligent, multi-channel AI Chatbots capable of conducting complex, human-like conversations. Engineered with context-retention logic, custom knowledge bases, and direct transactional system capabilities, our chatbots automate client engagement and customer support 24/7 without losing brand tone.",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=800&q=80",
+    image: aiChatbotImg,
     techStack: ["Node.js / Python", "OpenAI Assistants API", "LangGraph", "vapi.ai / Bland.ai", "Redis (Session Store)", "Pinecone"],
     features: [
       "Context-Aware Conversational Flows",
@@ -382,7 +404,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "generative-ai-development": {
     title: "Generative AI Development",
     description: "Build cutting-edge AI ecosystems that go beyond simple chat. We engineer custom LLM applications, proprietary RAG pipelines, and automated agent workflows that leverage your private data to provide intelligent, accurate, and context-aware business insights.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
+    image: generativeAiImg,
     techStack: ["OpenAI API / Claude API", "LangChain / LlamaIndex", "Pinecone / Weaviate (Vector DB)", "Python / FastAPI", "PostgreSQL", "Docker / AWS Bedrock"],
     features: [
       "Custom RAG (Retrieval-Augmented Generation) Pipelines",
@@ -410,7 +432,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "machine-learning": {
     title: "Machine Learning",
     description: "Build robust, data-driven intelligence that predicts trends, identifies anomalies, and automates complex decision-making. We develop custom predictive models and ML pipelines that transform your raw historical data into accurate, actionable business forecasts.",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
+    image: machineLearningImg,
     techStack: ["Python (Scikit-Learn/XGBoost)", "TensorFlow / PyTorch", "Pandas / NumPy", "MLflow / Kubeflow", "Docker / FastAPI", "SQL / NoSQL"],
     features: [
       "Custom Predictive Analytics Models",
@@ -442,7 +464,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "computer-vision": {
     title: "Computer Vision",
     description: "Empower your systems to 'see' and interpret the world. We build advanced Computer Vision solutions that automate visual inspection, object recognition, motion analysis, and OCR pipelines to increase operational efficiency and accuracy.",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+    image: computerVisionImg,
     techStack: ["OpenCV", "YOLO (You Only Look Once)", "PyTorch / TensorFlow", "MediaPipe", "CUDA (GPU Acceleration)", "FastAPI / gRPC"],
     features: [
       "Real-time Object Detection & Tracking",
@@ -474,7 +496,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "natural-language-processing": {
     title: "Natural Language Processing",
     description: "Unlock the hidden intelligence within your text data. We engineer advanced NLP pipelines to parse, understand, and extract actionable insights from unstructured language, enabling your business to automate document processing, sentiment tracking, and cross-lingual communication.",
-    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
+    image: naturalLanguageProcessorImg,
     techStack: ["Hugging Face Transformers", "spaCy / NLTK", "BERT / RoBERTa", "LangChain", "Python", "Elasticsearch / OpenSearch"],
     features: [
       "Automated Sentiment & Emotion Analysis",
@@ -506,7 +528,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "cloud-migration": {
     title: "Cloud Migration",
     description: "Seamlessly transition your legacy infrastructure to a high-performance cloud ecosystem. We engineer zero-downtime migration strategies, ensuring your data, applications, and services scale effortlessly while reducing operational costs and enhancing system security.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+    image: cloudMigrationImg,
     techStack: ["AWS (EC2/S3/RDS)", "Azure", "Google Cloud Platform", "Kubernetes / Docker", "Terraform / Ansible", "Jenkins / GitHub Actions"],
     features: [
       "Zero-Downtime Application Migration",
@@ -538,7 +560,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "cloud-support-&-maintenance": {
     title: "Cloud Support & Maintenance",
     description: "Ensure your digital infrastructure remains robust, secure, and cost-efficient. We provide 24/7 proactive monitoring, automated patch management, and resource optimization to keep your cloud environment performing at peak potential.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: cloudMaintenanceImg,
     techStack: ["AWS CloudWatch / Azure Monitor", "Prometheus / Grafana", "PagerDuty", "Ansible / Terraform", "Docker / Kubernetes", "CloudHealth"],
     features: [
       "24/7 Proactive System Monitoring",
@@ -570,7 +592,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "seo": {
     title: "SEO Optimization",
     description: "Dominate search rankings and drive sustainable organic growth. We engineer data-backed SEO strategies covering technical infrastructure, semantic content optimization, and high-authority link acquisition to ensure your brand stands out in competitive digital landscapes.",
-    image: "https://images.unsplash.com/photo-1571566888602-ed11e1564756?auto=format&fit=crop&w=1200&q=80https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: seoImg,
     techStack: ["Google Search Console", "Ahrefs / SEMrush", "Screaming Frog", "Google Analytics 4", "Schema Markup (JSON-LD)", "PageSpeed Insights"],
     features: [
       "Technical SEO Audit & Architecture",
@@ -602,7 +624,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "smm": {
     title: "Social Media Management",
     description: "Transform your social channels into powerful growth engines. We craft compelling content, manage community engagement, and execute data-driven campaigns that amplify your brand identity and connect you directly with your target audience.",
-    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80",
+    image: smmImg,
     techStack: ["Meta Business Suite", "Hootsuite / Buffer", "Canva / Adobe Creative Cloud", "Google Analytics", "CapCut / Premiere Pro", "Social Listening Tools"],
     features: [
       "Strategic Content Calendar & Planning",
@@ -628,7 +650,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "paid-ads-management": {
     title: "Paid Ads Management",
     description: "Scale your revenue with high-precision paid advertising campaigns. We design data-backed ad funnels, perform rigorous A/B testing, and optimize bidding strategies to ensure every dollar spent maximizes your ROI and conversion goals.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+    image: paidAdsManagementImg,
     techStack: ["Google Ads Manager", "Meta Ads Manager", "LinkedIn Campaign Manager", "Google Analytics 4", "Hotjar / Clarity", "Looker Studio"],
     features: [
       "Precision Audience Targeting",
@@ -654,7 +676,7 @@ image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fi
   "content-creation": {
     title: "Content Creation",
     description: "Build a brand that speaks, resonates, and converts. We craft high-impact content strategies, from technical blog posts and case studies to high-converting ad copy and storytelling scripts, all tailored to elevate your brand identity and authority.",
-    image: "https://images.unsplash.com/photo-1542435503-956c4696c7f4?auto=format&fit=crop&w=1200&q=80",
+    image: contentCreationImg,
     techStack: ["Notion / Trello", "Grammarly / Hemingway", "Adobe Creative Suite", "Figma", "ChatGPT (Custom Prompts)", "WordPress / Webflow"],
     features: [
       "Technical Content & Thought Leadership",

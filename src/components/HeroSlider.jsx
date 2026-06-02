@@ -59,9 +59,9 @@ const HeroSlider = () => {
             className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-widest text-white leading-[1.2] sm:leading-[1.15] uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] w-full break-words"
             variants={itemVariants}
           >
-            BUILDING NEXT <br className="hidden sm:block" />
+            WHERE IDEAS <br className="hidden sm:block" />
             <span className="block sm:inline-block sm:whitespace-nowrap mt-1 sm:mt-0 tracking-wide bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              GEN DIGITAL EXPERIENCES
+              MADE DIGITAL
             </span>
           </motion.h1>
           
@@ -70,7 +70,7 @@ const HeroSlider = () => {
             className="text-xs sm:text-base md:text-lg text-slate-300 font-normal tracking-wide max-w-xl leading-relaxed drop-shadow-sm mx-auto px-4 sm:px-0"
             variants={itemVariants}
           >
-            We engineer custom software solutions, scalable cloud applications, and high-performance websites tailored to accelerate your business growth.
+            We design, develop, and grow brands in the digital world from visual identity to full-stack software, social media, and performance marketing.
           </motion.p>
           
           {/* Motion Animated Button */}
@@ -80,7 +80,7 @@ const HeroSlider = () => {
           >
             <button className="w-full sm:w-auto group relative px-10 py-5 bg-white text-slate-950 border border-white font-black text-[12px] sm:text-[14px] tracking-widest uppercase rounded-full overflow-hidden transition-all duration-300 shadow-xl backface-visibility-hidden transform-gpu hover:shadow-2xl">
               <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                Schedule Free Consultation
+                GET A FREE CONSULTATION
               </span>
               <span className="absolute inset-0 bg-slate-950 scale-x-0 group-hover:scale-x-105 origin-left transition-transform duration-500 ease-out rounded-full pointer-events-none"></span>
             </button>

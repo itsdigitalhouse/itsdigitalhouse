@@ -2,7 +2,6 @@ import React from 'react';
 import ServicesHero from '../components/ServicesHero';
 import ServicesGrid from '../components/ServicesGrid';
 import PortfolioPage from '../components/portfolio';
-import WhyChooseUs from '../components/WhyChooseUs';
 import CaseStudiesSlider from '../components/CaseStudiesSlider';
 
 const ServicesPage = () => {
@@ -11,7 +10,6 @@ const ServicesPage = () => {
       <ServicesHero />
       <ServicesGrid />
       <PortfolioPage />
-      <WhyChooseUs />
       <CaseStudiesSlider />
     </div>
   );
