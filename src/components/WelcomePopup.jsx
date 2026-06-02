@@ -28,8 +28,8 @@ const WelcomePopup = () => {
             <div className="w-full lg:w-[45%] flex-shrink-0">
               <span className="text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase">ITS DIGITAL HOUSE • BRIEFING</span>
               <h3 className="text-4xl lg:text-7xl font-black text-slate-950 mt-4 mb-6 leading-[1.1]">
-                Stop Building Sites.<br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e1b054] via-[#ee3444] to-[#75b0d2]">Start Dominant Loops.</span>
+                Book A Free.<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#e1b054] via-[#ee3444] to-[#75b0d2]">Consultant</span>
               </h3>
               <p className="text-base text-slate-600 leading-relaxed">
                 Most digital projects fail because they lack structured strategy. Drop your details to connect directly with our core architecture team.
