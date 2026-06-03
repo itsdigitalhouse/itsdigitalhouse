@@ -8,6 +8,7 @@ import StatsCounter from '../components/StatsCounter';
 import CorePillars from '../components/CorePillars'; 
 import AboutAgency from '../components/AboutAgency'; 
 import DigitalPartners from '../components/DigitalPartners';
+import ModernHero from '../components/ModernHero';
 
 const Home = () => {
   return (
@@ -15,13 +16,9 @@ const Home = () => {
       <HeroSlider />
       <CompanyCore /> 
       <ServiceSection />
-      
-      {/* Sequence requested: HowWeWork ke bilkul niche ScreenSolutions */}
-      <ScreenSolutions />
-      <HowWeWork /> 
-      
-      
+      <ModernHero />
       <StatsCounter /> 
+      <ScreenSolutions />
       <CorePillars /> 
       <AboutAgency /> 
       <DigitalPartners />

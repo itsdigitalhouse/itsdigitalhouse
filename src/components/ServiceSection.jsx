@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Imports ---
@@ -40,62 +40,56 @@ const ServiceSection = () => {
   return (
     <section className="bg-[#f0544f] min-h-screen py-12 lg:py-0 flex items-center justify-center overflow-hidden relative z-0">
       
-      {/* HEADER */}
-      <div className="absolute top-10 w-full text-center text-white px-6 z-20">
-        <h2 
-          className="font-unbounded font-black text-4xl lg:text-5xl uppercase mb-6 text-transparent bg-clip-text"
-          style={{ backgroundImage: `linear-gradient(white)` }}
-        >
-          END-TO-END DIGITAL SERVICES
-        </h2>
-        <p className="font-league-spartan text-md opacity-90">Everything your business needs to dominate the digital landscape under one roof.</p>
-      </div>
+      {/* HEADER removed as requested */}
 
-      <div className="hidden lg:flex container mx-auto px-10 items-center justify-between gap-4 relative z-10 w-full h-screen mt-20">
+      <div className="hidden lg:flex container mx-auto px-10 items-center justify-between gap-8 relative z-10 w-full min-h-[80vh]">
         
         {/* Left Column */}
-        <div className="flex flex-col gap-16 w-[35%] items-end">
+        <div className="flex flex-col gap-12 w-[35%] items-end">
           {services.filter(s => s.side === "left").map((service) => (
-            <div key={service.id} className="w-full max-w-[320px] cursor-pointer group flex flex-col items-end" onMouseEnter={() => setActiveService(service)}>
-              <span className="text-[9px] font-bold tracking-widest text-white/50 mb-1">{service.sub}</span>
-              <h3 className="text-white font-unbounded font-bold text-lg mb-2 text-right">{service.title}</h3>
-              <div className="w-full h-[3px] bg-white mb-5" />
-              <div className="flex items-start gap-5 flex-row text-right">
+            <div key={service.id} className="w-full max-w-[340px] cursor-pointer group flex flex-col items-end transition-transform duration-200 hover:-translate-y-1" onMouseEnter={() => setActiveService(service)} onMouseLeave={() => setActiveService(defaultState)}>
+              <span className="text-[10px] font-bold tracking-widest text-white/60 mb-1 w-full">{service.sub}</span>
+              <h3 className="w-full text-white font-unbounded font-extrabold text-lg mb-2 text-left">{service.title}</h3>
+              <div className="w-full h-[3px] bg-white opacity-90 mb-5 rounded-full" />
+              <div className="flex items-start gap-5 flex-row text-left">
                 <img src={service.icon} alt="icon" className="w-10 h-10 object-contain" />
-                <p className="text-white font-league-spartan text-[15px] opacity-90 text-right">{service.desc}</p>
+                <p className="text-white font-league-spartan text-[15px] opacity-95 text-left leading-relaxed max-w-[260px]">{service.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Center Frame - Smaller Size */}
+        {/* Center Frame - Slightly Larger */}
         <div className="w-[30%] h-full flex items-center justify-center">
-          <div className="relative w-[320px] h-[600px]">
+          <div className="relative w-[360px] h-[660px]">
             <img src={mobileFrame} alt="frame" className="absolute inset-0 w-full h-full object-contain z-10" />
-            <div className="relative z-20 overflow-hidden bg-slate-950 rounded-[30px]" style={{ width: '68.5%', height: '64.2%', marginTop: '28.5%', marginLeft: '13.9%' }}>
+            <div className="relative z-20 overflow-hidden bg-transparent" style={{ width: '68.5%', height: '68.5%', marginTop: '24%', marginLeft: '13.9%' }}>
               <AnimatePresence mode="wait">
-                <motion.div key={activeService.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-full flex flex-col justify-between p-4 text-white" style={{ background: activeService.bgColor }}>
-                  <img src={activeService.img} className="w-full h-[45%] object-cover" alt="Mockup" />
-                  <div className="px-1">
-                    <h4 className="font-unbounded font-black text-sm uppercase">{activeService.title}</h4>
-                    <p className="text-[10px] text-slate-200">{activeService.desc}</p>
-                  </div>
-                </motion.div>
+                <motion.img
+                  key={activeService.id}
+                  src={activeService.img}
+                  alt="Mockup"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.35 }}
+                  className="w-full h-full object-cover"
+                />
               </AnimatePresence>
             </div>
           </div>
         </div>
 
         {/* Right Column */}
-        <div className="flex flex-col gap-16 w-[35%] items-start">
+        <div className="flex flex-col gap-12 w-[35%] items-start">
           {services.filter(s => s.side === "right").map((service) => (
-            <div key={service.id} className="w-full max-w-[320px] cursor-pointer group flex flex-col items-start" onMouseEnter={() => setActiveService(service)} onMouseLeave={() => setActiveService(defaultState)}>
-              <span className="text-[9px] font-bold tracking-widest text-white/50 mb-1">{service.sub}</span>
-              <h3 className="text-white font-unbounded font-bold text-lg mb-2 text-left">{service.title}</h3>
-              <div className="w-full h-[3px] bg-white mb-5" />
+            <div key={service.id} className="w-full max-w-[340px] cursor-pointer group flex flex-col items-start transition-transform duration-200 hover:-translate-y-1" onMouseEnter={() => setActiveService(service)} onMouseLeave={() => setActiveService(defaultState)}>
+              <span className="text-[10px] font-bold tracking-widest text-white/60 mb-1">{service.sub}</span>
+              <h3 className="text-white font-unbounded font-extrabold text-lg mb-2 text-left">{service.title}</h3>
+              <div className="w-full h-[3px] bg-white opacity-90 mb-5 rounded-full" />
               <div className="flex items-start gap-5 flex-row text-left">
                 <img src={service.icon} alt="icon" className="w-10 h-10 object-contain" />
-                <p className="text-white font-league-spartan text-[15px] opacity-90">{service.desc}</p>
+                <p className="text-white font-league-spartan text-[15px] opacity-95 leading-relaxed max-w-[260px]">{service.desc}</p>
               </div>
             </div>
           ))}

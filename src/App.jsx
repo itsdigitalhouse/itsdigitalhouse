@@ -51,7 +51,7 @@ function App() {
         <Navbar />
         <WelcomePopup />
 
-        <main className="pt-24">
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

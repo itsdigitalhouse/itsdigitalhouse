@@ -10,8 +10,25 @@ const Navbar = () => {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false); 
   const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
   
+  // State to track scroll for transparent to blur transition
+  const [isScrolled, setIsScrolled] = useState(false);
+  
   const location = useLocation();
   const timeoutsRef = useRef({ Services: null, Solutions: null });
+
+  // Scroll handle karne k liye effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     setIsServicesOpen(false);
@@ -46,6 +63,8 @@ const Navbar = () => {
     }, 150);
   };
 
+  const isHeaderWhite = isScrolled || isServicesOpen || isSolutionsOpen;
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -64,7 +83,6 @@ const Navbar = () => {
     marketing: { title: "DIGITAL MARKETING SERVICES", items: ["SEO", "SMM", "Paid Ads Management", "Content Creation"] }
   };
 
-  // UPDATED TO OBJECTS FOR DYNAMIC ROUTING PATHS
   const solutionsData = [
     { name: "Legal Management", path: "/solutions/legal-management" },
     { name: "Restaurant - ERP", path: "/solutions/restaurant-erp" },
@@ -82,20 +100,31 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white z-[999] shadow-sm">
-      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-24">
+    /* CRITICAL FIX: 
+      Jab user top par hoga toh 'absolute bg-transparent' apply hoga taake slider top touch kare.
+      Scroll karne par 'fixed bg-white/80 backdrop-blur-md' hojayega tab baki sections iske pichay scroll honge.
+    */
+    <nav className={`absolute top-0 left-0 w-full z-[999] transition-colors duration-300 ease-out ${
+      isHeaderWhite
+        ? 'fixed !bg-white/80 backdrop-blur-md shadow-none border-b border-transparent h-24' 
+        : 'bg-transparent h-24'
+    }`}>
+      <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 h-full">
+        <div className="flex items-center justify-between h-full">
+          
           {/* Logo */}
-          <Link to="/"><img src={logo} alt="Logo" className="h-16 w-auto" /></Link>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Logo" className={`w-auto transition-all duration-300 ${isScrolled ? 'h-12' : 'h-16'}`} />
+          </Link>
 
           {/* DESKTOP LINKS */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8 h-full">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative py-6" 
+              <div key={link.name} className="relative h-full flex items-center" 
                 onMouseEnter={() => link.hasDropdown && handleMouseEnter(link.name)} 
                 onMouseLeave={() => link.hasDropdown && handleMouseLeave(link.name)}
               >
-                <Link to={link.path} className="font-semibold uppercase tracking-widest text-[13px] text-slate-600 hover:text-slate-950 flex items-center gap-1">
+                <Link to={link.path} className="font-bold uppercase tracking-widest text-[13px] text-slate-950 hover:text-black flex items-center gap-1 transition-colors py-4">
                   {link.name} {link.hasDropdown && <svg className="w-3 h-3" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeWidth="2.5" d="M19 9l-7 7-7-7"/></svg>}
                 </Link>
 
@@ -104,8 +133,10 @@ const Navbar = () => {
                   <motion.div 
                     onMouseEnter={() => handleMouseEnter('Services')}
                     onMouseLeave={() => handleMouseLeave('Services')}
-                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} 
-                    className="fixed left-0 top-24 w-screen bg-white border-t border-slate-100 shadow-2xl flex z-[999]"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.36, ease: 'easeOut' }}
+                    className={`fixed left-0 w-screen bg-white border-t border-transparent shadow-lg flex z-[999] transition-all duration-300 top-24`}
                   >
                     <div className="w-[25%] p-6">
                       <div className="w-full h-[350px] rounded-3xl overflow-hidden shadow-lg">
@@ -132,12 +163,14 @@ const Navbar = () => {
                   <motion.div 
                     onMouseEnter={() => handleMouseEnter('Solutions')}
                     onMouseLeave={() => handleMouseLeave('Solutions')}
-                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} 
-                    className="absolute left-0 top-full w-[300px] bg-white border border-slate-100 shadow-2xl p-6 rounded-3xl z-[999]"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.32, ease: 'easeOut' }}
+                    className={`absolute left-0 w-[300px] bg-white border border-transparent shadow-lg p-6 rounded-3xl z-[999] ${isHeaderWhite ? 'top-24' : 'top-[100%]'}`}
                   >
                     <div className="grid grid-cols-1 gap-2">
                       {solutionsData.map(item => (
-                        <Link key={item.name} to={item.path} className="text-[13px] font-semibold text-slate-600 hover:text-[#ee3444] p-3 bg-slate-50 rounded-xl hover:bg-slate-100">
+                        <Link key={item.name} to={item.path} className="text-[13px] font-semibold text-slate-600 hover:text-[#ee3444] p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-all">
                           {item.name}
                         </Link>
                       ))}
@@ -149,13 +182,15 @@ const Navbar = () => {
           </div>
           
           {/* Desktop Consultation Button */}
-          <button className="hidden lg:block font-black uppercase text-[11px] border-2 border-slate-950 rounded-full px-6 py-2 hover:bg-slate-950 hover:text-white transition-all">Get A Consultation</button>
+          <button className="hidden lg:block font-black uppercase text-[11px] border-2 border-slate-950 rounded-full px-6 py-2 hover:bg-slate-950 hover:text-white transition-all transform-gpu active:scale-95">
+            Get A Consultation
+          </button>
 
           {/* HAMBURGER BUTTON */}
           <div className="lg:hidden flex items-center">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-slate-800 focus:outline-none p-2"
+              className="text-slate-900 focus:outline-none p-2"
             >
               {isMobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -175,7 +210,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed right-0 top-24 w-full sm:w-[350px] h-[calc(100vh-6rem)] bg-white border-l border-slate-100 shadow-2xl p-6 overflow-y-auto lg:hidden z-[998]"
+            className={`fixed right-0 w-full sm:w-[350px] bg-white border-l border-slate-100 shadow-2xl p-6 overflow-y-auto lg:hidden z-[998] top-24 h-[calc(100vh-6rem)]`}
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -222,7 +257,9 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              <button className="mt-4 font-black uppercase text-[11px] border-2 border-slate-950 rounded-full px-6 py-3 bg-slate-950 text-white text-center">Get A Consultation</button>
+              <button className="mt-4 font-black uppercase text-[11px] border-2 border-slate-950 rounded-full px-6 py-3 bg-slate-950 text-white text-center">
+                Get A Consultation
+              </button>
             </div>
           </motion.div>
         )}
