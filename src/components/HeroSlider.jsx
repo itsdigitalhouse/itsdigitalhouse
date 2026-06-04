@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import bgVideo from '../assets/background-animation.mp4';
+import bgVideo from '../assets/anime-vedio.mp4';
 
 const HeroSlider = () => {
   const containerVariants = {
@@ -34,6 +34,10 @@ const HeroSlider = () => {
           loop
           muted
           playsInline
+          style={{ 
+            maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' 
+          }}
           className="w-full h-full object-cover opacity-100"
         />
       </div>

@@ -1,170 +1,94 @@
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-
-// Icons Pattern
-import bgPattern from '../assets/digital_icons_pattern.jpg'; 
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 const ModernHero = () => {
-  const containerRef = useRef(null);
+  const heroRef = useRef(null);
+  const orbRef = useRef(null);
+  const textWrapRef = useRef(null);
+  const animRef = useRef(null);
 
-  // 6 Custom Colors Brand Gradient String
-  const gradientColors = "linear-gradient(45deg, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
+  const mx = useRef(-999), my = useRef(-999);
+  const cx = useRef(-999), cy = useRef(-999);
+  const curR = useRef(15), tgtR = useRef(15);
+  
+  const [straighten, setStraighten] = useState(false);
+  const [orbVisible, setOrbVisible] = useState(false);
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const bgPattern = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.7'%3E%3Crect x='4' y='4' width='10' height='10' rx='1'/%3E%3Ccircle cx='30' cy='9' r='5'/%3E%3Cpath d='M44 4 L56 4 L56 16 L44 16Z'/%3E%3Ccircle cx='9' cy='30' r='5'/%3E%3Crect x='25' y='25' width='10' height='10' rx='5'/%3E%3Cpath d='M44 25 L56 25 M50 25 L50 35 M44 35 L56 35'/%3E%3Cpath d='M4 44 L16 56 M4 56 L16 44'/%3E%3Ccircle cx='30' cy='50' r='5'/%3E%3Crect x='44' y='44' width='10' height='10' rx='1'/%3E%3C/g%3E%3C/svg%3E")`;
 
-  const springX = useSpring(mouseX, { stiffness: 350, damping: 30 });
-  const springY = useSpring(mouseY, { stiffness: 350, damping: 30 });
+  const isOrbOverText = useCallback(() => {
+    if (!textWrapRef.current || !heroRef.current) return false;
+    const tr = textWrapRef.current.getBoundingClientRect();
+    const hr = heroRef.current.getBoundingClientRect();
+    const dist = Math.hypot(cx.current - (tr.left + tr.width/2 - hr.left), cy.current - (tr.top + tr.height/2 - hr.top));
+    return dist < 250; 
+  }, []);
 
-  const handleMouseMove = (e) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
-    }
-  };
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
 
-  const spotlightSize = 120; // Spotlight Radius
-  const maskImage = useTransform(
-    [springX, springY],
-    ([x, y]) => `circle(${spotlightSize}px at ${x}px ${y}px)`
-  );
+    const onMove = (e) => {
+      const rect = hero.getBoundingClientRect();
+      mx.current = (e.clientX || e.touches[0].clientX) - rect.left;
+      my.current = (e.clientY || e.touches[0].clientY) - rect.top;
+      setOrbVisible(true);
+    };
+
+    const onLeave = () => { mx.current = -999; my.current = -999; setOrbVisible(false); };
+    
+    hero.addEventListener('mousemove', onMove);
+    hero.addEventListener('mouseleave', onLeave);
+
+    const loop = () => {
+      cx.current += (mx.current - cx.current) * 0.15;
+      cy.current += (my.current - cy.current) * 0.15;
+      
+      const over = mx.current > 0 && isOrbOverText();
+      setStraighten(over);
+      tgtR.current = over ? 180 : 15;
+      curR.current += (tgtR.current - curR.current) * 0.1;
+
+      if (orbRef.current) {
+        orbRef.current.style.left = cx.current + 'px';
+        orbRef.current.style.top = cy.current + 'px';
+        orbRef.current.style.width = (curR.current * 2) + 'px';
+        orbRef.current.style.height = (curR.current * 2) + 'px';
+      }
+      animRef.current = requestAnimationFrame(loop);
+    };
+    animRef.current = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animRef.current);
+  }, [isOrbOverText]);
 
   return (
-    <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full bg-[#070707] flex items-center overflow-hidden cursor-none select-none px-4 sm:px-8 md:px-16 lg:px-24"
+    <section 
+      ref={heroRef} 
+      style={{ 
+        height: '100svh', 
+        width: '100%', 
+        background: '#070707', 
+        cursor: 'none', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        position: 'relative', 
+        overflow: 'hidden' 
+      }}
     >
-      {/* 1. BASE LAYER: Dark Low-Opacity Grey Pattern Grid */}
-      <div
-        className="absolute inset-0 z-0 opacity-[0.08] pointer-events-none"
-        style={{
-          backgroundImage: `url(${bgPattern})`,
-          backgroundSize: '480px',
-          backgroundRepeat: 'repeat',
-          filter: 'grayscale(100%) brightness(0.4)',
-        }}
-      />
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.09, backgroundImage: bgPattern }} />
 
-      {/* 2. COLOR LAYER / FOREGROUND MASKED TEXT (Gole ke andar jo solid layout reveal karega) */}
-      <motion.div
-        className="absolute inset-0 z-40 pointer-events-none"
-        style={{
-          clipPath: maskImage,
-          WebkitClipPath: maskImage,
-        }}
-      >
-        <div className="relative min-h-screen w-full flex items-center px-4 sm:px-8 md:px-16 lg:px-24">
-          
-          <div 
-            className="absolute inset-0 z-0"
-            style={{
-              background: gradientColors,
-              WebkitMaskImage: `url(${bgPattern})`,
-              maskImage: `url(${bgPattern})`,
-              WebkitMaskSize: '480px',
-              maskSize: '480px',
-              WebkitMaskRepeat: 'repeat',
-              maskRepeat: 'repeat',
-            }}
-          />
-
-          <div className="relative z-50 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12">
-            {/* Left Box Mirror Spacer */}
-            <div className="lg:col-span-3 opacity-0 select-none pointer-events-none">
-              <span style={{ fontFamily: "'Unbounded', sans-serif" }}>"</span>
-            </div>
-
-            {/* RIGHT COLUMN: Active Exact Alignment Layout Match */}
-            <div className="lg:col-span-9 flex flex-col items-start lg:items-end text-left w-full space-y-12">
-              <div className="relative w-full text-left">
-                <h1 className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-[120px] xl:text-[135px] leading-[0.85] tracking-tighter uppercase whitespace-nowrap text-[#f5f5f0]">
-                  {/* Ideas Made: Aligned Right indent */}
-                  <span className="block mb-2 translate-x-20 xl:translate-x-32 transition-transform duration-300">
-                    IDEAS MADE
-                  </span>
-                  {/* Digital: Flushed Left indent */}
-                  <span className="block translate-x-0 transition-transform duration-300">
-                    DIGITAL
-                  </span>
-                </h1>
-              </div>
-            </div>
-          </div>
+      <div style={{ position: 'absolute', left: '48px', zIndex: 20, color: 'white', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ fontSize: '9px', opacity: 0.5, letterSpacing: '0.25em', textTransform: 'uppercase' }}>
+          YOUR<br/>GATEWAY TO<br/>THE DIGITAL WORLD
         </div>
-      </motion.div>
-
-      {/* 3. CINEMATIC ORB BORDER */}
-      <motion.div
-        className="absolute z-50 pointer-events-none border border-white/20 rounded-full bg-white/[0.02] shadow-[0_0_50px_rgba(255,255,255,0.05)]"
-        style={{
-          width: spotlightSize * 2,
-          height: spotlightSize * 2,
-          left: springX,
-          top: springY,
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
-
-      {/* 4. BASE GROUND LAYOUT CONTAINER (Static Wireframe Base) */}
-      <div className="relative z-30 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12">
-        
-        {/* LEFT COLUMN: 3 Lines Text Structure */}
-        <div className="lg:col-span-3 flex flex-col items-start space-y-6 md:space-y-8 z-30 lg:mt-24">
-          <div className="space-y-1">
-            <div className="text-[#f5f5f0] font-black text-[10px] tracking-[0.35em] uppercase opacity-40 leading-normal">
-              YOUR
-            </div>
-            <div className="text-[#f5f5f0] font-black text-[10px] tracking-[0.35em] uppercase opacity-40 leading-normal">
-              GATEWAY TO
-            </div>
-            <div className="text-[#f5f5f0] font-black text-[10px] tracking-[0.35em] uppercase opacity-40 leading-normal">
-              THE DIGITAL WORLD
-            </div>
-          </div>
-          
-          <span 
-            className="text-[#f5f5f0] text-[120px] md:text-[150px] font-black leading-none select-none opacity-100 h-16 flex items-center pl-1 tracking-tighter"
-            style={{ fontFamily: "'Unbounded', sans-serif" }}
-          >
-            "
-          </span>
-        </div>
-
-        {/* RIGHT COLUMN: Static Wireframe Layout Alignment matching exactly */}
-        <div className="lg:col-span-9 flex flex-col items-start lg:items-end text-left w-full space-y-12">
-          
-          <div className="relative w-full text-left">
-            <h1 className="font-black text-4xl sm:text-6xl md:text-7xl lg:text-[120px] xl:text-[135px] leading-[0.85] tracking-tighter uppercase whitespace-nowrap">
-              {/* Wireframe Top Line: Right Indented Shift */}
-              <span 
-                className="block text-transparent mb-2 translate-x-20 xl:translate-x-32" 
-                style={{ WebkitTextStroke: '1.5px rgba(245,245,240,0.18)' }}
-              >
-                IDEAS MADE
-              </span>
-              
-              {/* Wireframe Bottom Line: Base Left Aligned */}
-              <span 
-                className="block bg-clip-text text-transparent pb-2 translate-x-0"
-                style={{ backgroundImage: gradientColors }}
-              >
-                DIGITAL
-              </span>
-            </h1>
-          </div>
-
-          {/* BOTTOM ALIGNED PARAGRAPH */}
-          <div className="w-full max-w-xl lg:text-left mt-8 lg:self-start lg:ml-auto">
-            <p className="text-[#f5f5f0]/50 text-[10px] md:text-[11px] leading-relaxed tracking-[0.22em] uppercase font-bold">
-              DIGITAL HOUSE IS A DESIGN DRIVEN, DEVELOPMENT FOCUSED AGENCY DEDICATED TO HELPING BRANDS GROW BY BLENDING CREATIVITY WITH SMART DIGITAL STRATEGIES TO CREATE MEANINGFUL EXPERIENCES FROM STANDOUT BRANDING TO HIGH PERFORMING WEBSITES & RESULT ORIENTED MARKETING.
-            </p>
-          </div>
-
-        </div>
-
       </div>
+
+      <div ref={textWrapRef} style={{ zIndex: 20, width: '100%', textAlign: 'center', perspective: '1000px' }}>
+        <span style={{ display: 'block', fontSize: '90px', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.2)', transition: '0.4s', transform: straighten ? 'rotateY(0deg)' : 'rotateY(-20deg)' }}>IDEAS MADE</span>
+        <span style={{ display: 'block', fontSize: '130px', fontWeight: 900, background: 'linear-gradient(90deg,#e1b054,#d24a8a,#ee3444,#75b0d2,#7361a7,#f1574d)', WebkitBackgroundClip: 'text', color: 'transparent', transition: '0.4s', transform: straighten ? 'rotateY(0deg)' : 'rotateY(20deg)' }}>DIGITAL</span>
+      </div>
+
+      <div ref={orbRef} style={{ position: 'absolute', zIndex: 15, pointerEvents: 'none', borderRadius: '50%', transform: 'translate(-50%, -50%)', opacity: orbVisible ? 1 : 0, border: '1px solid rgba(255,255,255,0.2)', transition: 'width 0.3s, height 0.3s' }} />
     </section>
   );
 };
