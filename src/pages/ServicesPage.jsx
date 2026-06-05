@@ -6,7 +6,8 @@ import CaseStudiesSlider from '../components/CaseStudiesSlider';
 
 const ServicesPage = () => {
   return (
-    <div className="w-full bg-black min-h-screen block">
+    // Yahan 'pt-24' add kiya hai jo header ki height (h-24) jitni jagah chhod dega
+    <div className="w-full bg-white min-h-screen pt-24"> 
       <ServicesHero />
       <ServicesGrid />
       <PortfolioPage />

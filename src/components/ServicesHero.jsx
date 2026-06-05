@@ -33,7 +33,7 @@ const ServicesHero = () => {
     <div 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen bg-[#1D0727] text-white flex items-center overflow-hidden font-sans pt-24 lg:pt-16"
+      className="relative h-[87vh] lg:h-[87vh] bg-[#1D0727] text-white flex items-center overflow-hidden font-sans pt-24"
     >
       
       {/* Bottom to Top Smooth Gradient Shade Overlay */}

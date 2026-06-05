@@ -18,9 +18,9 @@ import LegalManagement from './pages/LegalManagement';
 import RestaurantERP from './pages/RestaurantERP';
 import ZakyaPOS from './pages/ZakyaPOS'; 
 import RetailERP from './pages/RetailERP';
-import PRAgencyERP from './pages/PRAgencyERP'; // Added PR Agency ERP Page
-import ManufacturingERP from './pages/ManufacturingERP'; // Added Manufacturing ERP Page
-import CarRentalERP from './pages/CarRentalERP'; // Added Car Rental ERP Page
+import PRAgencyERP from './pages/PRAgencyERP';
+import ManufacturingERP from './pages/ManufacturingERP';
+import CarRentalERP from './pages/CarRentalERP';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -52,6 +52,7 @@ function App() {
         <WelcomePopup />
 
         <main>
+          {/* Routes ke andar sirf woh pages hain jin par content show hoga */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -61,16 +62,17 @@ function App() {
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/insights" element={<Insights />} /> 
 
-            {/* CONNECTING SOLUTIONS ROUTES */}
+            {/* SOLUTIONS ROUTES */}
             <Route path="/solutions/legal-management" element={<LegalManagement />} />
             <Route path="/solutions/restaurant-erp" element={<RestaurantERP />} />
             <Route path="/solutions/retail-zakya-pos" element={<ZakyaPOS />} /> 
             <Route path="/solutions/retail-erp" element={<RetailERP />} /> 
-            <Route path="/solutions/pr-agency-erp" element={<PRAgencyERP />} /> {/* PR Agency ERP Route */}
-            <Route path="/solutions/manufacturing-erp" element={<ManufacturingERP />} /> {/* Added Manufacturing ERP Route */}
-            <Route path="/solutions/car-rental-erp" element={<CarRentalERP />} /> {/* Added Car Rental ERP Route */}
+            <Route path="/solutions/pr-agency-erp" element={<PRAgencyERP />} />
+            <Route path="/solutions/manufacturing-erp" element={<ManufacturingERP />} />
+            <Route path="/solutions/car-rental-erp" element={<CarRentalERP />} />
           </Routes>
         </main>
+        
         <Footer />
       </div>
     </Router>

@@ -114,11 +114,11 @@ const ModernHero = () => {
       </div>
 
       <div ref={textWrapRef} style={{ zIndex: 20, width: '100%', textAlign: 'center', perspective: '1000px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <span style={{ display: 'block', fontSize: isMobile ? '40px' : '90px', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1px #ffffff', transition: '0.4s', transform: straighten ? 'rotateY(0deg)' : 'rotateY(40deg)' }}>IDEAS MADE</span>
+        <span style={{ display: 'block', fontSize: isMobile ? '40px' : '110px', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1px #ffffff', transition: '0.4s', marginLeft: isMobile ? '0' : '210px', transform: straighten ? 'rotateY(0deg)' : 'rotateY(-40deg)' }}>IDEAS MADE</span>
         
         <span style={{ 
           display: 'block', 
-          fontSize: isMobile ? '60px' : '130px', 
+          fontSize: isMobile ? '60px' : '160px', 
           fontWeight: 900, 
           background: 'linear-gradient(90deg, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)', 
           WebkitBackgroundClip: 'text', 
@@ -126,7 +126,7 @@ const ModernHero = () => {
           color: 'transparent', 
           transition: '0.4s', 
           marginTop: isMobile ? '-20px' : '-50px',
-          transform: straighten ? 'rotateY(0deg)' : 'rotateY(-40deg)'
+          transform: straighten ? 'rotateY(0deg)' : 'rotateY(40deg)'
         }}>DIGITAL</span>
         
         <p style={{ 

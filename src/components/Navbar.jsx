@@ -104,10 +104,10 @@ const Navbar = () => {
       Jab user top par hoga toh 'absolute bg-transparent' apply hoga taake slider top touch kare.
       Scroll karne par 'fixed bg-white/80 backdrop-blur-md' hojayega tab baki sections iske pichay scroll honge.
     */
-    <nav className={`absolute top-0 left-0 w-full z-[999] transition-colors duration-300 ease-out ${
-      isHeaderWhite
-        ? 'fixed !bg-white/80 backdrop-blur-md shadow-none border-b border-transparent h-24' 
-        : 'bg-transparent h-24'
+    <nav className={`fixed top-0 left-0 w-full z-[999] transition-colors duration-300 ease-out ${
+    isHeaderWhite
+      ? 'bg-white/80 backdrop-blur-md shadow-none border-b border-transparent h-24' 
+      : 'bg-transparent h-24'
     }`}>
       <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 h-full">
         <div className="flex items-center justify-between h-full">
@@ -204,66 +204,84 @@ const Navbar = () => {
 
       {/* MOBILE MENU SIDEBAR */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            className={`fixed right-0 w-full sm:w-[350px] bg-white border-l border-slate-100 shadow-2xl p-6 overflow-y-auto lg:hidden z-[998] top-24 h-[calc(100vh-6rem)]`}
-          >
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <div key={link.name} className="border-b border-slate-50 pb-3">
-                  {!link.hasDropdown ? (
-                    <Link to={link.path} className="font-bold uppercase tracking-wider text-[14px] text-slate-700 hover:text-slate-950 block py-1">
-                      {link.name}
-                    </Link>
-                  ) : (
-                    <div>
-                      <button 
-                        onClick={() => link.name === 'Services' ? setMobileServicesOpen(!mobileServicesOpen) : setMobileSolutionsOpen(!mobileSolutionsOpen)}
-                        className="w-full flex justify-between items-center font-bold uppercase tracking-wider text-[14px] text-slate-700 hover:text-slate-950 py-1"
+  {isMobileMenuOpen && (
+    <motion.div 
+      initial={{ opacity: 0, x: '100%' }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: '100%' }}
+      transition={{ type: 'tween', duration: 0.3 }}
+      className="fixed inset-0 z-[1000] bg-white flex flex-col lg:hidden" // Full screen white
+    >
+      {/* Header inside Menu */}
+      <div className="flex justify-between items-center p-6 border-b border-slate-100">
+        <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+          <img src={logo} alt="Logo" className="h-10 w-auto" />
+        </Link>
+        <button onClick={() => setIsMobileMenuOpen(false)} className="text-slate-900 p-2">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      {/* Scrollable Container */}
+      <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex flex-col gap-4">
+          {navLinks.map((link) => (
+            <div key={link.name} className="border-b border-slate-50 pb-3">
+              {!link.hasDropdown ? (
+                <Link to={link.path} onClick={() => setIsMobileMenuOpen(false)} className="font-bold uppercase tracking-wider text-[14px] text-slate-700 block py-1">
+                  {link.name}
+                </Link>
+              ) : (
+                <div>
+                  <button 
+                    onClick={() => link.name === 'Services' ? setMobileServicesOpen(!mobileServicesOpen) : setMobileSolutionsOpen(!mobileSolutionsOpen)}
+                    className="w-full flex justify-between items-center font-bold uppercase tracking-wider text-[14px] text-slate-700 py-1"
+                  >
+                    {link.name}
+                    <svg className={`w-4 h-4 transform transition-transform ${((link.name === 'Services' && mobileServicesOpen) || (link.name === 'Solutions' && mobileSolutionsOpen)) ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
+                  </button>
+
+                  {/* Sub-menu container inside flow */}
+                  <AnimatePresence initial={false}>
+                    {((link.name === 'Services' && mobileServicesOpen) || (link.name === 'Solutions' && mobileSolutionsOpen)) && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
                       >
-                        {link.name}
-                        <svg className={`w-4 h-4 transform transition-transform ${((link.name === 'Services' && mobileServicesOpen) || (link.name === 'Solutions' && mobileSolutionsOpen)) ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/></svg>
-                      </button>
-
-                      {/* Mobile Services Items */}
-                      {link.name === 'Services' && mobileServicesOpen && (
-                        <div className="pl-4 mt-3 space-y-4 bg-slate-50 p-4 rounded-xl">
-                          {Object.values(servicesData).map(s => (
-                            <div key={s.title}>
-                              <h5 style={headingGradientStyle} className="text-[11px] font-black tracking-wider mb-2">{s.title}</h5>
-                              <div className="space-y-2 pl-2">
-                                {s.items.map(i => (
-                                  <Link key={i} to={`/services/${i.toLowerCase().replace(/\s+/g, '-')}`} className="block text-[12px] font-medium text-slate-600 hover:text-slate-950">• {i}</Link>
-                                ))}
+                        {link.name === 'Services' ? (
+                          <div className="pl-4 mt-3 space-y-4 bg-slate-50 p-4 rounded-xl">
+                            {Object.values(servicesData).map(s => (
+                              <div key={s.title}>
+                                <h5 style={headingGradientStyle} className="text-[11px] font-black tracking-wider mb-2">{s.title}</h5>
+                                <div className="space-y-2 pl-2">
+                                  {s.items.map(i => (
+                                    <Link key={i} to={`/services/${i.toLowerCase().replace(/\s+/g, '-')}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[12px] font-medium text-slate-600">• {i}</Link>
+                                  ))}
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Mobile Solutions Items */}
-                      {link.name === 'Solutions' && mobileSolutionsOpen && (
-                        <div className="pl-2 mt-2 flex flex-col gap-1 bg-slate-50 p-3 rounded-xl">
-                          {solutionsData.map(item => (
-                            <Link key={item.name} to={item.path} className="text-[12px] font-semibold text-slate-600 hover:text-[#ee3444] p-2 hover:bg-slate-100 rounded-lg">{item.name}</Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="pl-2 mt-2 flex flex-col gap-1 bg-slate-50 p-3 rounded-xl">
+                            {solutionsData.map(item => (
+                              <Link key={item.name} to={item.path} onClick={() => setIsMobileMenuOpen(false)} className="text-[12px] font-semibold text-slate-600 p-2">{item.name}</Link>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              ))}
-              <button className="mt-4 font-black uppercase text-[11px] border-2 border-slate-950 rounded-full px-6 py-3 bg-slate-950 text-white text-center">
-                Get A Consultation
-              </button>
+              )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
     </nav>
   );
 };

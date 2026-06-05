@@ -21,12 +21,10 @@ const HeroSlider = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-[#f5f2ee] overflow-hidden flex flex-col justify-start z-10">
+    // Mobile par height 50vh, desktop par h-screen
+    <div className="relative w-full h-[50vh] sm:h-screen bg-[#f5f2ee] overflow-hidden flex flex-col justify-start z-10">
       
-      {/* ========================================================================
-        DYNAMIC VIDEO BACKGROUND INFRASTRUCTURE
-        ========================================================================
-      */}
+      {/* Video Background */}
       <div className="absolute inset-0 w-full h-full select-none pointer-events-none z-0 overflow-hidden">
         <video
           src={bgVideo}
@@ -42,38 +40,25 @@ const HeroSlider = () => {
         />
       </div>
 
-      {/* Subtle overlay to maintain interface depth */}
-      <div className="absolute inset-0 bg-black/[0.03] pointer-events-none z-5" />
-
-      {/* ========================================================================
-        MAIN TYPOGRAPHY STATEMENT SECTION
-        ========================================================================
-      */}
+      {/* Heading Section */}
       <motion.div 
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center justify-start pt-[24vh]"
+        // Mobile par pt-24 (navbar height) + mt-4 (extra gap)
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center justify-start pt-24 mt-4 lg:pt-32"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="w-full max-w-5xl text-center space-y-6">
-          
+        <div className="w-full max-w-5xl text-center">
           <motion.h1 
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-[80px] font-[1000] tracking-tighter text-[#0a0a0a] leading-[0.95] uppercase break-words px-2"
+            // Mobile par text chhota (28px) taake navbar ke neeche fit ho
+            className="text-[22px] sm:text-[50px] md:text-[65px] lg:text-[70px] font-[1000] tracking-[-0.03em] text-[#0a0a0a] leading-[0.9] uppercase"
             variants={itemVariants}
           >
-            Dynamic Creative <br />
-            Studio, Merging The <br />
-            Realms Of Design With <br />
-            Technical Innovation.
+            <span className="block mb-1 sm:mb-2">Creative Digital Agency</span>
+            <span className="block mb-1 sm:mb-2">Transforming Ideas into</span>
+            <span className="block mb-1 sm:mb-2">Powerful Brands Through</span>
+            <span className="block">Design, Strategy & Technology.</span>
           </motion.h1>
-          
-          <motion.p 
-            className="text-xs sm:text-sm text-gray-500 font-bold tracking-widest max-w-lg uppercase mx-auto pt-2"
-            variants={itemVariants}
-          >
-            // Elevating Digital Identities Through Code & Media
-          </motion.p>
-
         </div>
       </motion.div>
 

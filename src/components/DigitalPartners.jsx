@@ -46,15 +46,15 @@ const DigitalPartners = () => {
   const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section className="relative w-full min-h-screen bg-white flex flex-col justify-center items-center py-20 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col items-center">
-        
-        {/* HEADING */}
-        <motion.h2 
-          className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-[1000] uppercase tracking-tighter italic text-center leading-[1.4] mb-16"
-          style={{ 
-            backgroundImage: neonGradient, 
-            WebkitBackgroundClip: 'text', 
+    <section className="relative w-full min-h-screen bg-white flex flex-col justify-center items-center py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col items-center w-full">
+
+        {/* ── HEADING ── */}
+        <motion.h2
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-[1000] uppercase tracking-tighter italic text-center leading-[1.3] mb-10 sm:mb-14 lg:mb-16 px-2"
+          style={{
+            backgroundImage: neonGradient,
+            WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
           }}
@@ -62,10 +62,15 @@ const DigitalPartners = () => {
           OUR PARTNERS IN DIGITAL JOURNEY
         </motion.h2>
 
-        {/* TESTIMONIAL SLIDER */}
-        <div className="w-full flex flex-col items-center justify-center mb-24">
-          <span className="text-[#D24A8A] text-5xl md:text-8xl font-serif text-center w-full">"</span>
-          <div className="max-w-4xl w-full px-4 text-center">
+        {/* ── TESTIMONIAL SLIDER ── */}
+        <div className="w-full flex flex-col items-center justify-center mb-12 sm:mb-16 lg:mb-24">
+
+          {/* Quote mark — smaller on mobile */}
+          <span className="text-[#D24A8A] text-4xl sm:text-6xl md:text-8xl font-serif text-center w-full leading-none">
+            "
+          </span>
+
+          <div className="max-w-4xl w-full px-2 sm:px-4 text-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={index}
@@ -75,44 +80,64 @@ const DigitalPartners = () => {
                 transition={{ duration: 0.5 }}
                 className="flex flex-col items-center"
               >
-                <p className="text-gray-700 text-lg md:text-3xl italic font-medium mb-8 leading-relaxed">
+                {/* Testimonial text — smaller on mobile */}
+                <p className="text-gray-700 text-base sm:text-xl md:text-2xl lg:text-3xl italic font-medium mb-6 sm:mb-8 leading-relaxed px-2">
                   {testimonials[index].text}
                 </p>
-                <h4 className="text-black font-black uppercase tracking-widest border-t-4 border-[#D24A8A] pt-4">
+
+                {/* Author */}
+                <h4 className="text-black font-black uppercase tracking-widest text-xs sm:text-sm border-t-4 border-[#D24A8A] pt-3 sm:pt-4">
                   {testimonials[index].author}
                 </h4>
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* Dot indicators for mobile */}
+          <div className="flex gap-2 mt-6 sm:hidden">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-[#D24A8A] w-5' : 'bg-gray-300'}`}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* MARQUEE CONTAINER */}
-        <div className="relative w-full max-w-7xl overflow-hidden py-10 border-y border-gray-100 bg-gray-50/30 rounded-2xl">
-          
-          {/* Deep Left Shadow Effect */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-          
-          {/* Deep Right Shadow Effect */}
-          <div className="absolute right-0 top-0 bottom-0 w-32 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+        {/* ── MARQUEE ── */}
+        <div className="relative w-full max-w-7xl overflow-hidden py-6 sm:py-8 lg:py-10 border-y border-gray-100 bg-gray-50/30 rounded-xl sm:rounded-2xl">
 
-          <motion.div 
-            className="flex space-x-16 md:space-x-24 w-max items-center px-10"
+          {/* Fade edges — narrower on mobile */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 md:w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 md:w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+          <motion.div
+            className="flex items-center w-max px-6 sm:px-10"
+            style={{ gap: '3rem' }}
             animate={{ x: [0, "-50%"] }}
             transition={{
               ease: "linear",
-              duration: 30, 
+              duration: 25,
               repeat: Infinity,
             }}
           >
             {duplicatedPartners.map((partner, i) => (
-              <div 
-                key={i} 
-                className="w-40 h-20 md:w-56 md:h-28 flex items-center justify-center flex-shrink-0 transition-transform duration-300 hover:scale-105"
+              <div
+                key={i}
+                className="
+                  w-28 h-14
+                  sm:w-40 sm:h-20
+                  md:w-52 md:h-24
+                  lg:w-64 lg:h-32
+                  flex items-center justify-center flex-shrink-0
+                  transition-transform duration-300 hover:scale-105
+                "
               >
-                <img 
-                  src={partner.img} 
-                  alt={partner.name} 
-                  className="max-h-full max-w-full object-contain opacity-90 hover:opacity-100 transition-all duration-300" 
+                <img
+                  src={partner.img}
+                  alt={partner.name}
+                  className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-all duration-300"
                 />
               </div>
             ))}
