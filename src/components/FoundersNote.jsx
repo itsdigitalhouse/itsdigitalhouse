@@ -1,78 +1,377 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 
 const services = [
-  { 
-    title: "WEB DESIGN", 
+  {
+    id: 1,
+    title: "WEB DESIGN",
+    tag: "01",
     description: "Crafting visually stunning and highly functional websites to elevate your online presence and engage your audience.",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=800" 
+    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=800",
+    accent: "#e1b054",
+    keywords: ["Figma", "Motion", "Typography", "Responsive"]
   },
-  { 
-    title: "WEB DEVELOPMENT", 
+  {
+    id: 2,
+    title: "WEB DEVELOPMENT",
+    tag: "02",
     description: "Building robust, scalable backends and high-performance frontends that turn complex visions into reality.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" 
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
+    accent: "#ee3444",
+    keywords: ["React", "Next.js", "Node", "APIs"]
   },
-  { 
-    title: "UX / UI DESIGN", 
+  {
+    id: 3,
+    title: "UX / UI DESIGN",
+    tag: "03",
     description: "Designing intuitive user experiences that bridge the gap between human needs and technical innovation.",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" 
-  }
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800",
+    accent: "#75b0d2",
+    keywords: ["Research", "Wireframes", "Prototypes", "Testing"]
+  },
 ];
 
-const ServicesSection = () => {
-  const [hoveredService, setHoveredService] = useState(null);
-  
-  // Aapka specific gradient
-  const customGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
+const neonGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
+
+/* ── Cursor-following card (desktop only) ── */
+const HoverCard = ({ service, mouseX, mouseY }) => {
+  const sx = useSpring(mouseX, { stiffness: 220, damping: 26, mass: 0.4 });
+  const sy = useSpring(mouseY, { stiffness: 220, damping: 26, mass: 0.4 });
 
   return (
-    <section className="relative w-full bg-white py-24 px-4 sm:px-8 lg:px-24">
-      <div className="max-w-4xl mx-auto text-center mb-20">
-        <h2 className="text-7xl font-[1000] uppercase tracking-tighter mb-6">What We Do</h2>
-        <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-          Our studio excels in creating custom digital solutions, blending innovative web design with user experience optimization. We focus on transforming visions into functional, aesthetically striking digital realities.
-        </p>
-      </div>
-
-      <div className="max-w-6xl mx-auto flex flex-col gap-2">
-        {services.map((service, index) => (
-          <div 
-            key={index}
-            className="relative group cursor-pointer border-b border-gray-200"
-            onMouseEnter={() => setHoveredService(service)}
-            onMouseLeave={() => setHoveredService(null)}
-          >
-            <div className="py-10 flex justify-between items-center px-4">
-              <motion.h3 
-                className="text-5xl font-black uppercase transition-all duration-300"
-                whileHover={{ 
-                  backgroundImage: customGradient,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                {service.title}
-              </motion.h3>
-              <span className="text-3xl opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
-            </div>
-
-            {/* Hover Card */}
-            <AnimatePresence>
-              {hoveredService === service && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="absolute z-50 left-[55%] top-0 w-[420px] bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-100 p-4"
-                >
-                  <img src={service.image} alt={service.title} className="w-full h-56 object-cover rounded-xl mb-4" />
-                  <p className="text-gray-700 font-medium px-2 pb-2">{service.description}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+    <motion.div
+      style={{ x: sx, y: sy, pointerEvents: 'none' }}
+      className="fixed top-0 left-0 z-[200] hidden lg:block select-none"
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.88, rotate: -2 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        exit={{ opacity: 0, scale: 0.88, rotate: 2 }}
+        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="w-[320px] bg-white rounded-2xl overflow-hidden pointer-events-none"
+        style={{ boxShadow: `0 32px 80px rgba(0,0,0,0.18), 0 0 0 1px ${service.accent}33` }}
+      >
+        {/* Image with gradient overlay */}
+        <div className="relative h-[200px] overflow-hidden">
+          <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+          <div
+            className="absolute inset-0"
+            style={{ background: `linear-gradient(to top, ${service.accent}cc 0%, transparent 55%)` }}
+          />
+          <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+            <span className="text-white text-xs font-black tracking-[0.2em] uppercase">{service.title}</span>
+            <span className="text-white/70 text-xs font-mono">{service.tag}</span>
           </div>
-        ))}
+        </div>
+
+        {/* Body */}
+        <div className="p-5">
+          <p className="text-gray-600 text-sm leading-relaxed mb-4">{service.description}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {service.keywords.map((kw) => (
+              <span
+                key={kw}
+                className="text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border"
+                style={{ borderColor: service.accent, color: service.accent }}
+              >
+                {kw}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Accent bar */}
+        <div className="h-[3px] w-full" style={{ background: service.accent }} />
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* ── Main Component ── */
+const ServicesSection = () => {
+  const [hovered, setHovered] = useState(null);
+  const [openMobile, setOpenMobile] = useState(null);
+  const mouseX = useMotionValue(-500);
+  const mouseY = useMotionValue(-500);
+
+  const handleMouseMove = (e) => {
+    // Media query matching 'lg' breakpoint (1024px) to avoid performance lag on mobile/touch screens
+    if (window.innerWidth < 1024) return;
+    mouseX.set(e.clientX - 160);
+    mouseY.set(e.clientY - 220);
+  };
+
+  return (
+    <section
+      className="relative w-full bg-white py-16 sm:py-24 px-4 sm:px-8 lg:px-16 xl:px-24 overflow-hidden select-none"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Subtle grid texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.022]"
+        style={{
+          backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
+        }}
+      />
+
+      {/* ── HEADER ── */}
+      <motion.div
+        className="max-w-4xl mx-auto text-center mb-16 sm:mb-20 lg:mb-24 relative z-10"
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0, letterSpacing: '0.1em' }}
+          whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="text-[10px] sm:text-xs font-black uppercase mb-4 sm:mb-5"
+          style={{
+            backgroundImage: neonGradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}
+        >
+          ITS DIGITAL HOUSE • SERVICES
+        </motion.p>
+
+        {/* Heading — word by word */}
+        <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[90px] font-[1000] uppercase tracking-tighter mb-6 sm:mb-8 py-2 overflow-visible lg:overflow-hidden">
+          {["What", "We", "Do"].map((word, i) => (
+            <motion.span
+              key={word}
+              className="inline-block mr-[0.15em] text-[#0a0a0a] current-color"
+              initial={{ opacity: 0, y: window.innerWidth < 1024 ? 20 : 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </h2>
+
+        <motion.p
+          className="text-gray-500 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto px-2"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
+          Our studio excels in creating custom digital solutions, blending innovative web design with user
+          experience optimization. We focus on transforming visions into functional, aesthetically striking
+          digital realities.
+        </motion.p>
+
+        {/* Gradient line */}
+        <motion.div
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true }}
+          className="mt-8 sm:mt-10 h-[2px] rounded-full"
+          style={{ background: neonGradient, transformOrigin: 'left' }}
+        />
+      </motion.div>
+
+      {/* ── DESKTOP LIST (Large Screens Only) ── */}
+      <motion.div
+        className="hidden lg:block max-w-6xl mx-auto relative z-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.08 } }
+        }}
+      >
+        {services.map((service) => {
+          const isHovered = hovered?.id === service.id;
+          return (
+            <motion.div
+              key={service.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+              }}
+              className="relative group cursor-none border-b overflow-hidden"
+              style={{ borderColor: isHovered ? `${service.accent}40` : '#e5e7eb' }}
+              onMouseEnter={() => setHovered(service)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <div className="py-8 xl:py-10 flex items-center justify-between px-2 xl:px-4">
+
+                {/* Left: tag + title */}
+                <div className="flex items-center gap-6 xl:gap-10">
+                  <motion.span
+                    animate={{ color: isHovered ? service.accent : '#d1d5db' }}
+                    transition={{ duration: 0.25 }}
+                    className="text-xs font-black tracking-[0.25em] font-mono w-5"
+                  >
+                    {service.tag}
+                  </motion.span>
+
+                  <motion.h3
+                    animate={{ x: isHovered ? 12 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                    className="text-3xl xl:text-5xl font-[1000] uppercase tracking-tighter leading-none"
+                    style={{
+                      backgroundImage: isHovered ? neonGradient : 'none',
+                      WebkitBackgroundClip: isHovered ? 'text' : 'unset',
+                      WebkitTextFillColor: isHovered ? 'transparent' : '#0a0a0a',
+                      backgroundClip: isHovered ? 'text' : 'unset',
+                    }}
+                  >
+                    {service.title}
+                  </motion.h3>
+                </div>
+
+                {/* Right: keywords + arrow */}
+                <div className="flex items-center gap-4 xl:gap-6">
+                  <motion.div
+                    animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 10 }}
+                    transition={{ duration: 0.25 }}
+                    className="hidden xl:flex gap-2"
+                  >
+                    {service.keywords.slice(0, 2).map((kw) => (
+                      <span
+                        key={kw}
+                        className="text-[10px] font-black tracking-wider uppercase px-3 py-1.5 rounded-full border"
+                        style={{ borderColor: service.accent, color: service.accent }}
+                      >
+                        {kw}
+                      </span>
+                    ))}
+                  </motion.div>
+
+                  <motion.div
+                    animate={{
+                      scale: isHovered ? 1 : 0.8,
+                      backgroundColor: isHovered ? service.accent : 'rgba(0,0,0,0.03)'
+                    }}
+                    transition={{ duration: 0.25 }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                  >
+                    <span 
+                      className="font-bold text-lg leading-none transition-colors duration-200"
+                      style={{ color: isHovered ? '#fff' : '#0a0a0a' }}
+                    >
+                      ↗
+                    </span>
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* Hover background wash */}
+              <motion.div
+                className="absolute inset-0 -z-10 pointer-events-none"
+                animate={{ opacity: isHovered ? 1 : 0 }}
+                transition={{ duration: 0.25 }}
+                style={{ background: `linear-gradient(to right, ${service.accent}06, transparent 60%)` }}
+              />
+
+              {/* Bottom accent line */}
+              <motion.div
+                className="absolute bottom-0 left-0 h-[2px] rounded-full"
+                animate={{ width: isHovered ? '100%' : '0%' }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                style={{ background: service.accent }}
+              />
+            </motion.div>
+          );
+        })}
+      </motion.div>
+
+      {/* ── MOBILE / TABLET ACCORDION (Below 1024px) ── */}
+      <div className="lg:hidden flex flex-col gap-4 max-w-2xl mx-auto relative z-10">
+        {services.map((service) => {
+          const isOpen = openMobile === service.id;
+          return (
+            <div
+              key={service.id}
+              className="rounded-2xl overflow-hidden border transition-all duration-300 bg-white"
+              style={{ borderColor: isOpen ? `${service.accent}60` : '#e5e7eb' }}
+            >
+              {/* Header Button */}
+              <button
+                onClick={() => setOpenMobile(isOpen ? null : service.id)}
+                className="w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left active:bg-gray-50/50 transition-colors duration-150"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-[10px] font-black tracking-widest font-mono" style={{ color: service.accent }}>
+                    {service.tag}
+                  </span>
+                  <span className="text-base sm:text-xl font-[1000] uppercase tracking-tight text-[#0a0a0a]">
+                    {service.title}
+                  </span>
+                </div>
+
+                <motion.div
+                  animate={{
+                    rotate: isOpen ? 45 : 0,
+                    backgroundColor: isOpen ? service.accent : '#f3f4f6'
+                  }}
+                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                  className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ml-3"
+                >
+                  <span
+                    className="text-lg font-light leading-none transition-colors duration-200"
+                    style={{ color: isOpen ? 'white' : '#6b7280' }}
+                  >
+                    +
+                  </span>
+                </motion.div>
+              </button>
+
+              {/* Expandable Panel */}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="bg-gray-50/40 border-t border-gray-100">
+                      <div className="w-full h-48 sm:h-60 overflow-hidden">
+                        <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-5 sm:p-6">
+                        <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-5">
+                          {service.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {service.keywords.map((kw) => (
+                            <span
+                              key={kw}
+                              className="text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border bg-white"
+                              style={{ borderColor: service.accent, color: service.accent }}
+                            >
+                              {kw}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="h-[3px] mx-5 sm:mx-6 mb-5 rounded-full" style={{ background: service.accent }} />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
+
+      {/* ── CURSOR CARD (Only handles desktop hover) ── */}
+      <AnimatePresence>
+        {hovered && <HoverCard service={hovered} mouseX={mouseX} mouseY={mouseY} />}
+      </AnimatePresence>
     </section>
   );
 };

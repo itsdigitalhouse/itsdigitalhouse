@@ -12,6 +12,7 @@ import Insights from './pages/Insights';
 import ScrollToTop from './components/ScrollToTop';
 import WelcomePopup from './components/WelcomePopup';
 import GlobalLoader from './components/GlobalLoader';
+import ChatWidget from './components/ChatWidget'; // 🚀 AI Chat Bot Widget Import Kiya
 
 // SOLUTIONS PAGES IMPORTS
 import LegalManagement from './pages/LegalManagement';
@@ -47,7 +48,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white relative">
         <Navbar />
         <WelcomePopup />
 
@@ -74,6 +75,9 @@ function App() {
         </main>
         
         <Footer />
+
+        {/* 🚀 AI Bot floating dynamic layer (Puri Website Par Har Page Par Float Karega) */}
+        <ChatWidget />
       </div>
     </Router>
   );

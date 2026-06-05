@@ -1,14 +1,43 @@
 import React, { useState, useEffect } from 'react';
 
-const WelcomePopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => { const timer = setTimeout(() => setIsOpen(true), 1500); return () => clearTimeout(timer); }, []);
-  const handleClose = () => setIsOpen(false);
+const WelcomePopup = ({ isOpen: controlledIsOpen, onClose }) => {
+  const [localIsOpen, setLocalIsOpen] = useState(false);
 
-  if (!isOpen) return null;
+  // Sync internal state with controlled prop or fallback to automatic timer
+  const isPopupActive = controlledIsOpen !== undefined ? controlledIsOpen : localIsOpen;
+
+  useEffect(() => {
+    // Agar control navbar ke paas nahi hai (undefined hai), toh timer chalayein
+    if (controlledIsOpen === undefined) {
+      const timer = setTimeout(() => setLocalIsOpen(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [controlledIsOpen]);
+
+  // Body overflow toggler based on active modal view state
+  useEffect(() => {
+    if (isPopupActive) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isPopupActive]);
+
+  const handleClose = () => {
+    if (onClose) {
+      onClose(); // Navbar ki state clear karega
+    } else {
+      setLocalIsOpen(false); // Local timer state close karega
+    }
+  };
+
+  if (!isPopupActive) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-white/80 backdrop-blur-2xl animate-fade-in">
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-3 sm:p-4 bg-white/80 backdrop-blur-2xl animate-fade-in">
 
       {/* Container */}
       <div className="relative bg-white w-full max-w-[1200px] max-h-[95vh] flex flex-col rounded-2xl sm:rounded-[2rem] lg:rounded-[3rem] shadow-2xl overflow-hidden box-border">
@@ -105,7 +134,6 @@ const WelcomePopup = () => {
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        body { overflow: hidden !important; }
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
       `}</style>

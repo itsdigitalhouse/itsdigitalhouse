@@ -110,14 +110,6 @@ const Footer = () => {
           ))}
         </motion.div>
 
-        {/* Copyright */}
-        <motion.p
-          variants={itemVariants}
-          className="text-xs text-gray-600 tracking-widest uppercase text-center"
-        >
-          © {new Date().getFullYear()} ITS Digital House. All Rights Reserved.
-        </motion.p>
-
       </motion.div>
 
       {/* ── WHATSAPP BUTTON ── */}
