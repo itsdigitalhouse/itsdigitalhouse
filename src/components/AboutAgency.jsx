@@ -1,6 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Image imports (Ensure these files exist in your ../assets/ folder)
+import strategyImg from '../assets/straregy.jpeg';
+import creativeImg from '../assets/creative-engineering.jpeg';
+import growthImg from '../assets/growth-transformation.jpeg';
+
 const AboutAgency = () => {
   const sections = [
     {
@@ -8,21 +13,21 @@ const AboutAgency = () => {
       title: "VISIONARY",
       subtitle: "STRATEGY",
       desc: "WE DO NOT JUST PLAN FOR THE PRESENT; WE ARCHITECT THE FUTURE. OUR STRATEGIC FRAMEWORK IS BUILT ON DEEP ANALYTICAL INSIGHTS AND UNWAVERING CLARITY. WE DISSECT COMPLEX MARKET CHALLENGES TO ENGINEER DIGITAL FOUNDATIONS.",
-      img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
+      img: strategyImg
     },
     {
       id: "02",
       title: "CREATIVE",
       subtitle: "ENGINEERING",
       desc: "THIS IS WHERE THE INTERSECTION OF RAW CHAOS AND PERFECT ORDER COMES TO LIFE. WE BRIDGE THE GAP BETWEEN ABSTRACT CREATIVE CONCEPTS AND FUNCTIONAL TECHNICAL EXECUTION. BY INTEGRATING CUTTING-EDGE DEVELOPMENT PRACTICES.",
-      img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop"
+      img: creativeImg
     },
     {
       id: "03",
       title: "GROWTH",
       subtitle: "TRANSFORMATION",
       desc: "THE END OF THE ROAD IS WHERE OUR TRUE JOURNEY BEGINS. GROWTH IS NOT A DESTINATION; IT IS A CONTINUOUS DIALOGUE BETWEEN YOUR BRAND AND THE MARKET. WE PARTNER WITH FORWARD-THINKING BRANDS TO NAVIGATE THE EVER-CHANGING ECOSYSTEM.",
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop"
+      img: growthImg
     }
   ];
 
@@ -43,9 +48,8 @@ const AboutAgency = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 className="w-full lg:w-5/12 z-10"
               >
-                {/* overflow-hidden container ke andar image ko fit rakhega */}
-                <div className={`h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden transition-transform duration-500 ${isEven ? '-rotate-2' : 'rotate-2'} hover:rotate-0`}>
-                  <img src={section.img} className="w-full h-full object-cover" alt="feature" />
+                <div className={`h-[300px] md:h-[400px] lg:h-[500px] w-full overflow-hidden transition-transform duration-500 ${isEven ? '-rotate-2' : 'rotate-2'} hover:rotate-0 bg-gray-100`}>
+                  <img src={section.img} className="w-full h-full object-cover object-center" alt="feature" />
                 </div>
               </motion.div>
 
