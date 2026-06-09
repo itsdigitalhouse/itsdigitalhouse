@@ -2,9 +2,11 @@ import React from 'react';
 import AboutHero from '../components/AboutHero';
 import AgencyVision from '../components/AgencyVision';
 import GlobalReach from '../components/GlobalReach';
+import AboutTimelineWave from '../components/AboutTimelineWave';
 import SEOEngine from '../components/SEOEngine';
-import TechStackMatrix from '../components/TechStackMatrix';
-import WhyChooseUs from '../components/WhyChooseUs';
+import AboutContactForm from '../components/AboutContactForm';
+// import TechStackMatrix from '../components/TechStackMatrix';
+// import WhyChooseUs from '../components/WhyChooseUs';
 import FoundersNote from '../components/FoundersNote';
 import OurTeam from '../components/OurTeam';
 
@@ -14,11 +16,14 @@ const About = () => {
       <AboutHero />
       <AgencyVision />
       <GlobalReach />
+      <AboutTimelineWave />
       <SEOEngine />
-      <TechStackMatrix />
-      <WhyChooseUs />
+      
+      {/* <TechStackMatrix />
+      <WhyChooseUs /> */}
       <FoundersNote />
       <OurTeam />
+      <AboutContactForm />
     </div>
   );
 };

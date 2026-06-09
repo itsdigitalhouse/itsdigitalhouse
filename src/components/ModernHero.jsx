@@ -107,14 +107,14 @@ const ModernHero = () => {
     >
       <div style={{ position: 'absolute', inset: 0, opacity: 0.09, backgroundImage: bgPattern }} />
 
-      <div style={{ position: 'absolute', left: isMobile ? '20px' : '150px', top: '48px', zIndex: 20, color: 'white', textAlign: 'left' }}>
+      <div style={{ position: 'absolute', left: isMobile ? '20px' : '200px', top: '100px', zIndex: 20, color: 'white', textAlign: 'left' }}>
         <div style={{ fontSize: isMobile ? '8px' : '11px', opacity: 0.8, letterSpacing: '0.4em', textTransform: 'uppercase' }}>
           YOUR<br/>GATEWAY TO<br/>THE DIGITAL WORLD
         </div>
       </div>
 
       <div ref={textWrapRef} style={{ zIndex: 20, width: '100%', textAlign: 'center', perspective: '1000px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <span style={{ display: 'block', fontSize: isMobile ? '40px' : '110px', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1px #ffffff', transition: '0.4s', marginLeft: isMobile ? '0' : '210px', transform: straighten ? 'rotateY(0deg)' : 'rotateY(40deg)' }}>IDEAS MADE</span>
+        <span style={{ display: 'block', fontSize: isMobile ? '40px' : '90px', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1px #ffffff', transition: '0.4s', marginLeft: isMobile ? '0' : '270px', transform: straighten ? 'rotateY(0deg)' : 'rotateY(40deg)' }}>IDEAS MADE</span>
         
         <span style={{ 
           display: 'block', 

@@ -2,70 +2,72 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const AboutHero = () => {
-  const neonGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } 
-    }
-  };
+  // Vibrant pink gradient for the section background
+  const bgGradient = "linear-gradient(135deg, #FF6B6B 0%, #FF0080 50%, #FF00CC 100%)";
+  
+  // Sequence of your 6 colors for the button
+  const gradientColors = "#e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d";
 
   return (
-    <section className="relative w-full min-h-[85vh] bg-white text-[#0a0a0a] flex flex-col justify-center items-center overflow-hidden pt-28 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(117,176,210,0.04)_0%,transparent_70%)]" />
-      
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.2 }}
-        className="container mx-auto text-center max-w-5xl relative z-10"
-      >
-        <motion.p 
-          variants={itemVariants}
-          className="text-xs sm:text-sm font-black tracking-[0.25em] uppercase mb-6"
-          style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
-        >
-          Intellectual Digital Architecture
-        </motion.p>
-
+    <section 
+      className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pb-20" 
+      style={{ 
+        background: bgGradient,
+        borderBottomLeftRadius: '50% 10%',
+        borderBottomRightRadius: '50% 10%'
+      }}
+    >
+      {/* Content Container */}
+      <div className="text-center max-w-4xl relative z-10 text-white">
         <motion.h1 
-          variants={itemVariants}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-[1000] uppercase tracking-tighter leading-[0.95] sm:leading-[0.9] mb-8 text-[#0a0a0a]"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-6xl sm:text-8xl font-black uppercase tracking-tighter mb-8"
         >
-          We Build, Grow, <br className="hidden sm:block" />
-          <span className="italic font-light text-gray-400">And Transform</span> <br />
-          Online Identities.
+          About us
         </motion.h1>
 
         <motion.p 
-          variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12 font-medium"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-12"
         >
-          Its Digital House is a full-service creative digital agency dedicated to empowering ambitious brands. We seamlessly bridge the gap between high-end digital aesthetics, advanced technology, and performance growth ecosystems.
+          We are one of the UK’s first full-service digital agencies. Powered by passion for nearly two decades, we redefine digital and put businesses on the path to success.
         </motion.p>
-
-        <motion.div variants={itemVariants} className="w-full flex justify-center">
-          <motion.div 
-            initial={{ width: 0 }}
-            whileInView={{ width: "96px" }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="h-[2px] rounded-full" 
-            style={{ background: neonGradient }} 
-          />
+        
+        {/* Updated Button with Bottom-to-Top Slide Fill */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex justify-center w-full relative z-30"
+        >
+          <button 
+            onClick={() => console.log('Action Triggered')}
+            className="group relative px-10 py-5 bg-white text-slate-950 rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none"
+          >
+            {/* Bottom-to-Top Slide Fill Layer */}
+            <span 
+              className="absolute bottom-0 left-0 w-full h-full translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-0"
+              style={{
+                backgroundImage: `linear-gradient(to right, ${gradientColors})`
+              }}
+            ></span>
+            
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors duration-300">
+              <span>Let's Build Together</span>
+              <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </span>
+          </button>
         </motion.div>
-      </motion.div>
+      </div>
+
+      {/* Decorative Circles */}
+      <div className="absolute top-20 right-20 w-64 h-64 border-2 border-white/10 rounded-full pointer-events-none" />
+      <div className="absolute bottom-40 left-20 w-40 h-40 border-2 border-white/10 rounded-full pointer-events-none" />
     </section>
   );
 };

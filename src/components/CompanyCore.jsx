@@ -26,7 +26,7 @@ const CompanyCore = () => {
   ];
 
   return (
-    <section className="w-full min-h-screen bg-white text-slate-950 relative border-b border-slate-100 flex items-center py-20">
+    <section id="next-section" className="w-full min-h-screen bg-white text-slate-950 relative border-b border-slate-100 flex items-center py-20">
       <div className="w-full max-w-screen-2xl mx-auto px-6 lg:px-12 text-center flex flex-col items-center">
         
         {/* Adjusted Font Sizes */}
@@ -79,6 +79,29 @@ const CompanyCore = () => {
             </div>
           ))}
         </div>
+
+        {/* ==================== CENTERED ACTION BUTTON WITH VERTICAL FILL ANIMATION ==================== */}
+        <div className="mt-16 flex justify-center w-full relative z-30">
+          <button 
+            onClick={() => console.log('Action Triggered')}
+            className="group relative px-8 py-4 bg-slate-950 text-white rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none"
+          >
+            {/* Bottom-to-Top Slide Fill Layer */}
+            <span 
+              className="absolute bottom-0 left-0 w-full h-full translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-0"
+              style={{
+                backgroundImage: `linear-gradient(to right, #e1b054, #d24a8a, #ee3444)`
+              }}
+            ></span>
+            
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-2">
+              <span>Let's Build Together</span>
+              <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </span>
+          </button>
+        </div>
+
       </div>
     </section>
   );

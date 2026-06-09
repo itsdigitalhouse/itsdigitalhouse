@@ -1,73 +1,92 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 
 const CorePillars = () => {
+  // Words rotation list
+  const rotatingWords = ['Development.', 'Digital Marketing.', 'Data Science.', 'Digital Identity.', 'Creative Design.'];
+  const [wordIndex, setWordIndex] = useState(0);
+
+  // 8 Complete Projects Data Block
   const projects = [
     {
       id: 1,
-      title: 'PROPER WHISKEY',
-      image: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop',
-      tags: ['DESIGN', 'UX']
+      client: 'YorkTest',
+      category: 'PPC',
+      headline: '63% More PPC Revenue for Leading Health Brand',
+      mockupImage: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #1d2b64 0%, #2a5298 100%)',
+      waveColor: '#ee3444'
     },
     {
       id: 2,
-      title: 'FURNITURE HUB',
-      image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop',
-      tags: ['DEVELOPMENT', 'UI']
+      client: 'Ideal4Finance',
+      category: 'PPC & CRO',
+      headline: <>70% More Conversions for <br />SME Finance Broker</>,
+      mockupImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+      waveColor: '#00B4A4'
     },
     {
       id: 3,
-      title: 'VIDEO GAME WORLD',
-      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop',
-      tags: ['DESIGN', '3D']
+      client: 'XOX Jewels',
+      category: 'UX/UI Architecture',
+      headline: 'Luxury Interactive E-Commerce Experience Built with Fabric.js',
+      mockupImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)',
+      waveColor: '#ee3444'
     },
     {
       id: 4,
-      title: 'CYBER SECURITY DASHBOARD',
-      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop',
-      tags: ['WEB APP', 'SAAS']
+      client: 'Bathia Ocean Gold',
+      category: 'Agro-Mining Portal',
+      headline: 'Global Asset Tracking & Logistics Framework Architecture',
+      mockupImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #0f2027 0%, #203a43 100%)',
+      waveColor: '#75b0d2'
     },
     {
       id: 5,
-      title: 'LUXURY JEWELS TRADING',
-      image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop',
-      tags: ['E-COMMERCE', 'UX']
+      client: 'Portcity Traders',
+      category: 'Agro Import-Export',
+      headline: 'Raw Materials & Agro Supply Chain Enterprise System',
+      mockupImage: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #e65c00 0%, #F9D423 100%)',
+      waveColor: '#F9D423'
     },
     {
       id: 6,
-      title: 'MINERALS & AGRO LOGISTICS',
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop',
-      tags: ['SUPPLY CHAIN', 'WEB']
+      client: 'Its Digital House',
+      category: 'Agency Portfolio',
+      headline: 'Premium Next-Gen Digital Strategy & Web Experiences',
+      mockupImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)',
+      waveColor: '#00c6ff'
     },
     {
       id: 7,
-      title: 'CREATIVE DIGITAL HOUSE',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
-      tags: ['MARKETING', 'BRANDING']
+      client: 'Khaki & Co',
+      category: 'Real Estate & Building',
+      headline: 'Interactive Infrastructure Commercial Portal Engine',
+      mockupImage: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #30475e 0%, #f05454 100%)',
+      waveColor: '#f05454'
     },
     {
       id: 8,
-      title: 'VIBRANT FOOTWEAR',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop',
-      tags: ['DESIGN', 'UI']
-    },
-    {
-      id: 9,
-      title: 'REAL ESTATE BUILDERS',
-      image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1200&auto=format&fit=crop',
-      tags: ['ARCHITECTURE', 'WEB']
-    },
-    {
-      id: 10,
-      title: 'PREMIUM COLD BEVERAGES',
-      image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=1200&auto=format&fit=crop',
-      tags: ['BRANDING', 'UX']
+      client: 'BOG Minerals',
+      category: 'Agro-Mining',
+      headline: 'Precious Minerals & Metals Logistics Management Portal',
+      mockupImage: 'https://images.unsplash.com/photo-1610374792793-f016b77ca51a?q=80&w=1200&auto=format&fit=crop',
+      bgColor: 'linear-gradient(135deg, #141e30 0%, #243b55 100%)',
+      waveColor: '#f3b05a'
     }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const autoSlideTimer = useRef(null);
+
+  const dragStartX = useRef(0);
+  const isDragging = useRef(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -77,150 +96,230 @@ const CorePillars = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
   };
 
-  // SPEED SPEED ACCELERATION SYSTEM
+  // Words Rotator Effect
+  useEffect(() => {
+    const wordTimer = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+    }, 2500);
+    return () => clearInterval(wordTimer);
+  }, []);
+
   useEffect(() => {
     if (!isPaused) {
       autoSlideTimer.current = setInterval(() => {
         handleNext();
-      }, 2200); // Badha kar 2.2 seconds kar diya hai fast sliding k liye
+      }, 4000);
     }
-
     return () => {
-      if (autoSlideTimer.current) {
-        clearInterval(autoSlideTimer.current);
-      }
+      if (autoSlideTimer.current) clearInterval(autoSlideTimer.current);
     };
-  }, [isPaused]);
+  }, [isPaused, currentIndex]);
 
-  const getCardStatus = (index) => {
-    if (index === currentIndex) return 'center';
-    if ((currentIndex + 1) % projects.length === index) return 'right';
-    if ((currentIndex - 1 + projects.length) % projects.length === index) return 'left';
-    return 'hidden';
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
   };
 
+  const handleMouseUp = (e) => {
+    if (!isDragging.current) return;
+    const diff = dragStartX.current - e.clientX;
+    if (diff > 50) handleNext();  
+    if (diff < -50) handlePrev(); 
+    isDragging.current = false;
+  };
+
+  const currentProject = projects[currentIndex];
+
   return (
-    <section className="w-full bg-[#f5f2ee] px-0 py-24 flex flex-col items-center overflow-hidden select-none">
+    <section className="w-full bg-[#F4F6F8] px-0 py-12 md:py-20 flex flex-col items-center overflow-hidden select-none font-sans relative">
       
-      {/* HEADER SECTION */}
-      <div className="w-full max-w-7xl text-center space-y-3 mb-16 px-4 sm:px-6 lg:px-12">
-        <span className="text-xs sm:text-sm text-gray-500 font-bold tracking-widest uppercase">
-          Selected Work
-        </span>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-[1000] tracking-tighter text-[#0a0a0a] leading-[0.95] uppercase max-w-5xl mx-auto">
-          DIGITAL EXPERIENCES <br className="hidden md:inline" /> THAT BLOW PEOPLE’S MINDS
+      {/* ==================== HEADER SECTION (PERFECTLY CENTERED ROTATOR) ==================== */}
+      <div className="w-full max-w-5xl text-center space-y-4 mb-12 md:mb-14 px-6 relative z-30 flex flex-col items-center justify-center">
+        <h2 className="text-3xl sm:text-5xl md:text-[54px] font-black tracking-tight text-[#111111] leading-tight flex flex-col items-center justify-center">
+          <span>We are Your Partner in</span>
+          
+          {/* Centered Vertical Slider Block */}
+          <span className="block relative overflow-hidden h-[45px] sm:h-[65px] md:h-[75px] w-full text-center">
+            <span 
+              style={{ transform: `translateY(-${wordIndex * 20}%)` }}
+              className="absolute inset-x-0 flex flex-col items-center justify-start transition-transform duration-500 cubic-bezier(0.76, 0, 0.24, 1) text-[#00B4A4]"
+            >
+              {rotatingWords.map((word, idx) => (
+                <span 
+                  key={idx} 
+                  className="h-[45px] sm:h-[65px] md:h-[75px] flex items-center justify-center text-center w-full"
+                >
+                  {word}
+                </span>
+              ))}
+            </span>
+          </span>
         </h2>
+
+        <div className="space-y-1">
+          <p className="text-sm sm:text-base text-slate-700 font-semibold tracking-wide">
+            Wash away your doubt and bathe in our glory!
+          </p>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+            Explore some of our recent projects and see how we could make your brand shine...
+          </p>
+        </div>
+        <div className="pt-2">
+          <a href="#case-studies" className="text-xs font-black uppercase tracking-widest text-slate-900 border-b-2 border-[#FFD100] pb-1 hover:text-slate-600 transition-colors">
+            View all case studies
+          </a>
+        </div>
       </div>
 
-      {/* DYNAMIC SLIDER CONTAINER */}
+      {/* ==================== MASTER TRACK STAGE ==================== */}
       <div 
-        className="relative w-full h-[65vh] md:h-[80vh] flex items-center justify-center overflow-visible"
+        className="w-full max-w-7xl mx-auto px-4 relative flex items-center justify-center h-[380px] sm:h-[440px] md:h-[480px] cursor-grab active:cursor-grabbing"
         onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+        onMouseLeave={() => { setIsPaused(false); isDragging.current = false; }}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
       >
         
-        <div className="relative w-full max-w-[100vw] h-full flex items-center justify-center overflow-visible">
-          {projects.map((project, index) => {
-            const status = getCardStatus(index);
-
-            let positionStyles = {};
-            if (status === 'center') {
-              positionStyles = { 
-                width: window.innerWidth < 768 ? '85%' : '60%', 
-                zIndex: 30, 
-                opacity: 1, 
-                transform: 'translateX(0%) scale(1)' 
-              };
-            } else if (status === 'left') {
-              positionStyles = { 
-                width: window.innerWidth < 768 ? '85%' : '60%', 
-                zIndex: 20, 
-                opacity: 0.85, 
-                transform: window.innerWidth < 768 ? 'translateX(-95%) scale(0.9)' : 'translateX(-74%) scale(0.94)' 
-              };
-            } else if (status === 'right') {
-              positionStyles = { 
-                width: window.innerWidth < 768 ? '85%' : '60%', 
-                zIndex: 20, 
-                opacity: 0.85, 
-                transform: window.innerWidth < 768 ? 'translateX(95%) scale(0.9)' : 'translateX(74%) scale(0.94)' 
-              };
-            } else {
-              positionStyles = { 
-                width: window.innerWidth < 768 ? '85%' : '60%', 
-                zIndex: 10, 
-                opacity: 0, 
-                transform: 'translateX(0%) scale(0.6)', 
-                pointerEvents: 'none' 
-              };
-            }
-
-            return (
-              <div
-                key={project.id}
-                style={positionStyles}
-                className="absolute h-full transition-all duration-700 ease-out flex flex-col bg-[#141414] rounded-[24px] overflow-hidden shadow-2xl border border-black/5 cursor-pointer"
-                onClick={() => {
-                  if (status === 'left') handlePrev();
-                  if (status === 'right') handleNext();
-                }}
-              >
-                {/* Image Wrap */}
-                <div className="relative w-full h-full overflow-hidden flex-grow">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  
-                  {status !== 'center' && (
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[0.2px] transition-opacity duration-300" />
-                  )}
-                </div>
-
-                {/* Bottom Metadata Info Bar */}
-                <div className="w-full p-6 md:p-8 bg-[#0f0f0f] flex items-center justify-between mt-auto z-10">
-                  <h3 className="text-white font-[950] tracking-tight text-lg sm:text-2xl md:text-3xl uppercase break-words max-w-[65%]">
-                    {project.title}
-                  </h3>
-                  
-                  <div className="flex items-center gap-2 flex-wrap justify-end">
-                    {project.tags.map((tag, tIdx) => (
-                      <span 
-                        key={tIdx}
-                        className="text-[10px] md:text-xs font-black tracking-widest text-gray-400 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        {/* BACKGROUND SLATE WAVE DECORATION VECTOR */}
+        <div className="absolute inset-x-0 top-[50%] -translate-y-1/2 w-full h-24 md:h-32 pointer-events-none opacity-60 z-0 overflow-hidden">
+          <svg viewBox="0 0 1440 120" fill="none" className="w-full h-full stroke-slate-300/40 stroke-[7] stroke-linecap-round">
+            <path d="M0,60 Q180,5 360,60 T720,60 T1080,60 T1440,60" />
+          </svg>
         </div>
 
-        {/* NAVIGATION CONTROLS */}
-        <button 
-          onClick={handlePrev}
-          className="absolute left-4 md:left-16 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#141414]/90 text-white flex items-center justify-center border border-white/10 hover:bg-black transition-all z-40 shadow-lg"
-          aria-label="Previous Slide"
+        {/* LAYER 1: FIXED CARD WALL */}
+        <div 
+          style={{ backgroundImage: currentProject.bgColor }}
+          className="w-[92%] sm:w-[580px] md:w-[670px] h-full rounded-[30px] md:rounded-[40px] absolute top-0 left-1/2 -translate-x-1/2 z-10 shadow-[0_25px_50px_-12px_rgba(15,23,42,0.22)] md:shadow-[0_35px_70px_-20px_rgba(15,23,42,0.25)] overflow-hidden p-6 md:p-12 flex flex-col justify-between border border-white/10 transition-all duration-500 ease-in-out"
         >
-          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+          <div className="absolute top-4 right-4 w-24 h-24 md:w-36 md:h-36 rounded-full border border-white/10 pointer-events-none z-0" />
+          <div className="absolute top-20 right-20 w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/5 pointer-events-none z-0" />
 
-        <button 
-          onClick={handleNext}
-          className="absolute right-4 md:right-16 w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#141414]/90 text-white flex items-center justify-center border border-white/10 hover:bg-black transition-all z-40 shadow-lg"
-          aria-label="Next Slide"
-        >
-          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
+          {/* TOP METADATA ROW */}
+          <div className="w-full flex items-center justify-between relative z-10 -mt-5 md:-mt-8">
+            <span className="text-xl md:text-2xl font-black tracking-tight text-white transition-opacity duration-300">
+              {currentProject.client}
+            </span>
+            <span className="text-[9px] md:text-[10px] tracking-widest uppercase font-bold text-white/30">
+              Operational Showcase
+            </span>
+          </div>
 
+          {/* Bottom Fixed Area Context Info */}
+          <div className="w-full text-left space-y-2 md:space-y-3 relative z-10 mt-auto">
+            <div className="w-12 h-2 flex items-center justify-start">
+              <svg viewBox="0 0 40 10" fill="none" className="w-full h-full stroke-[5] stroke-linecap-round transition-colors duration-300" style={{ stroke: currentProject.waveColor }}>
+                <path d="M2,5 Q7,1 12,5 T22,5 T32,5" />
+              </svg>
+            </div>
+
+            <div className="block">
+              <span className="text-[9px] md:text-xs font-black tracking-widest uppercase bg-white/15 px-2 py-0.5 md:px-2.5 md:py-1 rounded text-white inline-block">
+                {currentProject.category}
+              </span>
+            </div>
+
+            <h3 className="font-black text-lg sm:text-2xl md:text-[26px] tracking-tight leading-snug max-w-2xl text-white drop-shadow-sm transition-all duration-300">
+              {currentProject.headline}
+            </h3>
+          </div>
+        </div>
+
+        {/* LAYER 2: FOREGROUND CAROUSEL OVERLAP TRACK */}
+        <div className="w-full h-[200px] sm:h-[240px] absolute top-[20%] sm:top-[15%] left-0 z-20 pointer-events-none flex items-center justify-center md:justify-between px-4 sm:px-6 gap-4">
+          
+          {/* 1. Left Side Screen Frame */}
+          <div 
+            onClick={handlePrev}
+            style={{ width: '40%', height: '200px' }}
+            className="hidden md:block rounded-2xl overflow-hidden bg-slate-950 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.6)] border border-white/20 pointer-events-auto cursor-pointer transform hover:scale-[1.01] transition-all duration-500 ease-in-out relative"
+          >
+            <div 
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+            >
+              {projects.map((p, idx) => (
+                <img 
+                  key={`left-img-${p.id}`}
+                  src={projects[(idx - 1 + projects.length) % projects.length].mockupImage} 
+                  alt="Prev Mockup" 
+                  className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
+                  style={{ minWidth: '100%' }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 2. Center Active Slider Window */}
+          <div 
+            className="w-[85%] sm:w-[60%] md:w-[40%] h-[180px] sm:h-[240px] rounded-2xl overflow-hidden bg-slate-950 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] md:shadow-[0_35px_70px_-12px_rgba(0,0,0,0.8)] border-2 border-white/40 pointer-events-auto transform transition-all duration-500 ease-in-out relative z-30"
+          >
+            <div 
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+            >
+              {projects.map((p) => (
+                <img 
+                  key={`center-img-${p.id}`}
+                  src={p.mockupImage} 
+                  alt="Active Mockup" 
+                  className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
+                  style={{ minWidth: '100%' }}
+                />
+              ))}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+          </div>
+
+          {/* 3. Right Side Screen Frame */}
+          <div 
+            onClick={handleNext}
+            style={{ width: '40%', height: '200px' }}
+            className="hidden md:block rounded-2xl overflow-hidden bg-slate-950 shadow-[0_20px_45px_-12px_rgba(0,0,0,0.6)] border border-white/20 pointer-events-auto cursor-pointer transform hover:scale-[1.01] transition-all duration-500 ease-in-out relative"
+          >
+            <div 
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+            >
+              {projects.map((p, idx) => (
+                <img 
+                  key={`right-img-${p.id}`}
+                  src={projects[(idx + 1) % projects.length].mockupImage} 
+                  alt="Next Mockup" 
+                  className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
+                  style={{ minWidth: '100%' }}
+                />
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      {/* CONTROL NAVIGATION PILL SWITCHER */}
+      <div className="mt-10 md:mt-16 z-30 relative">
+        <div className="inline-flex items-center gap-4 md:gap-6 bg-[#111111] text-white rounded-full px-5 py-2.5 md:px-6 md:py-3.5 shadow-xl border border-white/5">
+          <button 
+            onClick={handlePrev}
+            className="text-white/50 hover:text-white transition-colors cursor-pointer border-none bg-transparent outline-none font-bold text-xl md:text-2xl leading-none"
+            aria-label="Previous Slide"
+          >
+            &lsaquo;
+          </button>
+          
+          <span className="text-[11px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.25em] font-mono text-white/90">
+            {currentIndex + 1} / {projects.length}
+          </span>
+          
+          <button 
+            onClick={handleNext}
+            className="text-white/50 hover:text-white transition-colors cursor-pointer border-none bg-transparent outline-none font-bold text-xl md:text-2xl leading-none"
+            aria-label="Next Slide"
+          >
+            &rsaquo;
+          </button>
+        </div>
       </div>
 
     </section>

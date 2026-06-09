@@ -6,14 +6,17 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  body {
-    background-color: #070707;
+body {
+    background-color: #FAFAFA; /* Hero section white hai, toh body bhi white honi chahiye */
     overflow-x: hidden;
   }
 }
