@@ -4,12 +4,14 @@ import InsightTicker from '../components/InsightTicker'; // <- Naya Text Ticker 
 import InsightFeatured from '../components/InsightFeatured';
 import InsightGrid from '../components/InsightGrid';
 import InsightNewsletter from '../components/InsightNewsletter';
+import InsightsHero from '../components/InsightsHero'
 
 const Insights = () => {
   return (
     <div className="w-full min-h-screen bg-white">
       {/* 1. Page Anchor Intro Typography */}
-      <InsightHero />
+
+      <InsightsHero />
 
       {/* 2. Infinite Automated Technology Text Ticker (Edge-to-Edge) */}
       <InsightTicker />

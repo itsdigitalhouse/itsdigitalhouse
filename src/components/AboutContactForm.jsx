@@ -27,68 +27,70 @@ const AboutContactForm = () => {
 
   return (
     <div className="w-full relative bg-white py-16 md:py-28 overflow-hidden font-sans">
-      
-      {/* ==================== BACKGROUND FLOATING SHAPES (image_38223a.png Elements) ==================== */}
+
+      {/* ==================== BACKGROUND FLOATING SHAPES ==================== */}
       {/* Left Yellow Blob */}
-      <motion.div 
+      <motion.div
         className="absolute left-[-50px] md:left-[-30px] top-[40%] w-[160px] h-[180px] md:w-[240px] md:h-[260px] bg-[#FFD100] rounded-[40%_60%_70%_30%_/_40%_50%_50%_60%] z-10 select-none pointer-events-none"
         animate={{
           y: [0, -20, 0],
           rotate: [0, 5, -5, 0],
-          borderRadius: ["40% 60% 70% 30% / 40% 50% 50% 60%", "50% 50% 60% 40% / 45% 55% 45% 55%", "40% 60% 70% 30% / 40% 50% 50% 60%"]
+          borderRadius: [
+            "40% 60% 70% 30% / 40% 50% 50% 60%",
+            "50% 50% 60% 40% / 45% 55% 45% 55%",
+            "40% 60% 70% 30% / 40% 50% 50% 60%"
+          ]
         }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Right Teal Blob */}
-      <motion.div 
+      <motion.div
         className="absolute right-[-50px] md:right-[-20px] bottom-[20%] w-[140px] h-[160px] md:w-[200px] md:h-[220px] bg-[#00B4A4] rounded-[50%_50%_40%_60%_/_50%_50%_50%_50%] z-10 select-none pointer-events-none"
         animate={{
           y: [0, 15, 0],
           rotate: [0, -6, 4, 0],
-          borderRadius: ["50% 50% 40% 60% / 50% 50% 50% 50%", "45% 55% 50% 50% / 55% 45% 55% 45%", "50% 50% 40% 60% / 50% 50% 50% 50%"]
+          borderRadius: [
+            "50% 50% 40% 60% / 50% 50% 50% 50%",
+            "45% 55% 50% 50% / 55% 45% 55% 45%",
+            "50% 50% 40% 60% / 50% 50% 50% 50%"
+          ]
         }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
       />
 
       {/* ==================== MAIN CONTENT CONTAINER ==================== */}
       <div className="max-w-6xl mx-auto px-6 relative z-20">
-        
-        {/* ==================== UPPER LEFT SECTION (Standalone Heading Box) ==================== */}
-        <div className="w-full text-left max-w-xl mb-12 lg:mb-16">
-          <h2 className="text-4xl md:text-[54px] font-black tracking-tight text-slate-900 leading-[1.05] uppercase">
-            House Open the <br /> Conversation!
-          </h2>
-          
-          {/* Custom Teal Wave SVG Line directly beneath the heading */}
-          {/* <div className="w-16 h-2 mt-4 mb-8">
-            <svg viewBox="0 0 60 10" fill="none" className="w-full stroke-[#00B4A4] stroke-[4] stroke-linecap-round">
-              <path d="M2,5 Q8,1 14,5 T26,5 T38,5 T50,5 T58,5" />
-            </svg>
-          </div> */}
-        </div>
 
-        {/* ==================== LOWER CONTENT SPLIT GRID ==================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          
-          {/* LEFT COLUMN: DESCRIPTIVE TEXT */}
-          <div className="lg:col-span-5 text-left space-y-5 text-slate-600 font-medium text-sm md:text-base leading-relaxed max-w-md pt-2">
-            <p>
-              Ready to take the plunge and create a digital splash? 
-              Whether you’re looking for a complete marketing overhaul, 
-              a fresh new look, or a website that stands the test of time, 
-              we’re here for you. [cite: Its Digital House is a full-service creative digital agency dedicated to helping businesses build, grow, and transform their online identity. They combine design, technology, and digital strategy to create seamless experiences. Their mission is to empower businesses through modern digital solutions that enhance visibility, strengthen branding, and accelerate growth.]
-            </p>
-            <p className="font-bold text-slate-900 pt-2">
-              Book a call with our experts and take the first step toward 
-              reaching your digital and business goals.
-            </p>
+        {/* ==================== TWO COLUMN GRID: Heading+Text LEFT | Form RIGHT ==================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+
+          {/* LEFT COLUMN: Heading + Descriptive Text */}
+          <div className="text-left pt-2">
+            <h2 className="text-4xl md:text-[54px] font-black tracking-tight text-slate-900 leading-[1.05] uppercase mb-8">
+              House Open the <br /> Conversation!
+            </h2>
+
+            <div className="space-y-5 text-slate-600 font-medium text-sm md:text-base leading-relaxed max-w-md">
+              <p>
+                Ready to take the plunge and create a digital splash?
+                Whether you're looking for a complete marketing overhaul,
+                a fresh new look, or a website that stands the test of time,
+                we're here for you. Its Digital House is a full-service creative
+                digital agency dedicated to helping businesses build, grow, and
+                transform their online identity. They combine design, technology,
+                and digital strategy to create seamless experiences.
+              </p>
+              <p className="font-bold text-slate-900 pt-2">
+                Book a call with our experts and take the first step toward
+                reaching your digital and business goals.
+              </p>
+            </div>
           </div>
 
-          {/* RIGHT COLUMN: GRADIENT LEAD CAPTURE FORM */}
-          <div className="lg:col-span-7 w-full max-w-xl mx-auto lg:mx-0 lg:mt-[-60px]">
-            {/* Note: lg:mt-[-60px] pulls the form up slightly on desktop to balance out the top left text space */}
-            <motion.div 
+          {/* RIGHT COLUMN: Gradient Lead Capture Form */}
+          <div className="w-full">
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -96,22 +98,22 @@ const AboutContactForm = () => {
               className="w-full bg-gradient-to-b from-[#f34c68] via-[#e5195e] to-[#c70961] text-white p-6 md:p-9 rounded-[32px] shadow-[0_30px_60px_-15px_rgba(229,25,94,0.3)]"
             >
               <form onSubmit={handleSubmit} className="space-y-4">
-                
+
                 {/* First Name & Last Name Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="firstName"
-                    placeholder="First Name*" 
+                    placeholder="First Name*"
                     required
                     value={formData.firstName}
                     onChange={handleChange}
                     className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
                   />
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     name="lastName"
-                    placeholder="Last Name*" 
+                    placeholder="Last Name*"
                     required
                     value={formData.lastName}
                     onChange={handleChange}
@@ -120,10 +122,10 @@ const AboutContactForm = () => {
                 </div>
 
                 {/* Email Input */}
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   name="email"
-                  placeholder="Email*" 
+                  placeholder="Email*"
                   required
                   value={formData.email}
                   onChange={handleChange}
@@ -131,10 +133,10 @@ const AboutContactForm = () => {
                 />
 
                 {/* Phone Input */}
-                <input 
-                  type="tel" 
+                <input
+                  type="tel"
                   name="phone"
-                  placeholder="Phone*" 
+                  placeholder="Phone*"
                   required
                   value={formData.phone}
                   onChange={handleChange}
@@ -142,31 +144,31 @@ const AboutContactForm = () => {
                 />
 
                 {/* Website Input */}
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   name="website"
-                  placeholder="Website" 
+                  placeholder="Website"
                   value={formData.website}
                   onChange={handleChange}
                   className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
                 />
 
                 {/* Message Textarea */}
-                <textarea 
+                <textarea
                   name="message"
-                  rows="3" 
-                  placeholder="Tell us more about your project or campaign*" 
+                  rows="3"
+                  placeholder="Tell us more about your project or campaign*"
                   required
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white resize-none transition-all duration-200"
                 />
 
-                {/* Newsletter Box */}
+                {/* Newsletter Checkbox */}
                 <div className="flex items-center gap-2.5 pt-1 select-none">
-                  <input 
-                    type="checkbox" 
-                    id="newsletter" 
+                  <input
+                    type="checkbox"
+                    id="newsletter"
                     name="newsletter"
                     checked={formData.newsletter}
                     onChange={handleChange}
@@ -191,8 +193,8 @@ const AboutContactForm = () => {
                   </div>
                 </div>
 
-                {/* Submit Action Button */}
-                <motion.button 
+                {/* Submit Button */}
+                <motion.button
                   type="submit"
                   whileHover={{ scale: 1.015 }}
                   whileTap={{ scale: 0.985 }}

@@ -10,7 +10,7 @@ import Contact from './pages/Contact';
 import Solutions from './pages/Solutions';
 import Insights from './pages/Insights';
 import ScrollToTop from './components/ScrollToTop';
-import WelcomePopup from './components/WelcomePopup';
+// import WelcomePopup from './components/WelcomePopup';
 import GlobalLoader from './components/GlobalLoader';
 import ChatWidget from './components/ChatWidget'; // 🚀 AI Chat Bot Widget Import Kiya
 
@@ -50,7 +50,7 @@ function App() {
       <ScrollToTop />
       <div className="min-h-screen bg-white relative">
         <Navbar />
-        <WelcomePopup />
+        {/* <WelcomePopup /> */}
 
         <main>
           {/* Routes ke andar sirf woh pages hain jin par content show hoga */}

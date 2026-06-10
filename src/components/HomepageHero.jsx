@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import balloonImage from '../assets/balloon.png';
 
 const HomepageHero = () => {
-
   const handleScroll = () => {
     const element = document.getElementById('next-section');
     if (!element) return;
@@ -34,17 +33,15 @@ const HomepageHero = () => {
   return (
     <section className="relative w-full h-screen bg-[#FAFAFA] text-[#1A1A1A] overflow-hidden">
 
-      {/* Background Typo */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {/* Background Typo - Shifted Upward */}
+      <div className="absolute inset-0 flex items-start justify-center pt-5 pointer-events-none">
         <h1 className="text-[28vw] sm:text-[26vw] lg:text-[30vw] font-black uppercase text-[#F0F0F0] leading-none select-none tracking-tighter">
           DIGITAL
         </h1>
       </div>
 
-      {/* ── MOBILE LAYOUT (hidden on md+) ── */}
-      <div className="md:hidden relative z-10 w-full h-full flex flex-col items-center pt-28 px-5 pb-24">
-
-        {/* Balloon — top area */}
+      {/* ── MOBILE LAYOUT ── */}
+      <div className="md:hidden relative z-10 w-full h-full flex flex-col items-center pt-20 px-5 pb-20">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -59,8 +56,8 @@ const HomepageHero = () => {
           />
         </motion.div>
 
-        {/* Heading + Paragraph — below balloon, above indicator */}
-        <div className="mt-auto flex flex-col gap-3 w-full">
+        {/* Heading + Paragraph — Floated Upward */}
+        <div className="mt-auto flex flex-col gap-3 w-full pb-16">
           <h2 className="font-black uppercase tracking-tighter leading-[0.9] text-[11vw] sm:text-[9vw]">
             Building <br /> The Future.
           </h2>
@@ -70,10 +67,10 @@ const HomepageHero = () => {
         </div>
       </div>
 
-      {/* ── DESKTOP LAYOUT (hidden on mobile) ── */}
+      {/* ── DESKTOP LAYOUT ── */}
       <div className="hidden md:flex relative z-10 w-full h-full flex-col justify-between px-10 lg:px-12 py-12">
 
-        {/* Balloon — centered, bottom area */}
+        {/* Balloon */}
         <div className="absolute bottom-[15%] left-0 w-full flex justify-center z-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -89,8 +86,8 @@ const HomepageHero = () => {
           </motion.div>
         </div>
 
-        {/* Bottom text — side by side */}
-        <div className="mt-auto grid grid-cols-2 items-end z-30">
+        {/* Bottom text — Floated Upward */}
+        <div className="mt-auto grid grid-cols-2 items-end z-30 pb-20">
           <h2 className="font-black uppercase tracking-tighter leading-[0.9] text-[6vw] lg:text-[4vw]">
             Building <br /> The Future.
           </h2>
@@ -102,7 +99,7 @@ const HomepageHero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator — same on both */}
+      {/* Scroll indicator */}
       <div className="absolute left-0 w-full flex justify-center z-50 bottom-5 md:bottom-10">
         <button onClick={handleScroll} className="focus:outline-none cursor-pointer border-none bg-transparent" aria-label="Scroll to next section">
           <motion.div

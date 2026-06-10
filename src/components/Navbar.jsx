@@ -5,6 +5,8 @@ import { Smartphone, Globe, Code, Cpu, Megaphone, ArrowRight, ChevronRight, Chev
 import logo from '../assets/logo.png';
 import balloon from '../assets/balloon.png';
 import WelcomePopup from './WelcomePopup';
+// Video import yahan add kar di hai
+import animationVideo from '../assets/animation.mp4';
 
 const duckQuotes = [
   { question: "What did the duck detective say to his partner?", answer: "\"Let's quack this case.\"" },
@@ -23,7 +25,6 @@ const Navbar = () => {
   const [activeServiceTab, setActiveServiceTab] = useState('seo');
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // 'direction' tracks if we're going forward (1) or backward (-1) for slide animation
   const [mobileMenuScreen, setMobileMenuScreen] = useState('main');
   const [direction, setDirection] = useState(1);
   const [selectedSubService, setSelectedSubService] = useState(null);
@@ -98,7 +99,6 @@ const Navbar = () => {
     setIsSolutionsOpen(false);
   };
 
-  // ── Mobile nav helpers ────────────────────────────────────────────
   const goTo = (screen, dir = 1) => {
     setDirection(dir);
     setMobileMenuScreen(screen);
@@ -215,7 +215,6 @@ const Navbar = () => {
     WebkitTextFillColor: 'transparent'
   };
 
-  // ── FIX 3: Page-slide variants using direction state ───────────────
   const panelVariants = {
     initial: (dir) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
     animate: { x: 0, opacity: 1, transition: { duration: 0.32, ease: [0.32, 0, 0.67, 0] } },
@@ -224,133 +223,176 @@ const Navbar = () => {
 
   return (
     <>
+{/* ── DESKTOP FULL-PAGE OVERLAY ─────────────────────────────── */}
       {/* ── DESKTOP FULL-PAGE OVERLAY ─────────────────────────────── */}
       <AnimatePresence>
         {isServicesOpen && (
           <motion.div
             onMouseEnter={() => handleMouseEnter('Services')}
             onMouseLeave={() => handleMouseLeave('Services')}
-            initial={{ y: '-100vh' }}
+            initial={{ y: '-100%' }}
             animate={{ y: 0 }}
-            exit={{ y: '-100vh' }}
-            transition={{ type: 'spring', stiffness: 65, damping: 16, mass: 0.9 }}
-            className="fixed inset-0 w-screen h-screen bg-white z-[990] hidden lg:flex flex-col overflow-y-auto"
+            exit={{ y: '-100%' }}
+            transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.55 }}
+            className="fixed inset-0 w-full h-screen z-[990] hidden lg:flex flex-col overflow-hidden bg-slate-950"
           >
-            {/* ── Overlay Navbar row — mirrors base navbar exactly ── */}
-            <div className="w-full h-24 border-b border-slate-100 flex-shrink-0 relative flex items-center">
-              <div className="max-w-screen-2xl mx-auto px-12 w-full flex items-center h-full relative">
+            {/* VIDEO BACKGROUND LAYER - NOW ABSOLUTE TO MOVE PERFECTLY WITH ANIMATION */}
+<div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+  <video
+    src={animationVideo}
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="w-full h-full object-cover scale-115" 
+  />
+  {/* Light dark tint for readable text */}
+  <div className="absolute inset-0" />
+</div>
 
-                {/* Left links */}
-                <div className="flex items-center gap-x-8 xl:gap-x-12 pr-[160px] w-1/2 justify-end h-full">
-                  {leftNavLinks.map((link) => (
-                    <Link key={link.name} to={link.path}
-                      onMouseEnter={() => { if (!link.hasDropdown) forceCloseAllDropdowns(); }}
-                      className={`font-extrabold uppercase tracking-wider text-[16px] transition-colors ${link.name === 'Services' ? 'text-[#ee3444]' : 'text-slate-950 hover:text-black'}`}
-                    >{link.name}</Link>
-                  ))}
-                </div>
+            {/* CONTENT WRAPPER */}
+            <div className="relative z-10 flex flex-col flex-1 text-white h-full justify-between pb-6">
+              
+              {/* ── Overlay Navbar row ── */}
+              <div className="w-full h-24 border-b border-white/10 flex-shrink-0 relative flex items-center">
+                <div className="max-w-screen-2xl mx-auto px-12 w-full flex items-center h-full relative">
 
-                {/* Center logo */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[992]">
-                  <Link to="/" onClick={forceCloseAllDropdowns}>
-                    <img src={logo} alt="Logo" className="h-16 w-auto" />
-                  </Link>
-                </div>
-
-                {/* Right links + balloon */}
-                <div className="flex items-center w-1/2 h-full pl-[160px] justify-between">
-                  <div className="flex items-center gap-x-8 xl:gap-x-12 justify-start h-full">
-                    {rightNavLinks.map((link) => (
+                  {/* Left links */}
+                  <div className="flex items-center gap-x-8 xl:gap-x-12 pr-[160px] w-1/2 justify-end h-full">
+                    {leftNavLinks.map((link) => (
                       <Link key={link.name} to={link.path}
-                        onMouseEnter={() => { if (link.name === 'Solutions') handleMouseEnter('Solutions'); else forceCloseAllDropdowns(); }}
-                        className="font-extrabold uppercase tracking-wider text-[16px] text-slate-950 hover:text-black transition-colors"
+                        onMouseEnter={() => { if (!link.hasDropdown) forceCloseAllDropdowns(); }}
+                        className={`font-extrabold uppercase tracking-wider text-[16px] transition-colors ${link.name === 'Services' ? 'text-white' : 'text-white/70 hover:text-white'}`}
                       >{link.name}</Link>
                     ))}
                   </div>
-                  {/* Balloon — same position as base navbar */}
-                  <div className="relative ml-auto flex items-center h-full">
-                    <button onClick={handleDuckClick} className={`flex items-center justify-center transition-all duration-200 hover:scale-110 ${isDuckOpen ? 'scale-110' : ''}`}>
-                      <img src={balloon} alt="Duck" className="w-auto h-9 object-contain" />
-                    </button>
+
+                  {/* Center logo - Original Colors */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[992]">
+                    <Link to="/" onClick={forceCloseAllDropdowns}>
+                      <img src={logo} alt="Logo" className="h-16 w-auto" />
+                    </Link>
+                  </div>
+
+                  {/* Right links + balloon */}
+                  <div className="flex items-center w-1/2 h-full pl-[160px] justify-between">
+                    <div className="flex items-center gap-x-8 xl:gap-x-12 justify-start h-full">
+                      {rightNavLinks.map((link) => (
+                        <Link key={link.name} to={link.path}
+                          onMouseEnter={() => { if (link.name === 'Solutions') handleMouseEnter('Solutions'); else forceCloseAllDropdowns(); }}
+                          className="font-extrabold uppercase tracking-wider text-[16px] text-white/70 hover:text-white transition-colors"
+                        >{link.name}</Link>
+                      ))}
+                    </div>
+                    <div className="relative ml-auto flex items-center h-full">
+                      <button onClick={handleDuckClick} className={`flex items-center justify-center transition-all duration-200 hover:scale-110 ${isDuckOpen ? 'scale-110' : ''}`}>
+                        <img src={balloon} alt="Duck" className="w-auto h-9 object-contain" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* ── Services content area — two columns only (no image panel) ── */}
-            <div className="w-full max-w-screen-2xl mx-auto flex px-12 flex-1 mt-6 items-start">
+              {/* ── Services content area ── */}
+              <div className="w-full max-w-screen-2xl mx-auto flex px-12 flex-1 mt-6 items-start overflow-y-auto">
 
-              {/* Left col — service tabs, bigger font */}
-              <div className="w-[35%] border-r border-slate-100 pr-10 flex flex-col justify-start pt-4 gap-1">
-                <p className="text-[11px] font-black tracking-widest text-slate-400 uppercase mb-4">// Our Services</p>
-                {Object.entries(nestedServices).map(([key, value]) => {
-                  const TabIcon = value.icon;
-                  const isCurrent = activeServiceTab === key;
-                  return (
-                    <div key={key} onMouseEnter={() => setActiveServiceTab(key)}
-                      className={`flex items-center justify-between px-5 py-4 rounded-2xl cursor-pointer transition-all duration-200 ${
-                        isCurrent
-                          ? 'bg-slate-950 text-white shadow-xl translate-x-2 font-black'
-                          : 'text-slate-500 hover:text-slate-950 hover:bg-slate-50'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3.5">
-                        {TabIcon && <TabIcon className={`w-5 h-5 ${isCurrent ? 'text-[#ee3444]' : 'text-slate-400'}`} />}
-                        {/* FIX: bigger font for service category titles */}
-                        <span className="text-[17px] font-extrabold uppercase tracking-wide">{value.title}</span>
+                {/* Left col — service tabs */}
+                <div className="w-[35%] border-r border-white/10 pr-10 flex flex-col justify-start pt-4 gap-1">
+                  <p className="text-[11px] font-black tracking-widest text-white/50 uppercase mb-4">// Our Services</p>
+                  {Object.entries(nestedServices).map(([key, value]) => {
+                    const TabIcon = value.icon;
+                    const isCurrent = activeServiceTab === key;
+                    return (
+                      <div key={key} onMouseEnter={() => setActiveServiceTab(key)}
+                        className={`flex items-center justify-between px-5 py-4 rounded-2xl cursor-pointer transition-all duration-200 ${
+                          isCurrent
+                            ? 'bg-white text-slate-950 shadow-xl translate-x-2 font-black'
+                            : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3.5">
+                          {TabIcon && <TabIcon className={`w-5 h-5 ${isCurrent ? 'text-[#ee3444]' : 'text-white/50'}`} />}
+                          <span className="text-[17px] font-extrabold uppercase tracking-wide">{value.title}</span>
+                        </div>
+                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isCurrent ? 'opacity-100 text-[#ee3444]' : 'opacity-0'}`} />
                       </div>
-                      <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isCurrent ? 'opacity-100 text-[#ee3444]' : 'opacity-0'}`} />
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+
+                {/* Right col — sub-pages */}
+                <div className="w-[65%] pl-16 pt-4">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeServiceTab}
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <h4 className="text-[15px] font-black tracking-widest text-white uppercase mb-6 drop-shadow-md">
+                        {nestedServices[activeServiceTab].title}
+                      </h4>
+                      <div className="grid grid-cols-2 gap-3">
+                        {nestedServices[activeServiceTab].pages.map((page) => (
+                          <Link key={page.label}
+                            to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
+                            className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-all border border-white/10 hover:border-white/30"
+                          >
+                            <div className="flex items-center justify-between">
+                              <span className="text-[15px] font-extrabold text-white group-hover:text-white transition-colors leading-tight drop-shadow-sm">
+                                {page.label}
+                              </span>
+                              <ArrowRight className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-200 flex-shrink-0" />
+                            </div>
+                            <p className="text-[12px] text-white/60 font-medium leading-relaxed group-hover:text-white/80 transition-colors">
+                              {page.desc}
+                            </p>
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
 
-              {/* Right col — sub-pages, shifted right, bigger content */}
-              <div className="w-[65%] pl-16 pt-4">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeServiceTab}
-                    initial={{ opacity: 0, x: 15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -15 }}
-                    transition={{ duration: 0.2 }}
+              {/* ── Bottom CTA strip ── */}
+              <div className="w-full max-w-screen-2xl mx-auto px-12 py-4 grid grid-cols-3 items-center mt-auto border-t border-white/10">
+                {/* Left: CTA button */}
+                <div className="flex justify-start">
+                  <Link to="/contact" onClick={forceCloseAllDropdowns}
+                    className="flex items-center gap-3 px-6 py-3 bg-white text-slate-950 rounded-2xl font-bold text-[13px] uppercase tracking-wider hover:bg-[#ee3444] hover:text-white transition-colors shadow-md"
                   >
-                    {/* FIX: bigger heading for active service */}
-                    <h4 style={headingGradientStyle} className="text-[15px] font-black tracking-widest uppercase mb-6">
-                      {nestedServices[activeServiceTab].title}
-                    </h4>
-                    {/* 2x2 grid layout with descriptions */}
-                    <div className="grid grid-cols-2 gap-3">
-                      {nestedServices[activeServiceTab].pages.map((page) => (
-                        <Link key={page.label}
-                          to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
-                          className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl hover:bg-slate-50 transition-all border border-slate-100 hover:border-slate-200 hover:shadow-sm"
-                        >
-                          <div className="flex items-center justify-between">
-                            <span className="text-[15px] font-extrabold text-slate-800 group-hover:text-black transition-colors leading-tight">
-                              {page.label}
-                            </span>
-                            <ArrowRight className="w-4 h-4 text-[#ee3444] opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-200 flex-shrink-0" />
-                          </div>
-                          <p className="text-[12px] text-slate-400 font-medium leading-relaxed group-hover:text-slate-500 transition-colors">
-                            {page.desc}
-                          </p>
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+                    <span>Initiate Strategy Call</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
 
-            {/* Bottom CTA strip */}
-            <div className="w-full max-w-screen-2xl mx-auto px-12 py-6 flex justify-end">
-              <Link to="/contact" onClick={forceCloseAllDropdowns}
-                className="flex items-center gap-3 px-6 py-3 bg-slate-950 text-white rounded-2xl font-bold text-[13px] uppercase tracking-wider hover:bg-[#ee3444] transition-colors shadow-md"
-              >
-                <span>Initiate Strategy Call</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                {/* Center: Close button */}
+                <div className="flex justify-center">
+                  <motion.button
+                    onClick={forceCloseAllDropdowns}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.94 }}
+                    aria-label="Close menu"
+                    className="w-12 h-12 rounded-full border-2 border-white/30 bg-transparent hover:bg-white hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200"
+                  >
+                    <svg
+                      className="w-5 h-5 transition-colors duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  </motion.button>
+                </div>
+                <div />
+              </div>
+
             </div>
           </motion.div>
         )}
@@ -430,11 +472,10 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ── FIX 1: MOBILE HEADER BAR — Logo bigger ────────────── */}
+          {/* Mobile Header Bar */}
           <div className="lg:hidden flex items-center justify-between h-full w-full relative">
             <div className="w-10 h-10" />
 
-            {/* FIX 1: Logo is now h-14 (was h-10/h-12), centered */}
             <Link to="/" className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <img
                 src={logo}
@@ -443,7 +484,6 @@ const Navbar = () => {
               />
             </Link>
 
-            {/* Hamburger — only visible when drawer is CLOSED */}
             {!isMobileMenuOpen && (
               <div className="flex items-center">
                 <button
@@ -457,16 +497,14 @@ const Navbar = () => {
                 </button>
               </div>
             )}
-            {/* Placeholder to keep layout balanced when hamburger is hidden */}
             {isMobileMenuOpen && <div className="w-[44px]" />}
           </div>
         </div>
 
-        {/* ── FIX 2 & 3: MOBILE DRAWER — top slide-down + page-slide ── */}
+        {/* Mobile Drawer */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <>
-              {/* Backdrop */}
               <motion.div
                 key="backdrop"
                 initial={{ opacity: 0 }}
@@ -477,7 +515,6 @@ const Navbar = () => {
                 className="fixed inset-0 z-[1999] bg-black/20 lg:hidden"
               />
 
-              {/* FIX 2: Drawer slides from y: '-100%' to y: 0 (true top-down) */}
               <motion.div
                 key="drawer"
                 initial={{ y: '-100%' }}
@@ -490,7 +527,6 @@ const Navbar = () => {
                 {/* Drawer Header */}
                 <div className="w-full h-24 flex items-center justify-between px-6 border-b border-slate-100 flex-shrink-0">
                   <div className="w-10" />
-                  {/* FIX 1: Logo inside drawer also bigger */}
                   <Link to="/" onClick={closeMobileMenu}>
                     <img src={logo} alt="Logo" className="h-14 w-auto" />
                   </Link>
@@ -501,7 +537,6 @@ const Navbar = () => {
                   </button>
                 </div>
 
-                {/* FIX 3: Panels container — overflow:hidden so slide stays clipped */}
                 <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 96px)' }}>
                   <AnimatePresence custom={direction} mode="popLayout">
 
@@ -540,8 +575,6 @@ const Navbar = () => {
                             </React.Fragment>
                           ))}
                         </div>
-
-                        {/* Bottom CTA */}
                         <div className="mt-10">
                           <Link
                             to="/contact"

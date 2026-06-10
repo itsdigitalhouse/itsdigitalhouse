@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// Make sure to adjust the import path of your video if needed
+// Video import path apne assets folder ke mutabiq check kar lena bhae
 import animationVideo from '../assets/animation.mp4'; 
 
-const AboutHero = () => {
+const InsightsHero = () => {
   // Sequence of your 6 colors for the button
   const gradientColors = "#e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d";
 
@@ -13,12 +13,12 @@ const AboutHero = () => {
       style={{ 
         borderBottomLeftRadius: '50% 10%',
         borderBottomRightRadius: '50% 10%',
-        // Ensures the absolute video perfectly clips to the curved border on all browsers
+        // Ensures the absolute video perfectly clips to the curved border
         isolation: 'isolate' 
       }}
     >
       
-      {/* ── VIDEO BACKGROUND LAYER (Clips perfectly inside the section curve) ── */}
+      {/* ── VIDEO BACKGROUND LAYER (With Scale Fix & Bottom Curve) ── */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
         <video
           src={animationVideo}
@@ -40,7 +40,7 @@ const AboutHero = () => {
           transition={{ duration: 0.8 }}
           className="text-6xl sm:text-8xl font-black uppercase tracking-tighter mb-8 drop-shadow-md"
         >
-          About us
+          Insights
         </motion.h1>
 
         <motion.p 
@@ -49,10 +49,10 @@ const AboutHero = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-12 drop-shadow-sm"
         >
-          We are one of the UK’s first full-service digital agencies. Powered by passion for nearly two decades, we redefine digital and put businesses on the path to success.
+          Explore our latest thoughts, deep dives, and agency updates. We share industry trends and core digital strategies to power your business growth.
         </motion.p>
         
-        {/* Updated Button with Bottom-to-Top Slide Fill */}
+        {/* Button with Bottom-to-Top Slide Fill */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ const AboutHero = () => {
           className="flex justify-center w-full relative z-30"
         >
           <button 
-            onClick={() => console.log('Action Triggered')}
+            onClick={() => console.log('Insights Triggered')}
             className="group relative px-10 py-5 bg-white text-slate-950 rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none"
           >
             {/* Bottom-to-Top Slide Fill Layer */}
@@ -73,7 +73,7 @@ const AboutHero = () => {
             
             {/* Button Content */}
             <span className="relative z-10 flex items-center gap-2 group-hover:text-white transition-colors duration-300">
-              <span>Let's Build Together</span>
+              <span>View All Articles</span>
               <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </span>
           </button>
@@ -87,4 +87,4 @@ const AboutHero = () => {
   );
 };
 
-export default AboutHero;
+export default InsightsHero;
