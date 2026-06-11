@@ -1,32 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 // Video import path apne assets folder ke mutabiq check kar lena bhae
 import animationVideo from '../assets/animation.mp4'; 
 
 const InsightsHero = () => {
+  const [isVideoReady, setIsVideoReady] = useState(false);
   // Sequence of your 6 colors for the button
   const gradientColors = "#e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d";
+  const fallbackBackground = 'linear-gradient(135deg, #e1b054 0%, #ee3444 44%, #75b0d2 100%)';
 
   return (
     <section 
-      className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pb-20 bg-slate-950" 
+      className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 pb-20" 
       style={{ 
         borderBottomLeftRadius: '50% 10%',
         borderBottomRightRadius: '50% 10%',
         // Ensures the absolute video perfectly clips to the curved border
-        isolation: 'isolate' 
+        isolation: 'isolate',
+        background: fallbackBackground
       }}
     >
       
       {/* ── VIDEO BACKGROUND LAYER (With Scale Fix & Bottom Curve) ── */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        <div className="absolute inset-0" style={{ background: fallbackBackground }} />
         <video
           src={animationVideo}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover scale-115" 
+          preload="auto"
+          onLoadedData={() => setIsVideoReady(true)}
+          onCanPlay={() => setIsVideoReady(true)}
+          className={`absolute inset-0 w-full h-full object-cover scale-[1.15] transition-opacity duration-700 ${
+            isVideoReady ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         {/* Dark overlay so the white text stands out beautifully */}
         <div className="absolute inset-0" />

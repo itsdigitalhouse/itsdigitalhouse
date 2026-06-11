@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const CorePillars = () => {
   // Words rotation list
   const rotatingWords = ['Development.', 'Digital Marketing.', 'Data Science.', 'Digital Identity.', 'Creative Design.'];
-  const [wordIndex, setWordIndex] = useState(0);
+  const marqueeWords = [...rotatingWords, ...rotatingWords];
 
   // 8 Complete Projects Data Block
   const projects = [
@@ -83,26 +83,34 @@ const CorePillars = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isSliderTransitioning, setIsSliderTransitioning] = useState(true);
   const autoSlideTimer = useRef(null);
 
   const dragStartX = useRef(0);
   const isDragging = useRef(false);
+  const displayProjects = [...projects, projects[0]];
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+    setIsSliderTransitioning(true);
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, projects.length));
   };
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
-  };
+    if (currentIndex === 0) {
+      setIsSliderTransitioning(false);
+      setCurrentIndex(projects.length);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsSliderTransitioning(true);
+          setCurrentIndex(projects.length - 1);
+        });
+      });
+      return;
+    }
 
-  // Words Rotator Effect
-  useEffect(() => {
-    const wordTimer = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % rotatingWords.length);
-    }, 2500);
-    return () => clearInterval(wordTimer);
-  }, []);
+    setIsSliderTransitioning(true);
+    setCurrentIndex((prevIndex) => prevIndex - 1);
+  };
 
   useEffect(() => {
     if (!isPaused) {
@@ -114,6 +122,18 @@ const CorePillars = () => {
       if (autoSlideTimer.current) clearInterval(autoSlideTimer.current);
     };
   }, [isPaused, currentIndex]);
+
+  useEffect(() => {
+    if (currentIndex !== projects.length) return undefined;
+
+    const resetTimer = setTimeout(() => {
+      setIsSliderTransitioning(false);
+      setCurrentIndex(0);
+      requestAnimationFrame(() => setIsSliderTransitioning(true));
+    }, 680);
+
+    return () => clearTimeout(resetTimer);
+  }, [currentIndex, projects.length]);
 
   const handleMouseDown = (e) => {
     isDragging.current = true;
@@ -128,7 +148,8 @@ const CorePillars = () => {
     isDragging.current = false;
   };
 
-  const currentProject = projects[currentIndex];
+  const activeProjectIndex = currentIndex % projects.length;
+  const currentProject = projects[activeProjectIndex];
 
   return (
     <section className="w-full bg-[#F4F6F8] px-0 py-12 md:py-20 flex flex-col items-center overflow-hidden select-none font-sans relative">
@@ -141,10 +162,9 @@ const CorePillars = () => {
           {/* Centered Vertical Slider Block */}
           <span className="block relative overflow-hidden h-[45px] sm:h-[65px] md:h-[75px] w-full text-center">
             <span 
-              style={{ transform: `translateY(-${wordIndex * 20}%)` }}
-              className="absolute inset-x-0 flex flex-col items-center justify-start transition-transform duration-500 cubic-bezier(0.76, 0, 0.24, 1) text-[#00B4A4]"
+              className="core-pillars-word-marquee absolute inset-x-0 top-0 flex flex-col items-center justify-start text-[#00B4A4]"
             >
-              {rotatingWords.map((word, idx) => (
+              {marqueeWords.map((word, idx) => (
                 <span 
                   key={idx} 
                   className="h-[45px] sm:h-[65px] md:h-[75px] flex items-center justify-center text-center w-full"
@@ -236,11 +256,11 @@ const CorePillars = () => {
           >
             <div 
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+              className={`w-full h-full flex ${isSliderTransitioning ? 'transition-transform duration-[650ms] ease-[cubic-bezier(0.25,1,0.5,1)]' : 'transition-none'}`}
             >
-              {projects.map((p, idx) => (
+              {displayProjects.map((p, idx) => (
                 <img 
-                  key={`left-img-${p.id}`}
+                  key={`left-img-${p.id}-${idx}`}
                   src={projects[(idx - 1 + projects.length) % projects.length].mockupImage} 
                   alt="Prev Mockup" 
                   className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
@@ -256,11 +276,11 @@ const CorePillars = () => {
           >
             <div 
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+              className={`w-full h-full flex ${isSliderTransitioning ? 'transition-transform duration-[650ms] ease-[cubic-bezier(0.25,1,0.5,1)]' : 'transition-none'}`}
             >
-              {projects.map((p) => (
+              {displayProjects.map((p, idx) => (
                 <img 
-                  key={`center-img-${p.id}`}
+                  key={`center-img-${p.id}-${idx}`}
                   src={p.mockupImage} 
                   alt="Active Mockup" 
                   className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
@@ -279,11 +299,11 @@ const CorePillars = () => {
           >
             <div 
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              className="w-full h-full flex transition-transform duration-[450ms] cubic-bezier(0.25, 1, 0.5, 1)"
+              className={`w-full h-full flex ${isSliderTransitioning ? 'transition-transform duration-[650ms] ease-[cubic-bezier(0.25,1,0.5,1)]' : 'transition-none'}`}
             >
-              {projects.map((p, idx) => (
+              {displayProjects.map((p, idx) => (
                 <img 
-                  key={`right-img-${p.id}`}
+                  key={`right-img-${p.id}-${idx}`}
                   src={projects[(idx + 1) % projects.length].mockupImage} 
                   alt="Next Mockup" 
                   className="w-full h-full object-cover flex-shrink-0 select-none pointer-events-none"
@@ -309,7 +329,7 @@ const CorePillars = () => {
           </button>
           
           <span className="text-[11px] md:text-xs font-black tracking-[0.2em] md:tracking-[0.25em] font-mono text-white/90">
-            {currentIndex + 1} / {projects.length}
+            {activeProjectIndex + 1} / {projects.length}
           </span>
           
           <button 
@@ -321,6 +341,18 @@ const CorePillars = () => {
           </button>
         </div>
       </div>
+
+      <style>{`
+        @keyframes corePillarsWordMarquee {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+
+        .core-pillars-word-marquee {
+          animation: corePillarsWordMarquee 14s linear infinite;
+          will-change: transform;
+        }
+      `}</style>
 
     </section>
   );

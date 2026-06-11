@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Smartphone, Globe, Code, Cpu, Megaphone, ArrowRight, ChevronRight, ChevronLeft } from 'lucide-react';
 import logo from '../assets/logo.png';
+import logoWhite from '../assets/logo-white.png';
 import balloon from '../assets/balloon.png';
 import WelcomePopup from './WelcomePopup';
 // Video import yahan add kar di hai
@@ -40,12 +41,19 @@ const Navbar = () => {
   const timeoutsRef = useRef({ Services: null, Solutions: null });
 
   useEffect(() => {
+    const previousScrollbarGutter = document.documentElement.style.scrollbarGutter;
+
+    document.documentElement.style.scrollbarGutter = 'stable';
+
     if (isServicesOpen || isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.scrollbarGutter = previousScrollbarGutter;
+    };
   }, [isServicesOpen, isMobileMenuOpen]);
 
   useEffect(() => {
@@ -114,6 +122,18 @@ const Navbar = () => {
   };
 
   const isHeaderWhite = isScrolled || isServicesOpen || isSolutionsOpen;
+  const lightNavTextRoutes = ['/about', '/insights', '/solutions', '/contact'];
+  const isLightNavTextRoute = lightNavTextRoutes.some(
+    (path) => location.pathname === path || location.pathname.startsWith(`${path}/`)
+  );
+  const useLightNavText = isLightNavTextRoute && !isHeaderWhite;
+  const baseNavLinkClasses = `font-extrabold uppercase tracking-wider text-[16px] flex items-center gap-1.5 transition-colors whitespace-nowrap ${
+    useLightNavText ? 'text-white hover:text-white/80 drop-shadow-md' : 'text-slate-950 hover:text-black'
+  }`;
+  const mobileMenuButtonClasses = `focus:outline-none p-2 ${
+    useLightNavText ? 'text-white drop-shadow-md' : 'text-slate-900'
+  }`;
+  const baseLogo = useLightNavText ? logoWhite : logo;
 
   const leftNavLinks = [
     { name: 'Home', path: '/' },
@@ -221,182 +241,251 @@ const Navbar = () => {
     exit: (dir) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0, transition: { duration: 0.28, ease: [0.33, 1, 0.68, 1] } }),
   };
 
+  const servicesOverlayVariants = {
+    initial: {
+      y: -28,
+      opacity: 0,
+      clipPath: 'inset(0 0 100% 0)',
+      filter: 'blur(10px)',
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      clipPath: 'inset(0 0 0% 0)',
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.7,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+    exit: {
+      y: -18,
+      opacity: 0,
+      clipPath: 'inset(0 0 100% 0)',
+      filter: 'blur(8px)',
+      transition: {
+        duration: 0.36,
+        ease: [0.4, 0, 1, 1],
+      },
+    },
+  };
+
   return (
     <>
 {/* ── DESKTOP FULL-PAGE OVERLAY ─────────────────────────────── */}
       {/* ── DESKTOP FULL-PAGE OVERLAY ─────────────────────────────── */}
       <AnimatePresence>
-        {isServicesOpen && (
-          <motion.div
-            onMouseEnter={() => handleMouseEnter('Services')}
-            onMouseLeave={() => handleMouseLeave('Services')}
-            initial={{ y: '-100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ type: 'tween', ease: [0.16, 1, 0.3, 1], duration: 0.55 }}
-            className="fixed inset-0 w-full h-screen z-[990] hidden lg:flex flex-col overflow-hidden bg-slate-950"
-          >
-            {/* VIDEO BACKGROUND LAYER - NOW ABSOLUTE TO MOVE PERFECTLY WITH ANIMATION */}
-<div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-  <video
-    src={animationVideo}
-    autoPlay
-    loop
-    muted
-    playsInline
-    className="w-full h-full object-cover scale-115" 
-  />
-  {/* Light dark tint for readable text */}
-  <div className="absolute inset-0" />
-</div>
+  {isServicesOpen && (
+    <motion.div
+      onMouseEnter={() => handleMouseEnter('Services')}
+      onMouseLeave={() => handleMouseLeave('Services')}
+      variants={servicesOverlayVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      style={{ transformOrigin: 'top center', willChange: 'transform, opacity, clip-path, filter' }}
+      className="fixed inset-0 w-full h-screen z-[9999] hidden lg:flex flex-col overflow-hidden"
+    >
+      {/* VIDEO BACKGROUND LAYER */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+        {/* Dark fallback — video load hone se pehle black nahi dikhe */}
+        <div className="absolute inset-0 bg-[#0a0a1a]" />
+        <video
+          src={animationVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover scale-[1.15]"
+          style={{ opacity: 1 }}
+        />
+        <div className="absolute inset-0" />
+      </div>
 
-            {/* CONTENT WRAPPER */}
-            <div className="relative z-10 flex flex-col flex-1 text-white h-full justify-between pb-6">
-              
-              {/* ── Overlay Navbar row ── */}
-              <div className="w-full h-24 border-b border-white/10 flex-shrink-0 relative flex items-center">
-                <div className="max-w-screen-2xl mx-auto px-12 w-full flex items-center h-full relative">
+      {/* CONTENT WRAPPER */}
+      <div className="relative z-10 flex flex-col flex-1 text-white h-full justify-between pb-6">
 
-                  {/* Left links */}
-                  <div className="flex items-center gap-x-8 xl:gap-x-12 pr-[160px] w-1/2 justify-end h-full">
-                    {leftNavLinks.map((link) => (
-                      <Link key={link.name} to={link.path}
-                        onMouseEnter={() => { if (!link.hasDropdown) forceCloseAllDropdowns(); }}
-                        className={`font-extrabold uppercase tracking-wider text-[16px] transition-colors ${link.name === 'Services' ? 'text-white' : 'text-white/70 hover:text-white'}`}
-                      >{link.name}</Link>
-                    ))}
-                  </div>
+        {/* ── Overlay Navbar row ── */}
+        <div className="w-full h-24 border-b border-white/10 flex-shrink-0 relative flex items-center">
+          <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 w-full flex items-center h-full relative">
 
-                  {/* Center logo - Original Colors */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[992]">
-                    <Link to="/" onClick={forceCloseAllDropdowns}>
-                      <img src={logo} alt="Logo" className="h-16 w-auto" />
-                    </Link>
-                  </div>
-
-                  {/* Right links + balloon */}
-                  <div className="flex items-center w-1/2 h-full pl-[160px] justify-between">
-                    <div className="flex items-center gap-x-8 xl:gap-x-12 justify-start h-full">
-                      {rightNavLinks.map((link) => (
-                        <Link key={link.name} to={link.path}
-                          onMouseEnter={() => { if (link.name === 'Solutions') handleMouseEnter('Solutions'); else forceCloseAllDropdowns(); }}
-                          className="font-extrabold uppercase tracking-wider text-[16px] text-white/70 hover:text-white transition-colors"
-                        >{link.name}</Link>
-                      ))}
-                    </div>
-                    <div className="relative ml-auto flex items-center h-full">
-                      <button onClick={handleDuckClick} className={`flex items-center justify-center transition-all duration-200 hover:scale-110 ${isDuckOpen ? 'scale-110' : ''}`}>
-                        <img src={balloon} alt="Duck" className="w-auto h-9 object-contain" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Services content area ── */}
-              <div className="w-full max-w-screen-2xl mx-auto flex px-12 flex-1 mt-6 items-start overflow-y-auto">
-
-                {/* Left col — service tabs */}
-                <div className="w-[35%] border-r border-white/10 pr-10 flex flex-col justify-start pt-4 gap-1">
-                  <p className="text-[11px] font-black tracking-widest text-white/50 uppercase mb-4">// Our Services</p>
-                  {Object.entries(nestedServices).map(([key, value]) => {
-                    const TabIcon = value.icon;
-                    const isCurrent = activeServiceTab === key;
-                    return (
-                      <div key={key} onMouseEnter={() => setActiveServiceTab(key)}
-                        className={`flex items-center justify-between px-5 py-4 rounded-2xl cursor-pointer transition-all duration-200 ${
-                          isCurrent
-                            ? 'bg-white text-slate-950 shadow-xl translate-x-2 font-black'
-                            : 'text-white/70 hover:text-white hover:bg-white/10'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3.5">
-                          {TabIcon && <TabIcon className={`w-5 h-5 ${isCurrent ? 'text-[#ee3444]' : 'text-white/50'}`} />}
-                          <span className="text-[17px] font-extrabold uppercase tracking-wide">{value.title}</span>
-                        </div>
-                        <ArrowRight className={`w-4 h-4 flex-shrink-0 transition-transform ${isCurrent ? 'opacity-100 text-[#ee3444]' : 'opacity-0'}`} />
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Right col — sub-pages */}
-                <div className="w-[65%] pl-16 pt-4">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeServiceTab}
-                      initial={{ opacity: 0, x: 15 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -15 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <h4 className="text-[15px] font-black tracking-widest text-white uppercase mb-6 drop-shadow-md">
-                        {nestedServices[activeServiceTab].title}
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        {nestedServices[activeServiceTab].pages.map((page) => (
-                          <Link key={page.label}
-                            to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
-                            className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-all border border-white/10 hover:border-white/30"
-                          >
-                            <div className="flex items-center justify-between">
-                              <span className="text-[15px] font-extrabold text-white group-hover:text-white transition-colors leading-tight drop-shadow-sm">
-                                {page.label}
-                              </span>
-                              <ArrowRight className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-200 flex-shrink-0" />
-                            </div>
-                            <p className="text-[12px] text-white/60 font-medium leading-relaxed group-hover:text-white/80 transition-colors">
-                              {page.desc}
-                            </p>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              {/* ── Bottom CTA strip ── */}
-              <div className="w-full max-w-screen-2xl mx-auto px-12 py-4 grid grid-cols-3 items-center mt-auto border-t border-white/10">
-                {/* Left: CTA button */}
-                <div className="flex justify-start">
-                  <Link to="/contact" onClick={forceCloseAllDropdowns}
-                    className="flex items-center gap-3 px-6 py-3 bg-white text-slate-950 rounded-2xl font-bold text-[13px] uppercase tracking-wider hover:bg-[#ee3444] hover:text-white transition-colors shadow-md"
-                  >
-                    <span>Initiate Strategy Call</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-
-                {/* Center: Close button */}
-                <div className="flex justify-center">
-                  <motion.button
-                    onClick={forceCloseAllDropdowns}
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.94 }}
-                    aria-label="Close menu"
-                    className="w-12 h-12 rounded-full border-2 border-white/30 bg-transparent hover:bg-white hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200"
-                  >
-                    <svg
-                      className="w-5 h-5 transition-colors duration-200"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M18 6L6 18M6 6l12 12" />
-                    </svg>
-                  </motion.button>
-                </div>
-                <div />
-              </div>
-
+            {/* Left links */}
+            <div className="flex items-center gap-x-8 xl:gap-x-12 pr-[160px] w-1/2 justify-end h-full">
+              {leftNavLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onMouseEnter={() => { if (!link.hasDropdown) forceCloseAllDropdowns(); }}
+                  className={`font-extrabold uppercase tracking-wider text-[16px] transition-colors flex items-center gap-1.5 whitespace-nowrap ${
+                    link.name === 'Services' ? 'text-white' : 'text-white/70 hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                  {link.hasDropdown && <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
+                </Link>
+              ))}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            {/* ── CENTER LOGO — SIRF EK, WHITE WALA ── */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[992]">
+              <Link to="/" onClick={forceCloseAllDropdowns}>
+                <img src={logoWhite} alt="Logo" className="h-16 w-auto" />
+              </Link>
+            </div>
+
+            {/* Right links + balloon */}
+            <div className="flex items-center w-1/2 h-full pl-[160px] justify-between">
+              <div className="flex items-center gap-x-8 xl:gap-x-12 justify-start h-full">
+                {rightNavLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onMouseEnter={() => {
+                      if (link.name === 'Solutions') handleMouseEnter('Solutions');
+                      else forceCloseAllDropdowns();
+                    }}
+                    className="font-extrabold uppercase tracking-wider text-[16px] text-white/70 hover:text-white transition-colors flex items-center gap-1.5 whitespace-nowrap"
+                  >
+                    {link.name}
+                    {link.hasDropdown && <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
+                  </Link>
+                ))}
+              </div>
+              <div className="relative ml-auto flex items-center h-full">
+                <button
+                  onClick={handleDuckClick}
+                  className={`flex items-center justify-center transition-all duration-200 hover:scale-110 ${
+                    isDuckOpen ? 'scale-110' : ''
+                  }`}
+                >
+                  <img src={balloon} alt="Duck" className="w-auto h-9 object-contain" />
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── Services content area ── */}
+        <div className="w-full max-w-screen-2xl mx-auto flex px-12 flex-1 mt-6 items-start overflow-y-auto">
+
+          {/* Left col — service tabs */}
+          <div className="w-[35%] border-r border-white/10 pr-10 flex flex-col justify-start pt-4 gap-1">
+            <p className="text-[11px] font-black tracking-widest text-white/50 uppercase mb-4">// Our Services</p>
+            {Object.entries(nestedServices).map(([key, value]) => {
+              const TabIcon = value.icon;
+              const isCurrent = activeServiceTab === key;
+              return (
+                <div
+                  key={key}
+                  onMouseEnter={() => setActiveServiceTab(key)}
+                  className={`flex items-center justify-between px-5 py-4 rounded-2xl cursor-pointer transition-all duration-200 ${
+                    isCurrent
+                      ? 'bg-white text-slate-950 shadow-xl translate-x-2 font-black'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-3.5">
+                    {TabIcon && (
+                      <TabIcon className={`w-5 h-5 ${isCurrent ? 'text-[#ee3444]' : 'text-white/50'}`} />
+                    )}
+                    <span className="text-[17px] font-extrabold uppercase tracking-wide">{value.title}</span>
+                  </div>
+                  <ArrowRight
+                    className={`w-4 h-4 flex-shrink-0 transition-transform ${
+                      isCurrent ? 'opacity-100 text-[#ee3444]' : 'opacity-0'
+                    }`}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right col — sub-pages */}
+          <div className="w-[65%] pl-16 pt-4">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeServiceTab}
+                initial={{ opacity: 0, x: 15 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -15 }}
+                transition={{ duration: 0.2 }}
+              >
+                <h4 className="text-[15px] font-black tracking-widest text-white uppercase mb-6 drop-shadow-md">
+                  {nestedServices[activeServiceTab].title}
+                </h4>
+                <div className="grid grid-cols-2 gap-3">
+                  {nestedServices[activeServiceTab].pages.map((page) => (
+                    <Link
+                      key={page.label}
+                      to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
+                      className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-all border border-white/10 hover:border-white/30"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[15px] font-extrabold text-white group-hover:text-white transition-colors leading-tight drop-shadow-sm">
+                          {page.label}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-white opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all duration-200 flex-shrink-0" />
+                      </div>
+                      <p className="text-[12px] text-white/60 font-medium leading-relaxed group-hover:text-white/80 transition-colors">
+                        {page.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
+
+        {/* ── Bottom CTA strip ── */}
+        <div className="w-full max-w-screen-2xl mx-auto px-12 py-4 grid grid-cols-3 items-center mt-auto border-t border-white/10">
+
+          {/* Left: CTA button */}
+          <div className="flex justify-start">
+            <Link
+              to="/contact"
+              onClick={forceCloseAllDropdowns}
+              className="flex items-center gap-3 px-6 py-3 bg-white text-slate-950 rounded-2xl font-bold text-[13px] uppercase tracking-wider hover:bg-[#ee3444] hover:text-white transition-colors shadow-md"
+            >
+              <span>Initiate Strategy Call</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Center: Close button */}
+          <div className="flex justify-center">
+            <motion.button
+              onClick={forceCloseAllDropdowns}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.94 }}
+              aria-label="Close menu"
+              className="w-12 h-12 rounded-full border-2 border-white/30 bg-transparent hover:bg-white hover:text-slate-950 text-white flex items-center justify-center transition-all duration-200"
+            >
+              <svg
+                className="w-5 h-5 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </motion.button>
+          </div>
+
+          <div />
+        </div>
+
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
 
       {/* ── BASE NAVBAR ───────────────────────────────────────────── */}
       <nav className={`fixed top-0 left-0 w-full transition-all duration-300 ease-out z-[985] ${isHeaderWhite ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100/50 h-24' : 'bg-transparent h-24'}`}>
@@ -410,7 +499,7 @@ const Navbar = () => {
                   onMouseEnter={() => { if (link.hasDropdown) handleMouseEnter(link.name); else forceCloseAllDropdowns(); }}
                   onMouseLeave={() => link.hasDropdown && handleMouseLeave(link.name)}
                 >
-                  <Link to={link.path} className="font-extrabold uppercase tracking-wider text-[16px] text-slate-950 hover:text-black flex items-center gap-1.5 transition-colors whitespace-nowrap">
+                  <Link to={link.path} className={baseNavLinkClasses}>
                     {link.name}
                     {link.hasDropdown && <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
                   </Link>
@@ -425,7 +514,7 @@ const Navbar = () => {
                     onMouseEnter={() => { if (link.hasDropdown) handleMouseEnter(link.name); else forceCloseAllDropdowns(); }}
                     onMouseLeave={() => link.hasDropdown && handleMouseLeave(link.name)}
                   >
-                    <Link to={link.path} className="font-extrabold uppercase tracking-wider text-[16px] text-slate-950 hover:text-black flex items-center gap-1.5 transition-colors whitespace-nowrap">
+                    <Link to={link.path} className={baseNavLinkClasses}>
                       {link.name}
                       {link.hasDropdown && <svg className="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>}
                     </Link>
@@ -436,7 +525,7 @@ const Navbar = () => {
                       >
                         <div className="flex flex-col gap-1">
                           {solutionsData.map(item => (
-                            <Link key={item.name} to={item.path} className="text-[13px] font-bold text-slate-600 hover:text-[#ee3444] p-2.5 rounded-lg hover:bg-slate-50 transition-all">{item.name}</Link>
+                            <Link key={item.name} to={item.path} className="text-[13px] font-bold text-slate-600 hover:text-[#ee3444] p-2.5 rounded-lg transition-all">{item.name}</Link>
                           ))}
                         </div>
                       </motion.div>
@@ -466,9 +555,9 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Center Logo */}
-          <div className="hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[986] pointer-events-auto">
+          <div className={`hidden lg:flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[986] pointer-events-auto transition-opacity duration-200 ${isServicesOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
             <Link to="/">
-              <img src={logo} alt="Logo" className={`w-auto transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16'}`} />
+              <img src={baseLogo} alt="Logo" className={`w-auto transition-all duration-300 ${isScrolled ? 'h-14' : 'h-16'}`} />
             </Link>
           </div>
 
@@ -478,7 +567,7 @@ const Navbar = () => {
 
             <Link to="/" className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <img
-                src={logo}
+                src={baseLogo}
                 alt="Logo"
                 className={`w-auto transition-all duration-300 ${isScrolled ? 'h-12' : 'h-14'}`}
               />
@@ -488,7 +577,7 @@ const Navbar = () => {
               <div className="flex items-center">
                 <button
                   onClick={() => setIsMobileMenuOpen(true)}
-                  className="text-slate-900 focus:outline-none p-2"
+                  className={mobileMenuButtonClasses}
                   aria-label="Open menu"
                 >
                   <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -571,7 +660,7 @@ const Navbar = () => {
                                   : <ArrowRight className="w-4 h-4 text-slate-300 flex-shrink-0" />
                                 }
                               </button>
-                              {i < allNavLinks.length - 1 && <div className="h-px bg-slate-100" />}
+                              {i < allNavLinks.length - 1 && <div className="h-px" />}
                             </React.Fragment>
                           ))}
                         </div>
@@ -579,7 +668,7 @@ const Navbar = () => {
                           <Link
                             to="/contact"
                             onClick={closeMobileMenu}
-                            className="flex items-center justify-between w-full p-5 bg-slate-950 text-white rounded-2xl font-bold text-[13px] uppercase tracking-widest hover:bg-[#ee3444] transition-colors"
+                            className="flex items-center justify-between w-full p-5 text-white rounded-2xl font-bold text-[13px] uppercase tracking-widest hover:bg-[#ee3444] transition-colors"
                           >
                             <span>Get In Touch</span>
                             <ArrowRight className="w-4 h-4" />
@@ -618,7 +707,7 @@ const Navbar = () => {
                                 <span className="text-[20px] font-extrabold text-slate-800 leading-none">{val.title}</span>
                                 <ChevronRight className="w-5 h-5 text-slate-400 flex-shrink-0" />
                               </button>
-                              {i < arr.length - 1 && <div className="h-px bg-slate-100" />}
+                              {i < arr.length - 1 && <div className="h-px" />}
                             </React.Fragment>
                           ))}
                         </div>
@@ -656,7 +745,7 @@ const Navbar = () => {
                                 <span className="text-[20px] font-extrabold text-slate-800 leading-none">{item.name}</span>
                                 <ArrowRight className="w-4 h-4 text-slate-300 flex-shrink-0" />
                               </Link>
-                              {i < solutionsData.length - 1 && <div className="h-px bg-slate-100" />}
+                              {i < solutionsData.length - 1 && <div className="h-px" />}
                             </React.Fragment>
                           ))}
                         </div>
@@ -697,7 +786,7 @@ const Navbar = () => {
                                 </div>
                                 <p className="text-[12px] text-slate-400 mt-1 leading-relaxed">{page.desc}</p>
                               </Link>
-                              {i < arr.length - 1 && <div className="h-px bg-slate-100" />}
+                              {i < arr.length - 1 && <div className="h-px" />}
                             </React.Fragment>
                           ))}
                         </div>

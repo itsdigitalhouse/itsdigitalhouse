@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CompanyCore = () => {
   const coreData = [
@@ -82,8 +83,8 @@ const CompanyCore = () => {
 
         {/* ==================== CENTERED ACTION BUTTON WITH VERTICAL FILL ANIMATION ==================== */}
         <div className="mt-16 flex justify-center w-full relative z-30">
-          <button 
-            onClick={() => console.log('Action Triggered')}
+          <Link
+            to="/contact"
             className="group relative px-8 py-4 bg-slate-950 text-white rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none"
           >
             {/* Bottom-to-Top Slide Fill Layer */}
@@ -99,7 +100,7 @@ const CompanyCore = () => {
               <span>Let's Build Together</span>
               <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </span>
-          </button>
+          </Link>
         </div>
 
       </div>

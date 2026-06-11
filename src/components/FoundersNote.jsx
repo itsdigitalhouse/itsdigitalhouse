@@ -29,6 +29,42 @@ const services = [
     accent: "#75b0d2",
     keywords: ["Research", "Wireframes", "Prototypes", "Testing"]
   },
+  {
+    id: 4,
+    title: "APP DEVELOPMENT",
+    tag: "04",
+    description: "Developing high-performance, cross-platform mobile apps with fluid animations and seamless user interfaces.",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
+    accent: "#7361a7",
+    keywords: ["Flutter", "React Native", "iOS", "Android"]
+  },
+  {
+    id: 5,
+    title: "SOCIAL MEDIA",
+    tag: "05",
+    description: "Managing and scaling your brand footprint across social structures with premium aesthetic content creation.",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800",
+    accent: "#d24a8a",
+    keywords: ["Content", "SMM", "Branding", "Graphics"]
+  },
+  {
+    id: 6,
+    title: "DIGITAL MARKETING",
+    tag: "06",
+    description: "Driving hyper-targeted growth campaigns and analytical structures to accelerate ROI and visibility.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    accent: "#f1574d",
+    keywords: ["SEO", "Growth", "PPC Campaigns", "Strategy"]
+  },
+  {
+    id: 7,
+    title: "ARTIFICIAL INTELLIGENCE",
+    tag: "07",
+    description: "Integrating modern AI workflows, intelligent automation, and custom algorithms into your workflow architecture.",
+    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&q=80&w=800",
+    accent: "#34d399",
+    keywords: ["LLMs", "Automation", "SaaS", "Integrations"]
+  },
 ];
 
 const neonGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
@@ -225,6 +261,7 @@ const ServicesSection = () => {
                       WebkitBackgroundClip: isHovered ? 'text' : 'unset',
                       WebkitTextFillColor: isHovered ? 'transparent' : '#0a0a0a',
                       backgroundClip: isHovered ? 'text' : 'unset',
+                      color: isHovered ? 'transparent' : '#0a0a0a'
                     }}
                   >
                     {service.title}

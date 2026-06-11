@@ -19,7 +19,7 @@ const InsightHero = () => {
       {/* Main Content with Entry Animation */}
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center animate-fade-up">
         
-        <span className="inline-block text-[#ee3444] font-bold tracking-[0.3em] text-[10px] sm:text-[11px] uppercase mb-6 border border-[#ee3444]/20 px-4 py-1.5 rounded-full bg-[#ee3444]/5">
+        <span className="inline-block text-[#ee3444] font-bold tracking-[0.3em] text-[10px] sm:text-[11px] uppercase mb-6 border border-[#ee3444]/20 px-4 py-1.5 rounded-full">
           Knowledge & Perspectives
         </span>
 
