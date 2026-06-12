@@ -17,11 +17,9 @@ const ScreenSolutions = () => {
   const smoothX = useSpring(x, springConfig);
   const smoothY = useSpring(y, springConfig);
 
-  // Mouse tilt values
   const rotateX = useTransform(smoothY, [-0.5, 0.5], [10, -10]); 
   const rotateY = useTransform(smoothX, [-0.5, 0.5], [-10, 10]); 
 
-  // Parallax movement for depth
   const translateMobile = useTransform(smoothX, [-0.5, 0.5], [-20, 20]);
   const translateTablet = useTransform(smoothX, [-0.5, 0.5], [-10, 10]);
 
@@ -42,8 +40,8 @@ const ScreenSolutions = () => {
     <section 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full bg-white overflow-hidden font-sans cursor-default"
-      style={{ perspective: "1500px" }} // Increased perspective for deeper 3D
+      className="relative w-full bg-white overflow-hidden font-sans cursor-default py-16 lg:py-0"
+      style={{ perspective: "1500px" }}
     >
       <motion.div 
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
@@ -51,54 +49,61 @@ const ScreenSolutions = () => {
       >
         <div className="w-full px-6 lg:px-10 flex flex-col-reverse lg:flex-row items-center gap-12 relative">
           
-          {/* LEFT SIDE: CONTENT */}
+          {/* UPDATED WIDTH: lg:w-[50%] for more space */}
           <div 
-            className="w-full lg:w-[40%] text-center lg:text-left z-[100]"
-            style={{ transform: "translateZ(50px)" }} // Content floats slightly forward
+            className="w-full lg:w-[50%] text-center lg:text-left z-[100]"
+            style={{ transform: "translateZ(50px)" }}
           >
-            <h2 className="font-[1000] text-black tracking-tighter uppercase italic leading-[0.8]">
-              <span className="block text-3xl lg:text-[38px]">SEAMLESS</span>
+            {/* Heading text wrapping adjusted */}
+            <h2 className="text-3xl sm:text-5xl lg:text-[64px] font-black text-slate-950 tracking-tighter uppercase leading-[0.9]">
+              <span className="block">SEAMLESS</span>
               <span 
-                className="block text-3xl lg:text-[38px] -mt-1 lg:-mt-2 py-1" 
+                className="block py-1 whitespace-nowrap" 
                 style={{ 
                   background: 'linear-gradient(to right, #11b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                   color: 'transparent',
-                  display: 'inline-block',
                 }}
               >
                 DIGITAL SOLUTIONS
               </span>
-              <span className="block text-3xl lg:text-[38px] text-gray-900 -mt-1 lg:-mt-2">
+              <span className="block -mt-1 lg:-mt-2 whitespace-nowrap">
                 ACROSS EVERY SCREEN
               </span>
             </h2>
 
-            <p className="text-gray-500 text-[13px] lg:text-sm font-medium max-w-xs mx-auto lg:mx-0 mt-6 mb-8 leading-relaxed">
+            {/* Increased max-w for paragraph */}
+            <p className="text-gray-500 text-base sm:text-lg font-medium max-w-lg mx-auto lg:mx-0 mt-6 mb-8 leading-relaxed">
               Its Digital House is a full-service creative digital agency dedicated to helping businesses build, grow, and transform their online identity.
             </p>
 
-            <button className="px-16 py-3 border-2 border-black text-black font-normal uppercase tracking-widest text-[12px] hover:bg-black hover:text-white transition-all duration-300 shadow-xl">
-              GET STARTED TODAY
+            <button className="group relative px-8 py-4 bg-slate-950 text-white rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none">
+              <span 
+                className="absolute bottom-0 left-0 w-full h-full translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-0"
+                style={{ backgroundImage: 'linear-gradient(to right, #e1b054, #d24a8a, #ee3444)' }}
+              ></span>
+              <span className="relative z-10 flex items-center gap-2">
+                <span>GET STARTED TODAY</span>
+                <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+              </span>
             </button>
           </div>
 
-          {/* RIGHT SIDE: 3D DEVICES */}
+          {/* RIGHT SIDE: 3D DEVICES (Sizes further optimized) */}
           <div 
-            className="relative w-full lg:w-[60%] h-[400px] md:h-[600px] lg:h-[700px] flex items-center justify-center lg:justify-end"
+            className="relative w-full lg:w-[50%] h-[400px] md:h-[600px] lg:h-[700px] flex items-center justify-center lg:justify-end"
             style={{ transformStyle: "preserve-3d" }}
           >
             
-            {/* 3. LAPTOP (Furthest back) */}
             <motion.div 
               initial={{ opacity: 0, x: 200 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 3, delay: 3.0, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
               style={{ transform: "translateZ(0px)" }}
-              className="absolute z-10 w-[450px] md:w-[850px] lg:w-[1050px] left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[-22%] pointer-events-none"
+              className="absolute z-10 w-[300px] md:w-[600px] lg:w-[750px] left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[-5%] pointer-events-none"
             >
               <div className="relative">
                 <div className="absolute top-[10%] left-[14%] w-[72%] h-[78%] z-[25] overflow-hidden">
@@ -108,14 +113,13 @@ const ScreenSolutions = () => {
               </div>
             </motion.div>
 
-            {/* 2. TABLET (Middle layer) */}
             <motion.div 
               initial={{ opacity: 0, x: 150 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 3, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
               style={{ transform: "translateZ(80px)", x: translateTablet }}
-              className="absolute z-30 w-[220px] md:w-[480px] left-[45%] -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[42%] bottom-[5%] drop-shadow-2xl"
+              className="absolute z-30 w-[150px] md:w-[350px] left-[45%] -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[30%] bottom-[5%] drop-shadow-2xl"
             >
               <div className="relative">
                 <div className="absolute top-[8%] left-[8%] w-[84%] h-[87%] z-[35] overflow-hidden">
@@ -125,14 +129,13 @@ const ScreenSolutions = () => {
               </div>
             </motion.div>
 
-            {/* 1. MOBILE (Closest to user) */}
             <motion.div 
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 3, delay: 0, ease: [0.22, 1, 0.36, 1] }}
               viewport={{ once: true }}
               style={{ transform: "translateZ(150px)", x: translateMobile }}
-              className="absolute z-40 w-[120px] md:w-[280px] left-[25%] -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[78%] bottom-[5%] drop-shadow-2xl"
+              className="absolute z-40 w-[80px] md:w-[200px] left-[25%] -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-[60%] bottom-[5%] drop-shadow-2xl"
             >
               <div className="relative">
                 <div className="absolute top-[4.5%] left-[8%] w-[84%] h-[88%] z-[45] overflow-hidden rounded-[1rem] lg:rounded-[2.8rem]">

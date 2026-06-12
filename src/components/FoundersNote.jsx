@@ -131,7 +131,6 @@ const ServicesSection = () => {
   const mouseY = useMotionValue(-500);
 
   const handleMouseMove = (e) => {
-    // Media query matching 'lg' breakpoint (1024px) to avoid performance lag on mobile/touch screens
     if (window.innerWidth < 1024) return;
     mouseX.set(e.clientX - 160);
     mouseY.set(e.clientY - 220);
@@ -142,7 +141,6 @@ const ServicesSection = () => {
       className="relative w-full bg-white py-16 sm:py-24 px-4 sm:px-8 lg:px-16 xl:px-24 overflow-hidden select-none"
       onMouseMove={handleMouseMove}
     >
-      {/* Subtle grid texture */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.022]"
         style={{
@@ -159,7 +157,6 @@ const ServicesSection = () => {
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true, amount: 0.2 }}
       >
-        {/* Label */}
         <motion.p
           initial={{ opacity: 0, letterSpacing: '0.1em' }}
           whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
@@ -176,7 +173,6 @@ const ServicesSection = () => {
           ITS DIGITAL HOUSE • SERVICES
         </motion.p>
 
-        {/* Heading — word by word */}
         <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[90px] font-[1000] uppercase tracking-tighter mb-6 sm:mb-8 py-2 overflow-visible lg:overflow-hidden">
           {["What", "We", "Do"].map((word, i) => (
             <motion.span
@@ -199,12 +195,11 @@ const ServicesSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          Our studio excels in creating custom digital solutions, blending innovative web design with user
-          experience optimization. We focus on transforming visions into functional, aesthetically striking
-          digital realities.
+          We are a full-service creative digital agency dedicated to helping businesses build, 
+          grow, and transform their online identity through modern design, robust technology, 
+          and strategic digital solutions.
         </motion.p>
 
-        {/* Gradient line */}
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           whileInView={{ scaleX: 1, opacity: 1 }}
@@ -215,7 +210,7 @@ const ServicesSection = () => {
         />
       </motion.div>
 
-      {/* ── DESKTOP LIST (Large Screens Only) ── */}
+      {/* ── DESKTOP LIST ── */}
       <motion.div
         className="hidden lg:block max-w-6xl mx-auto relative z-10"
         initial="hidden"
@@ -241,8 +236,6 @@ const ServicesSection = () => {
               onMouseLeave={() => setHovered(null)}
             >
               <div className="py-8 xl:py-10 flex items-center justify-between px-2 xl:px-4">
-
-                {/* Left: tag + title */}
                 <div className="flex items-center gap-6 xl:gap-10">
                   <motion.span
                     animate={{ color: isHovered ? service.accent : '#d1d5db' }}
@@ -251,7 +244,6 @@ const ServicesSection = () => {
                   >
                     {service.tag}
                   </motion.span>
-
                   <motion.h3
                     animate={{ x: isHovered ? 12 : 0 }}
                     transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
@@ -267,8 +259,6 @@ const ServicesSection = () => {
                     {service.title}
                   </motion.h3>
                 </div>
-
-                {/* Right: keywords + arrow */}
                 <div className="flex items-center gap-4 xl:gap-6">
                   <motion.div
                     animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : 10 }}
@@ -285,7 +275,6 @@ const ServicesSection = () => {
                       </span>
                     ))}
                   </motion.div>
-
                   <motion.div
                     animate={{
                       scale: isHovered ? 1 : 0.8,
@@ -303,16 +292,12 @@ const ServicesSection = () => {
                   </motion.div>
                 </div>
               </div>
-
-              {/* Hover background wash */}
               <motion.div
                 className="absolute inset-0 -z-10 pointer-events-none"
                 animate={{ opacity: isHovered ? 1 : 0 }}
                 transition={{ duration: 0.25 }}
                 style={{ background: `linear-gradient(to right, ${service.accent}06, transparent 60%)` }}
               />
-
-              {/* Bottom accent line */}
               <motion.div
                 className="absolute bottom-0 left-0 h-[2px] rounded-full"
                 animate={{ width: isHovered ? '100%' : '0%' }}
@@ -324,7 +309,7 @@ const ServicesSection = () => {
         })}
       </motion.div>
 
-      {/* ── MOBILE / TABLET ACCORDION (Below 1024px) ── */}
+      {/* ── MOBILE ACCORDION ── */}
       <div className="lg:hidden flex flex-col gap-4 max-w-2xl mx-auto relative z-10">
         {services.map((service) => {
           const isOpen = openMobile === service.id;
@@ -334,10 +319,9 @@ const ServicesSection = () => {
               className="rounded-2xl overflow-hidden border transition-all duration-300 bg-white"
               style={{ borderColor: isOpen ? `${service.accent}60` : '#e5e7eb' }}
             >
-              {/* Header Button */}
               <button
                 onClick={() => setOpenMobile(isOpen ? null : service.id)}
-                className="w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left active:bg-gray-50/50 transition-colors duration-150"
+                className="w-full flex items-center justify-between px-5 sm:px-6 py-5 sm:py-6 text-left"
               >
                 <div className="flex items-center gap-4">
                   <span className="text-[10px] font-black tracking-widest font-mono" style={{ color: service.accent }}>
@@ -347,55 +331,37 @@ const ServicesSection = () => {
                     {service.title}
                   </span>
                 </div>
-
                 <motion.div
                   animate={{
                     rotate: isOpen ? 45 : 0,
                     backgroundColor: isOpen ? service.accent : '#f3f4f6'
                   }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ml-3"
+                  className="w-9 h-9 rounded-full flex items-center justify-center"
                 >
-                  <span
-                    className="text-lg font-light leading-none transition-colors duration-200"
-                    style={{ color: isOpen ? 'white' : '#6b7280' }}
-                  >
-                    +
-                  </span>
+                  <span className="text-lg font-light leading-none" style={{ color: isOpen ? 'white' : '#6b7280' }}>+</span>
                 </motion.div>
               </button>
-
-              {/* Expandable Panel */}
               <AnimatePresence initial={false}>
                 {isOpen && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
                     className="overflow-hidden"
                   >
                     <div className="bg-gray-50/40 border-t border-gray-100">
-                      <div className="w-full h-48 sm:h-60 overflow-hidden">
+                      <div className="w-full h-48 overflow-hidden">
                         <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
                       </div>
-                      <div className="p-5 sm:p-6">
-                        <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-5">
-                          {service.description}
-                        </p>
+                      <div className="p-5">
+                        <p className="text-gray-600 text-sm mb-5">{service.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {service.keywords.map((kw) => (
-                            <span
-                              key={kw}
-                              className="text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full border bg-white"
-                              style={{ borderColor: service.accent, color: service.accent }}
-                            >
-                              {kw}
-                            </span>
+                            <span key={kw} className="text-[10px] font-black uppercase px-2.5 py-1 rounded-full border bg-white" style={{ borderColor: service.accent, color: service.accent }}>{kw}</span>
                           ))}
                         </div>
                       </div>
-                      <div className="h-[3px] mx-5 sm:mx-6 mb-5 rounded-full" style={{ background: service.accent }} />
+                      <div className="h-[3px] mx-5 mb-5 rounded-full" style={{ background: service.accent }} />
                     </div>
                   </motion.div>
                 )}
@@ -404,8 +370,6 @@ const ServicesSection = () => {
           );
         })}
       </div>
-
-      {/* ── CURSOR CARD (Only handles desktop hover) ── */}
       <AnimatePresence>
         {hovered && <HoverCard service={hovered} mouseX={mouseX} mouseY={mouseY} />}
       </AnimatePresence>

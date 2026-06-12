@@ -15,18 +15,18 @@ const InsightFeatured = () => {
         {/* Dynamic Scale Card */}
         <div className="group w-full rounded-[2rem] bg-slate-50 border border-slate-200/50 p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 transition-all duration-700 hover:bg-white hover:border-slate-300 hover:shadow-2xl hover:shadow-slate-200/50">
           
-          <div className="max-w-2xl w-full">
+          <div className="max-w-4xl w-full">
             <div className="flex items-center gap-4 mb-4 text-xs font-medium text-slate-400">
               <span>Case Study</span>
               <span>•</span>
               <span>June 2026</span>
             </div>
             
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 leading-tight mb-6 transition-colors duration-300 group-hover:text-[#ee3444]">
+            <h2 className="text-3xl sm:text-5xl lg:text-[52px] font-black text-slate-950 leading-tight mb-6 transition-colors duration-300 group-hover:text-[#ee3444]">
               Engineering Scalable Systems: How We Transformed Digital Presence for Modern Enterprises.
             </h2>
             
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-slate-600 max-w-lg leading-relaxed mb-8">
               A comprehensive breakdown of how structuring customized UI/UX pipelines, next-generation frameworks, and data-driven marketing loops accelerated client conversion rates by over 120%.
             </p>
 

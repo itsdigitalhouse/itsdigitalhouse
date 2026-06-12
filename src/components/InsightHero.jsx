@@ -23,14 +23,14 @@ const InsightHero = () => {
           Knowledge & Perspectives
         </span>
 
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-950 leading-[1.1] tracking-tight mb-6">
+        <h1 className="text-3xl sm:text-5xl lg:text-[52px] font-black text-slate-950 leading-[1.1] tracking-tight mb-6">
           Thoughts, trends, and <br />
           <span style={strongGradient} className="inline-block pb-2">
             digital industry
           </span> insights.
         </h1>
 
-        <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 max-w-md mx-auto leading-relaxed">
           Stay ahead of the curve. Explore our latest articles, system updates, strategy breakdowns, and architectural guides engineered to accelerate modern businesses.
         </p>
 

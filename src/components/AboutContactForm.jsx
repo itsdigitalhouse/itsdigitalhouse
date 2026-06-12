@@ -28,8 +28,7 @@ const AboutContactForm = () => {
   return (
     <div className="w-full relative bg-white py-16 md:py-28 overflow-hidden font-sans">
 
-      {/* ==================== BACKGROUND FLOATING SHAPES ==================== */}
-      {/* Left Yellow Blob */}
+      {/* BACKGROUND FLOATING SHAPES */}
       <motion.div
         className="absolute left-[-50px] md:left-[-30px] top-[40%] w-[160px] h-[180px] md:w-[240px] md:h-[260px] bg-[#FFD100] rounded-[40%_60%_70%_30%_/_40%_50%_50%_60%] z-10 select-none pointer-events-none"
         animate={{
@@ -44,7 +43,6 @@ const AboutContactForm = () => {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Right Teal Blob */}
       <motion.div
         className="absolute right-[-50px] md:right-[-20px] bottom-[20%] w-[140px] h-[160px] md:w-[200px] md:h-[220px] bg-[#00B4A4] rounded-[50%_50%_40%_60%_/_50%_50%_50%_50%] z-10 select-none pointer-events-none"
         animate={{
@@ -59,36 +57,33 @@ const AboutContactForm = () => {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
       />
 
-      {/* ==================== MAIN CONTENT CONTAINER ==================== */}
+      {/* MAIN CONTENT CONTAINER */}
       <div className="max-w-6xl mx-auto px-6 relative z-20">
-
-        {/* ==================== TWO COLUMN GRID: Heading+Text LEFT | Form RIGHT ==================== */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-          {/* LEFT COLUMN: Heading + Descriptive Text */}
+          {/* LEFT COLUMN: Standardized Heading + Text */}
           <div className="text-left pt-2">
-            <h2 className="text-4xl md:text-[54px] font-black tracking-tight text-slate-900 leading-[1.05] uppercase mb-8">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 leading-[1.05] uppercase mb-8">
               House Open the <br /> Conversation!
             </h2>
 
-            <div className="space-y-5 text-slate-600 font-medium text-sm md:text-base leading-relaxed max-w-md">
+            <div className="space-y-6 text-slate-500 font-medium text-base sm:text-lg leading-relaxed max-w-lg">
               <p>
                 Ready to take the plunge and create a digital splash?
                 Whether you're looking for a complete marketing overhaul,
                 a fresh new look, or a website that stands the test of time,
                 we're here for you. Its Digital House is a full-service creative
                 digital agency dedicated to helping businesses build, grow, and
-                transform their online identity. They combine design, technology,
-                and digital strategy to create seamless experiences.
+                transform their online identity.
               </p>
-              <p className="font-bold text-slate-900 pt-2">
+              <p className="font-bold text-slate-950">
                 Book a call with our experts and take the first step toward
                 reaching your digital and business goals.
               </p>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Gradient Lead Capture Form */}
+          {/* RIGHT COLUMN: Form */}
           <div className="w-full">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -98,93 +93,23 @@ const AboutContactForm = () => {
               className="w-full bg-gradient-to-b from-[#f34c68] via-[#e5195e] to-[#c70961] text-white p-6 md:p-9 rounded-[32px] shadow-[0_30px_60px_-15px_rgba(229,25,94,0.3)]"
             >
               <form onSubmit={handleSubmit} className="space-y-4">
-
-                {/* First Name & Last Name Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name*"
-                    required
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name*"
-                    required
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
-                  />
+                  <input type="text" name="firstName" placeholder="First Name*" required value={formData.firstName} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200" />
+                  <input type="text" name="lastName" placeholder="Last Name*" required value={formData.lastName} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200" />
                 </div>
-
-                {/* Email Input */}
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email*"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
-                />
-
-                {/* Phone Input */}
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone*"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
-                />
-
-                {/* Website Input */}
-                <input
-                  type="text"
-                  name="website"
-                  placeholder="Website"
-                  value={formData.website}
-                  onChange={handleChange}
-                  className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200"
-                />
-
-                {/* Message Textarea */}
-                <textarea
-                  name="message"
-                  rows="3"
-                  placeholder="Tell us more about your project or campaign*"
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white resize-none transition-all duration-200"
-                />
-
-                {/* Newsletter Checkbox */}
+                <input type="email" name="email" placeholder="Email*" required value={formData.email} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200" />
+                <input type="tel" name="phone" placeholder="Phone*" required value={formData.phone} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200" />
+                <input type="text" name="website" placeholder="Website" value={formData.website} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white transition-all duration-200" />
+                <textarea name="message" rows="3" placeholder="Tell us more about your project or campaign*" required value={formData.message} onChange={handleChange} className="w-full bg-[#f4f4f4]/95 text-slate-900 placeholder-slate-500 rounded-xl px-4 py-3.5 text-xs font-bold border-none outline-none focus:bg-white resize-none transition-all duration-200" />
+                
                 <div className="flex items-center gap-2.5 pt-1 select-none">
-                  <input
-                    type="checkbox"
-                    id="newsletter"
-                    name="newsletter"
-                    checked={formData.newsletter}
-                    onChange={handleChange}
-                    className="w-3.5 h-3.5 accent-[#e5195e] cursor-pointer rounded"
-                  />
-                  <label htmlFor="newsletter" className="text-[10px] md:text-[11px] font-bold text-white/90 cursor-pointer">
-                    Join our quarterly newsletter
-                  </label>
+                  <input type="checkbox" id="newsletter" name="newsletter" checked={formData.newsletter} onChange={handleChange} className="w-3.5 h-3.5 accent-[#e5195e] cursor-pointer rounded" />
+                  <label htmlFor="newsletter" className="text-[10px] md:text-[11px] font-bold text-white/90 cursor-pointer">Join our quarterly newsletter</label>
                 </div>
 
-                {/* Cloudflare Mock Security Badge */}
                 <div className="bg-white rounded-xl p-3 flex items-center justify-between border border-white/10 shadow-inner mt-2">
                   <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 bg-[#00B4A4] rounded-full flex items-center justify-center text-white text-xs">
-                      ✓
-                    </div>
+                    <div className="w-5 h-5 bg-[#00B4A4] rounded-full flex items-center justify-center text-white text-xs">✓</div>
                     <span className="text-[11px] font-black text-slate-800 uppercase tracking-wider">Success!</span>
                   </div>
                   <div className="flex flex-col items-end opacity-90">
@@ -193,34 +118,15 @@ const AboutContactForm = () => {
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.015 }}
-                  whileTap={{ scale: 0.985 }}
-                  className="w-full border-2 border-white bg-transparent hover:bg-white hover:text-[#e5195e] text-white py-3.5 rounded-xl font-black uppercase text-xs tracking-[0.2em] flex items-center justify-center gap-2 transition-all duration-200 mt-4 cursor-pointer outline-none"
-                >
+                <motion.button type="submit" whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.985 }} className="w-full border-2 border-white bg-transparent hover:bg-white hover:text-[#e5195e] text-white py-3.5 rounded-xl font-black uppercase text-xs tracking-[0.2em] flex items-center justify-center gap-2 transition-all duration-200 mt-4 cursor-pointer outline-none">
                   <span>Schedule A Call</span>
                   <span className="text-sm font-bold">→</span>
                 </motion.button>
-
-                {/* Privacy Text */}
-                <div className="text-center pt-2 select-none">
-                  <p className="text-[9px] font-bold text-white/60 tracking-wide">
-                    🔒 By submitting this form you agree to our{' '}
-                    <a href="#privacy" className="underline text-white hover:text-white/80 transition-colors">
-                      privacy policy
-                    </a>.
-                  </p>
-                </div>
-
               </form>
             </motion.div>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };

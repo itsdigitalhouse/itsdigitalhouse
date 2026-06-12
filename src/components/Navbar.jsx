@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,8 +7,8 @@ import logo from '../assets/logo.png';
 import logoWhite from '../assets/logo-white.png';
 import balloon from '../assets/balloon.png';
 import WelcomePopup from './WelcomePopup';
-// Video import yahan add kar di hai
 import animationVideo from '../assets/animation.mp4';
+import { nestedServices } from '../data/servicesData';
 
 const duckQuotes = [
   { question: "What did the duck detective say to his partner?", answer: "\"Let's quack this case.\"" },
@@ -122,7 +123,7 @@ const Navbar = () => {
   };
 
   const isHeaderWhite = isScrolled || isServicesOpen || isSolutionsOpen;
-  const lightNavTextRoutes = ['/about', '/insights', '/solutions', '/contact'];
+  const lightNavTextRoutes = ['/about', '/insights', '/solutions', '/contact', '/services'];
   const isLightNavTextRoute = lightNavTextRoutes.some(
     (path) => location.pathname === path || location.pathname.startsWith(`${path}/`)
   );
@@ -138,11 +139,11 @@ const Navbar = () => {
   const leftNavLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'Services', path: '#', hasDropdown: true },
   ];
 
   const rightNavLinks = [
-    { name: 'Solutions', path: '/solutions', hasDropdown: true },
+    { name: 'Solutions', path: '#', hasDropdown: true },
     { name: 'Insights', path: '/insights' },
     { name: 'Contact', path: '/contact' },
   ];
@@ -153,68 +154,68 @@ const Navbar = () => {
     seo: {
       title: "SEO", icon: Megaphone,
       pages: [
-        { label: "Keyword Research & Strategy", desc: "Find high-impact keywords that drive qualified traffic to your site." },
-        { label: "On-Page SEO Optimization", desc: "Optimize content, meta tags, and structure for maximum search visibility." },
-        { label: "Technical Audit & Fixes", desc: "Identify and resolve crawl errors, speed issues, and indexing problems." },
-        { label: "Link Building Services", desc: "Build authoritative backlinks that strengthen your domain ranking." },
-        { label: "Local SEO Optimization", desc: "Dominate local search results and attract nearby customers." },
-        { label: "SEO Reporting & Analytics", desc: "Track rankings, traffic, and ROI with detailed monthly reports." },
+        { label: "Keyword Research & Strategy", desc: "Find high-impact keywords that drive qualified traffic to your site.", slug: "keyword-research" },
+        { label: "On-Page SEO Optimization", desc: "Optimize content, meta tags, and structure for maximum search visibility.", slug: "on-page-seo" },
+        { label: "Technical Audit & Fixes", desc: "Identify and resolve crawl errors, speed issues, and indexing problems.", slug: "technical-audit"  },
+        { label: "Link Building Services", desc: "Build authoritative backlinks that strengthen your domain ranking.", slug: "link-building" },
+        { label: "Local SEO Optimization", desc: "Dominate local search results and attract nearby customers.", slug: "local-seo" },
+        { label: "SEO Reporting & Analytics", desc: "Track rankings, traffic, and ROI with detailed monthly reports.", slug: "seo-reporting" },
       ]
     },
     "paid-media": {
       title: "Paid Media", icon: Megaphone,
       pages: [
-        { label: "Google PPC Campaigns", desc: "Data-driven ad campaigns that maximize clicks and minimize cost-per-lead." },
-        { label: "Meta Advertising", desc: "Precision-targeted Facebook & Instagram ads that convert audiences." },
-        { label: "LinkedIn B2B Ads", desc: "Reach decision-makers and professionals with high-intent B2B campaigns." },
-        { label: "Retargeting Frameworks", desc: "Re-engage past visitors and recover lost conversions at scale." },
+        { label: "Google PPC Campaigns", desc: "Data-driven ad campaigns that maximize clicks and minimize cost-per-lead.", slug: "google-ppc" },
+        { label: "Meta Advertising", desc: "Precision-targeted Facebook & Instagram ads that convert audiences.", slug: "meta-advertising" },
+        { label: "LinkedIn B2B Ads", desc: "Reach decision-makers and professionals with high-intent B2B campaigns.", slug: "linkedin-b2b-ads" },
+        { label: "Retargeting Frameworks", desc: "Re-engage past visitors and recover lost conversions at scale.", slug: "retargeting-frameworks" },
       ]
     },
     "social-media": {
       title: "Social Media", icon: Megaphone,
       pages: [
-        { label: "Social Media Strategy", desc: "Custom roadmaps aligned to your brand voice and business goals." },
-        { label: "Content Calendar Creation", desc: "Planned, on-brand content scheduled for peak engagement times." },
-        { label: "Community Management", desc: "Active audience engagement that builds loyalty and brand trust." },
-        { label: "Influencer Marketing", desc: "Connect with creators who authentically amplify your message." },
+        { label: "Social Media Strategy", desc: "Custom roadmaps aligned to your brand voice and business goals.", slug: "social-media-strategy" },
+        { label: "Content Calendar Creation", desc: "Planned, on-brand content scheduled for peak engagement times.", slug: "content-calendar-creation" },
+        { label: "Community Management", desc: "Active audience engagement that builds loyalty and brand trust.", slug: "community-management" },
+        { label: "Influencer Marketing", desc: "Connect with creators who authentically amplify your message.", slug: "influencer-marketing" },
       ]
     },
     web: {
       title: "Web Development", icon: Globe,
       pages: [
-        { label: "Web Portal Development", desc: "Scalable, secure portals built for enterprise-level user management." },
-        { label: "E-Commerce Development", desc: "High-converting online stores with seamless checkout experiences." },
-        { label: "CMS Development", desc: "Flexible content management systems your team can run independently." },
-        { label: "Integration Services", desc: "Connect your website to CRMs, ERPs, and third-party APIs effortlessly." },
+        { label: "Web Portal Development", desc: "Scalable, secure portals built for enterprise-level user management.", slug: "web-portal-development" },
+        { label: "E-Commerce Development", desc: "High-converting online stores with seamless checkout experiences.", slug: "e-commerce-development" },
+        { label: "CMS Development", desc: "Flexible content management systems your team can run independently.", slug: "cms-development" },
+        { label: "Integration Services", desc: "Connect your website to CRMs, ERPs, and third-party APIs effortlessly.", slug: "integration-services" },
       ]
     },
     mobile: {
       title: "Mobile Development", icon: Smartphone,
       pages: [
-        { label: "iOS App Development", desc: "Polished native iPhone and iPad apps built for App Store success." },
-        { label: "Android App Development", desc: "Robust Android applications optimized for diverse device ecosystems." },
-        { label: "Cross Platform Apps", desc: "One codebase, two platforms — fast delivery without sacrificing quality." },
-        { label: "App UI/UX Design", desc: "Intuitive mobile interfaces designed around real user behavior." },
+        { label: "iOS App Development", desc: "Polished native iPhone and iPad apps built for App Store success.", slug: "ios-app-development" },
+        { label: "Android App Development", desc: "Robust Android applications optimized for diverse device ecosystems.", slug: "android-app-development" },
+        { label: "Cross Platform Apps", desc: "One codebase, two platforms — fast delivery without sacrificing quality.", slug: "cross-platform-apps" },
+        { label: "App UI/UX Design", desc: "Intuitive mobile interfaces designed around real user behavior.", slug: "app-ui-ux-design" },
       ]
     },
     custom: {
       title: "Custom Software", icon: Code,
       pages: [
-        { label: "ERP Solution", desc: "Unified enterprise systems that streamline operations across departments." },
-        { label: "CRM Solution", desc: "Customer relationship tools built around your unique sales workflow." },
-        { label: "LMS Solution", desc: "Engaging learning platforms for training teams or selling courses." },
-        { label: "Process Automation", desc: "Eliminate repetitive tasks with intelligent workflow automation." },
+        { label: "ERP Solution", desc: "Unified enterprise systems that streamline operations across departments.", slug: "erp-solution" },
+        { label: "CRM Solution", desc: "Customer relationship tools built around your unique sales workflow.", slug: "crm-solution" },
+        { label: "LMS Solution", desc: "Engaging learning platforms for training teams or selling courses.", slug: "lms-solution" },
+        { label: "Process Automation", desc: "Eliminate repetitive tasks with intelligent workflow automation.", slug: "process-automation" },
       ]
     },
     ai: {
       title: "Artificial Intelligence", icon: Cpu,
       pages: [
-        { label: "AI Development", desc: "Custom AI systems engineered to solve your specific business challenges." },
-        { label: "AI Chatbot Development", desc: "Conversational agents that handle support, sales, and lead capture 24/7." },
-        { label: "Generative AI Solutions", desc: "Leverage LLMs to automate content, code, and creative workflows." },
-        { label: "Machine Learning", desc: "Predictive models trained on your data to unlock actionable insights." },
-        { label: "Computer Vision", desc: "Visual AI systems for detection, classification, and quality inspection." },
-        { label: "AI Integration", desc: "Embed AI capabilities into your existing platforms and products." },
+        { label: "AI Development", desc: "Custom AI systems engineered to solve your specific business challenges.", slug: "ai-development" },
+        { label: "AI Chatbot Development", desc: "Conversational agents that handle support, sales, and lead capture 24/7.", slug: "ai-chatbot-development" },
+        { label: "Generative AI Solutions", desc: "Leverage LLMs to automate content, code, and creative workflows.", slug: "generative-ai-solutions" },
+        { label: "Machine Learning", desc: "Predictive models trained on your data to unlock actionable insights.", slug: "machine-learning" },
+        { label: "Computer Vision", desc: "Visual AI systems for detection, classification, and quality inspection.", slug: "computer-vision" },
+        { label: "AI Integration", desc: "Embed AI capabilities into your existing platforms and products.", slug: "ai-integration" },
       ]
     }
   };
@@ -417,11 +418,12 @@ const Navbar = () => {
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   {nestedServices[activeServiceTab].pages.map((page) => (
-                    <Link
-                      key={page.label}
-                      to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
-                      className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-all border border-white/10 hover:border-white/30"
-                    >
+                      <Link
+                        key={page.slug}
+                        to={`/services/${activeServiceTab}/${page.slug}`}
+                        onClick={forceCloseAllDropdowns}
+                        className="group flex flex-col gap-1.5 px-5 py-4 rounded-xl bg-white/5 hover:bg-white/15 backdrop-blur-sm transition-all border border-white/10 hover:border-white/30"
+                      >
                       <div className="flex items-center justify-between">
                         <span className="text-[15px] font-extrabold text-white group-hover:text-white transition-colors leading-tight drop-shadow-sm">
                           {page.label}
@@ -776,7 +778,7 @@ const Navbar = () => {
                           {nestedServices[selectedSubService].pages.map((page, i, arr) => (
                             <React.Fragment key={page.label}>
                               <Link
-                                to={`/services/${page.label.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-')}`}
+                                to={`/services/${activeServiceTab}/${page.slug}`}
                                 onClick={closeMobileMenu}
                                 className="flex flex-col py-4 group"
                               >

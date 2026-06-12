@@ -43,7 +43,8 @@ const StatsCounter = () => {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-[clamp(2rem,6vw,5rem)] font-black uppercase tracking-tighter leading-[0.9] text-slate-950"
+            // UPDATED HEADING SIZE TO MATCH COMPANYCORE TYPOGRAPHY}
+            className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-[0.9] text-slate-950"
           >
             Impact through <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#e1b054] via-[#ee3444] to-[#7361a7]">Intelligence.</span>

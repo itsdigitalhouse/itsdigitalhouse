@@ -44,14 +44,16 @@ const SEOEngine = () => {
             transition={{ duration: 0.8 }}
             className="order-1 lg:order-2 flex flex-col justify-center"
           >
-            <p className="text-xs sm:text-sm font-black tracking-[0.3em] uppercase mb-4" style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <p className="text-sm font-bold tracking-[0.2em] uppercase mb-4" style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Performance Engineering
             </p>
-            <h2 className="text-3xl sm:text-5xl font-[1000] uppercase tracking-tighter text-[#0a0a0a] leading-[1.1] mb-8">
+            
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter text-[#0a0a0a] leading-[1.05] mb-8">
               Next-Level SEO: <br />
               <span className="italic font-light text-gray-400">Built For Dominance</span>
             </h2>
-            <p className="text-gray-600 font-medium leading-relaxed mb-8 text-base">
+            
+            <p className="text-slate-500 font-medium leading-relaxed mb-8 text-base sm:text-lg">
               We do not track vanity trends; we engineer total search engine authority. Our algorithmic framework shifts search paradigms, placing your enterprise layout directly in front of premier global corporate leads.
             </p>
 

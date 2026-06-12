@@ -57,15 +57,11 @@ const AgencyVision = () => {
 
   return (
     <section className="relative w-full bg-white py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-
-      {/* Subtle bg texture */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ backgroundImage: "radial-gradient(circle at 15% 50%, rgba(225,176,84,0.05) 0%, transparent 60%), radial-gradient(circle at 85% 30%, rgba(238,52,68,0.05) 0%, transparent 60%)" }}
-      />
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 15% 50%, rgba(225,176,84,0.05) 0%, transparent 60%), radial-gradient(circle at 85% 30%, rgba(238,52,68,0.05) 0%, transparent 60%)" }} />
 
       <div className="container mx-auto max-w-7xl relative z-10">
-
-        {/* Heading */}
+        
+        {/* Updated Heading & Sub-heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,11 +69,11 @@ const AgencyVision = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-20"
         >
-          <p className="text-[11px] font-black tracking-[0.35em] text-slate-400 uppercase mb-4">
+          <p className="text-sm font-bold tracking-[0.2em] text-slate-500 uppercase mb-4">
             // Who We Are
           </p>
           <h2
-            className="text-4xl sm:text-6xl font-[1000] uppercase tracking-tighter inline-block"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter inline-block"
             style={{ backgroundImage: neonGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
           >
             Foundational Pillars
@@ -104,62 +100,32 @@ const AgencyVision = () => {
               }`}
               style={{ minHeight: '360px' }}
             >
-              {/* Giant ghost number */}
               <span
-                className="absolute -right-4 -bottom-6 text-[160px] font-[1000] leading-none select-none pointer-events-none transition-all duration-500 group-hover:scale-105 group-hover:-bottom-2"
-                style={{
-                  color: pillar.dark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)',
-                  fontVariantNumeric: 'tabular-nums',
-                }}
+                className="absolute -right-4 -bottom-6 text-[160px] font-black leading-none select-none pointer-events-none transition-all duration-500 group-hover:scale-105 group-hover:-bottom-2"
+                style={{ color: pillar.dark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)' }}
               >
                 {pillar.num}
               </span>
 
-              {/* Top row: icon + small number badge */}
               <div className="flex items-start justify-between mb-6 relative z-10">
-                {/* Icon circle */}
-                <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: `${pillar.accent}18`, color: pillar.accent }}
-                >
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${pillar.accent}18`, color: pillar.accent }}>
                   {pillar.icon}
                 </div>
-
-                {/* Number badge */}
-                <span
-                  className="text-[11px] font-black tracking-[0.3em] px-3 py-1.5 rounded-full"
-                  style={{
-                    backgroundColor: `${pillar.accent}15`,
-                    color: pillar.accent,
-                  }}
-                >
+                <span className="text-[11px] font-black tracking-[0.3em] px-3 py-1.5 rounded-full" style={{ backgroundColor: `${pillar.accent}15`, color: pillar.accent }}>
                   {pillar.num}
                 </span>
               </div>
 
-              {/* Text */}
               <div className="relative z-10 flex-1">
-                <h3
-                  className={`text-xl lg:text-2xl font-black uppercase tracking-tight mb-4 ${
-                    pillar.dark ? 'text-white' : 'text-[#0a0a0a]'
-                  }`}
-                >
+                <h3 className={`text-xl lg:text-2xl font-black uppercase tracking-tight mb-4 ${pillar.dark ? 'text-white' : 'text-[#0a0a0a]'}`}>
                   {pillar.title}
                 </h3>
-                <p
-                  className={`font-medium leading-relaxed text-sm lg:text-[15px] ${
-                    pillar.dark ? 'text-white/60' : 'text-slate-500'
-                  }`}
-                >
+                <p className={`font-medium leading-relaxed text-base sm:text-lg ${pillar.dark ? 'text-white/60' : 'text-slate-500'}`}>
                   {pillar.desc}
                 </p>
               </div>
 
-              {/* Bottom accent line */}
-              <div
-                className="mt-8 h-[3px] rounded-full w-10 transition-all duration-500 group-hover:w-20 relative z-10"
-                style={{ backgroundColor: pillar.accent }}
-              />
+              <div className="mt-8 h-[3px] rounded-full w-10 transition-all duration-500 group-hover:w-20 relative z-10" style={{ backgroundColor: pillar.accent }} />
             </motion.div>
           ))}
         </motion.div>

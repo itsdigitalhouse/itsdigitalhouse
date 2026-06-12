@@ -59,10 +59,10 @@ const HomepageHero = () => {
         {/* Heading + Paragraph — Floated Upward */}
         <div className="mt-auto flex flex-col gap-3 w-full pb-16">
           <h2 className="font-black uppercase tracking-tighter leading-[0.9] text-[11vw] sm:text-[9vw]">
-            Building <br /> The Future.
+            Where Ideas <br /> Made Digital.
           </h2>
           <p className="font-medium leading-relaxed opacity-70 text-[13px] max-w-[300px]">
-            We engineer high-performance digital experiences. From concept to deployment, we bridge the gap between creative vision and technical precision.
+            Building powerful digital experiences that drive growth through design, development & strategy.
           </p>
         </div>
       </div>
@@ -89,11 +89,11 @@ const HomepageHero = () => {
         {/* Bottom text — Floated Upward */}
         <div className="mt-auto grid grid-cols-2 items-end z-30 pb-20">
           <h2 className="font-black uppercase tracking-tighter leading-[0.9] text-[6vw] lg:text-[4vw]">
-            Building <br /> The Future.
+            Where Ideas <br /> Made Digital.
           </h2>
           <div className="flex justify-end">
             <p className="text-[12px] max-w-[250px] font-medium leading-relaxed opacity-70 text-right">
-              We engineer high-performance digital experiences. From concept to deployment, we bridge the gap between creative vision and technical precision.
+              Building powerful digital experiences that drive growth through design, development & strategy
             </p>
           </div>
         </div>

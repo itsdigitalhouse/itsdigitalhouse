@@ -124,7 +124,7 @@ const OurTeam = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="text-3xl sm:text-5xl font-[1000] uppercase tracking-tighter text-[#0a0a0a]"
+            className="text-3xl sm:text-5xl lg:text-[52px] font-[1000] uppercase tracking-tighter text-[#0a0a0a]"
           >
             Meet Our Elite Departments
           </motion.h2>

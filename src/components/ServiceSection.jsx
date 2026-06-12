@@ -68,9 +68,10 @@ const ServiceSection = () => {
           )}
         </AnimatePresence>
 
-        {/* ── LAYER 4: Dark tint overlay ── */}
-        <div className={`absolute inset-0 z-[3] pointer-events-none transition-colors duration-500 ${
-          active ? '' : ''
+        {/* ── LAYER 4: Dark tint overlay (FIXED HERE) ── */}
+        {/* Is layer mein strong background aur blur laga diya hai taake text clearly visible rahay */}
+        <div className={`absolute inset-0 z-[3] pointer-events-none transition-all duration-500 ${
+          active ? 'bg-[#0a0a1a]/75 backdrop-blur-sm' : 'bg-transparent backdrop-blur-none'
         }`} />
 
         {/* ── LAYER 5: Content ── */}
@@ -85,14 +86,20 @@ const ServiceSection = () => {
                 onMouseLeave={() => setActive(null)}
                 className="cursor-pointer group flex items-baseline gap-4"
               >
-                <span className="text-white/40 text-2xl font-bold transition-colors group-hover:text-[#f0544f]">
+                <span className={`text-2xl font-bold transition-colors duration-300 ${
+                  active?.id === s.id ? 'text-[#f0544f]' : 'text-white/40 group-hover:text-white/80'
+                }`}>
                   0{index + 1}.
                 </span>
                 <div className="flex flex-col">
-                  <h2 className="text-3xl font-black text-white group-hover:text-[#f0544f] transition-all duration-300">
+                  <h2 className={`text-3xl font-black transition-all duration-300 ${
+                    active?.id === s.id ? 'text-[#f0544f] translate-x-2' : 'text-white group-hover:text-white/90'
+                  }`}>
                     {s.title}
                   </h2>
-                  <span className="text-white/50 text-[10px] tracking-[0.3em] mt-1 uppercase font-bold">
+                  <span className={`text-[10px] tracking-[0.3em] mt-1 uppercase font-bold transition-colors duration-300 ${
+                    active?.id === s.id ? 'text-white/90 translate-x-2' : 'text-white/50'
+                  }`}>
                     {s.sub}
                   </span>
                 </div>
@@ -123,7 +130,7 @@ const ServiceSection = () => {
 
         {/* Mobile video background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0" />
+          <div className="absolute inset-0 bg-[#0a0a1a]" />
           <video
             src={animationVideo}
             autoPlay
@@ -133,13 +140,14 @@ const ServiceSection = () => {
             preload="auto"
             className="absolute inset-0 w-full h-full object-cover scale-[1.05]"
           />
-          <div className="absolute inset-0" />
+          {/* Mobile Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a]/90 via-[#0a0a1a]/80 to-[#0a0a1a]/95 backdrop-blur-[2px]" />
         </div>
 
         {/* Mobile content — scroll andar hoga, section bahar nahi jaega */}
         <div className="relative z-10 h-full overflow-y-auto py-14 px-5 sm:px-8">
           {/* Section label */}
-          <p className="text-[10px] tracking-[0.35em] font-bold text-white/50 uppercase mb-3">
+          <p className="text-[10px] tracking-[0.35em] font-bold text-white/70 uppercase mb-3">
             Our Services
           </p>
           <h2 className="text-3xl sm:text-4xl font-black text-white uppercase leading-tight mb-10">
@@ -163,7 +171,7 @@ const ServiceSection = () => {
                 >
                   {/* Header row */}
                   <div className={`flex items-center justify-between px-5 py-4 transition-colors duration-300 ${
-                    isOpen ? 'bg-[#f0544f]' : 'bg-white/10 backdrop-blur-sm'
+                    isOpen ? 'bg-[#f0544f]' : 'bg-white/10 backdrop-blur-md'
                   }`}>
                     <div className="flex items-baseline gap-3">
                       <span className={`text-base font-bold transition-colors duration-300 ${
@@ -178,7 +186,7 @@ const ServiceSection = () => {
                           {s.title}
                         </p>
                         <p className={`text-[9px] tracking-[0.3em] font-bold uppercase mt-0.5 transition-colors duration-300 ${
-                          isOpen ? 'text-white/70' : 'text-white/50'
+                          isOpen ? 'text-white/80' : 'text-white/60'
                         }`}>
                           {s.sub}
                         </p>

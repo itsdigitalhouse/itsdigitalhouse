@@ -5,11 +5,22 @@ const InsightGrid = () => {
   const categories = ['All', 'Development', 'Branding', 'Marketing'];
 
   const articles = [
-    { category: "Development", date: "May 28, 2026", title: "Why Modern Businesses are Migrating to Next.js Architecture", desc: "Explore how server-side rendering and static optimization loop accelerate application performance and skyrocket SEO rankings.", readTime: "5 min read" },
-    { category: "Marketing", date: "May 15, 2026", title: "The Core Framework of High-Converting B2B Lead Automation", desc: "An inside look into deploying data-driven marketing loops and structured systems to capture and convert enterprise clients efficiently.", readTime: "7 min read" },
-    { category: "Branding", date: "May 02, 2026", title: "Engineered Identity: Designing Logos That Dominate the Market Noise", desc: "How structured visual guidelines and precise brand identity systems build emotional authority and instant customer trust.", readTime: "4 min read" },
-    { category: "Development", date: "April 20, 2026", title: "The Impact of Premium UI/UX Animation on Retention Loops", desc: "Analyzing how high-end micro-interactions and interactive canvas engineering hold user attention and enhance conversion rates.", readTime: "6 min read" }
-  ];
+    { category: "Development", date: "April 20, 2026", title: "Scalable App Architecture: Building for the Next Billion Users", desc: "Explore how leveraging modern frameworks like React Native and Flutter enables cross-platform performance without compromising on native-like speed.", readTime: "5 min read" },
+    { category: "Development", date: "April 28, 2026", title: "The Power of Server-Side Rendering in Modern SaaS", desc: "An analysis of why Next.js architecture is the industry standard for creating fast, SEO-optimized, and high-performance digital products.", readTime: "5 min read" },
+    { category: "Development", date: "May 11, 2026", title: "Custom Tooling: Why Off-the-Shelf Plugins Aren't Always Enough", desc: "A look at how building custom solutions, like product customization builders, empowers businesses to offer unique experiences to their customers.", readTime: "5 min read" },
+    { category: "Development", date: "May 19, 2026", title: "Automating Infrastructure: The Role of Master Starter Kits", desc: "How we deploy standardized, high-performance starter kits to manage and scale multiple client websites simultaneously with maximum efficiency.", readTime: "5 min read" },
+
+    { category: "Marketing", date: "April 20, 2026", title: "Automating Your Sales Pipeline: The Digital Hunter Advantage", desc: "Discover how we integrate custom Python scripts to scale lead generation and streamline outreach for international markets.", readTime: "7 min read" },    
+    { category: "Marketing", date: "April 28, 2026", title: "Data-Driven Outreach: Targeting UK & Middle East Markets", desc: "Insights into building efficient lead tracking systems and strategic marketing campaigns that resonate with international audiences.", readTime: "7 min read" },
+    { category: "Marketing", date: "May 11, 2026", title: "Turning Digital Footprints into Revenue Streams", desc: "A strategic look at how our agency uses full-service digital marketing solutions to transform online identity into measurable business growth.", readTime: "7 min read" },
+    { category: "Marketing", date: "May 19, 2026", title: "The Science of Lead Conversion for Enterprise Clients", desc: "Breaking down the systems and processes we use to capture, nurture, and convert high-value prospects into long-term clients.", readTime: "7 min read" },
+
+    { category: "Branding", date: "April 20, 2026", title: "The Art of Premium Motion: Elevating Brands with GSAP", desc: "Learn how high-end web animations and interactive design elements transform a standard interface into a memorable, premium brand identity.", readTime: "4 min read" },
+    { category: "Branding", date: "April 28, 2026", title: "Crafting a High-Tech Aesthetic for Modern Brands", desc: "How we combine minimal design, 3D effects, and smooth transitions to help brands stand out in a competitive digital world.", readTime: "4 min read" },
+    { category: "Branding", date: "May 11, 2026", title: "Identity Beyond the Logo: Building a Cohesive Digital Presence", desc: "An exploration of how design, technology, and strategy work together to create seamless experiences that strengthen branding.", readTime: "4 min read" },
+    { category: "Branding", date: "May 19, 2026", title: "Visual Authority: Why Aesthetics Impact Conversion Rates", desc: "Analyzing the link between premium digital design and user trust, specifically for businesses looking to project growth and innovation.", readTime: "4 min read" },
+
+ ];
 
   const filteredArticles = activeCategory === 'All' 
     ? articles 

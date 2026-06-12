@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import ServicesPage from './pages/ServicesPage';
-import ServiceDetail from './pages/ServiceDetail';
 import Contact from './pages/Contact';
 import Solutions from './pages/Solutions';
 import Insights from './pages/Insights';
@@ -14,14 +13,8 @@ import ScrollToTop from './components/ScrollToTop';
 import GlobalLoader from './components/GlobalLoader';
 import ChatWidget from './components/ChatWidget'; // 🚀 AI Chat Bot Widget Import Kiya
 
-// SOLUTIONS PAGES IMPORTS
-import LegalManagement from './pages/LegalManagement';
-import RestaurantERP from './pages/RestaurantERP';
-import ZakyaPOS from './pages/ZakyaPOS'; 
-import RetailERP from './pages/RetailERP';
-import PRAgencyERP from './pages/PRAgencyERP';
-import ManufacturingERP from './pages/ManufacturingERP';
-import CarRentalERP from './pages/CarRentalERP';
+import ServiceDetailPage from './components/ServiceDetailPage';
+import SolutionDetailPage from './components/SolutionDetailPage'; // 🚀 Naya Dynamic Solution Page Import Kiya
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,19 +51,18 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:serviceId" element={<ServiceDetail />} />
+            
             <Route path="/contact" element={<Contact />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/insights" element={<Insights />} /> 
 
-            {/* SOLUTIONS ROUTES */}
-            <Route path="/solutions/legal-management" element={<LegalManagement />} />
-            <Route path="/solutions/restaurant-erp" element={<RestaurantERP />} />
-            <Route path="/solutions/retail-zakya-pos" element={<ZakyaPOS />} /> 
-            <Route path="/solutions/retail-erp" element={<RetailERP />} /> 
-            <Route path="/solutions/pr-agency-erp" element={<PRAgencyERP />} />
-            <Route path="/solutions/manufacturing-erp" element={<ManufacturingERP />} />
-            <Route path="/solutions/car-rental-erp" element={<CarRentalERP />} />
+            {/* SERVICES DYNAMIC ROUTE */}
+            <Route path="/services/:category/:slug" element={<ServiceDetailPage />} />
+
+            {/* 🚀 NAYA SOLUTIONS DYNAMIC ROUTE */}
+            {/* Ab /solutions/retail-erp ho ya /solutions/zakya-pos, sab is ek route se handle honge */}
+            <Route path="/solutions/:slug" element={<SolutionDetailPage />} />
+
           </Routes>
         </main>
         

@@ -129,15 +129,16 @@ const ModernHero = () => {
           transform: straighten ? 'rotateY(0deg)' : 'rotateY(-40deg)'
         }}>DIGITAL</span>
         
+        {/* ── UPDATED FONT SIZE FOR READABILITY AND PREMIUM FEEL ── */}
         <p style={{ 
           color: 'rgba(255,255,255,0.6)', 
-          fontSize: isMobile ? '10px' : '12px', 
+          fontSize: isMobile ? '12px' : '15px', 
           letterSpacing: '0.15em', 
           marginTop: '30px', 
-          maxWidth: isMobile ? '80%' : '500px', 
+          maxWidth: isMobile ? '85%' : '600px', 
           textAlign: isMobile ? 'center' : 'left',
           textTransform: 'uppercase', 
-          lineHeight: '1.6',
+          lineHeight: '1.7',
           marginLeft: isMobile ? '0' : '250px'
         }}>
           DIGITAL HOUSE IS A DESIGN DRIVEN, DEVELOPMENT FOCUSED AGENCY DEDICATED TO HELPING BRANDS GROW BY BLENDING CREATIVITY WITH SMART DIGITAL STRATEGIES TO CREATE MEANINGFUL EXPERIENCES FROM STANDOUT BRANDING TO HIGH PERFORMING WEBSITES & RESULT ORIENTED MARKETING.
@@ -151,7 +152,7 @@ const ModernHero = () => {
         borderRadius: '50%', 
         transform: 'translate(-50%, -50%)', 
         background: 'linear-gradient(90deg, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)',
-        opacity: orbVisible ? 0.6 : 0, // Jab invisible ho to opacity 0 kardein
+        opacity: orbVisible ? 0.6 : 0, 
         transition: 'width 0.3s, height 0.3s, opacity 0.3s' 
       }} />
     </section>

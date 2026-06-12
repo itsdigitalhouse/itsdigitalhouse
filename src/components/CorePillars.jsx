@@ -156,18 +156,18 @@ const CorePillars = () => {
       
       {/* ==================== HEADER SECTION (PERFECTLY CENTERED ROTATOR) ==================== */}
       <div className="w-full max-w-5xl text-center space-y-4 mb-12 md:mb-14 px-6 relative z-30 flex flex-col items-center justify-center">
-        <h2 className="text-3xl sm:text-5xl md:text-[54px] font-black tracking-tight text-[#111111] leading-tight flex flex-col items-center justify-center">
+        {/* ── UPDATED GLOBAL HEADING SIZE ── */}
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#111111] leading-tight flex flex-col items-center justify-center">
           <span>We are Your Partner in</span>
           
           {/* Centered Vertical Slider Block */}
-          <span className="block relative overflow-hidden h-[45px] sm:h-[65px] md:h-[75px] w-full text-center">
-            <span 
-              className="core-pillars-word-marquee absolute inset-x-0 top-0 flex flex-col items-center justify-start text-[#00B4A4]"
-            >
+          <span className="block relative overflow-hidden h-[45px] sm:h-[65px] lg:h-[75px] w-full text-center mt-1">
+            <span className="core-pillars-word-marquee absolute inset-x-0 top-0 flex flex-col items-center justify-start">
               {marqueeWords.map((word, idx) => (
                 <span 
                   key={idx} 
-                  className="h-[45px] sm:h-[65px] md:h-[75px] flex items-center justify-center text-center w-full"
+                  // UPDATED GRADIENT COLOR FOR SLIDING WORDS
+                  className="h-[45px] sm:h-[65px] lg:h-[75px] flex items-center justify-center text-center w-full bg-clip-text text-transparent bg-gradient-to-r from-[#e1b054] via-[#ee3444] to-[#7361a7]"
                 >
                   {word}
                 </span>
@@ -176,17 +176,35 @@ const CorePillars = () => {
           </span>
         </h2>
 
-        <div className="space-y-1">
-          <p className="text-sm sm:text-base text-slate-700 font-semibold tracking-wide">
+        <div className="space-y-2 mt-4">
+          {/* ── UPDATED GLOBAL PARAGRAPH SIZE ── */}
+          <p className="text-base sm:text-lg text-slate-700 font-semibold tracking-wide">
             Wash away your doubt and bathe in our glory!
           </p>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">
             Explore some of our recent projects and see how we could make your brand shine...
           </p>
         </div>
-        <div className="pt-2">
-          <a href="#case-studies" className="text-xs font-black uppercase tracking-widest text-slate-900 border-b-2 border-[#FFD100] pb-1 hover:text-slate-600 transition-colors">
-            View all case studies
+        
+        {/* ==================== CENTERED ACTION BUTTON WITH VERTICAL FILL ANIMATION ==================== */}
+        <div className="mt-8 flex justify-center w-full relative z-30">
+          <a
+            href="/contact"
+            className="group relative px-8 py-4 bg-slate-950 text-white rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none inline-block"
+          >
+            {/* Bottom-to-Top Slide Fill Layer */}
+            <span 
+              className="absolute bottom-0 left-0 w-full h-full translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] z-0"
+              style={{
+                backgroundImage: `linear-gradient(to right, #e1b054, #d24a8a, #ee3444)`
+              }}
+            ></span>
+            
+            {/* Button Content */}
+            <span className="relative z-10 flex items-center gap-2">
+              <span>VIEW ALL CASE STUDIES</span>
+              <span className="text-sm transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            </span>
           </a>
         </div>
       </div>
