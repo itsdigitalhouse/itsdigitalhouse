@@ -60,7 +60,7 @@ const AboutHero = () => {
           className="flex justify-center w-full relative z-30"
         >
           <button 
-            onClick={() => console.log('Action Triggered')}
+            onClick={() => window.location.href = '/contact'}
             className="group relative px-10 py-5 bg-white text-slate-950 rounded-full font-black uppercase text-xs tracking-[0.2em] overflow-hidden shadow-lg hover:shadow-xl active:scale-95 transition-transform duration-200 cursor-pointer outline-none"
           >
             {/* Bottom-to-Top Slide Fill Layer */}

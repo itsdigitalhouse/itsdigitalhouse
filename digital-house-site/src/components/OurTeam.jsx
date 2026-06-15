@@ -7,8 +7,8 @@ const OurTeam = () => {
   // Complete department dataset with organic SVG avatars & unique matching backgrounds
   const squad = [
     { 
-      name: "Jamshed", 
-      role: "Senior Web & App Developer", 
+      name: "CODE & ENGINEERING FORGE", 
+      role: "FULL-STACK DEVELOPERS & NEXT-JS ARCHITECTS", 
       bgColor: "bg-[#e0f2fe]", // Soft Sky Blue
       avatarColor: "#0284c7",
       // Tech Geek / Developer Avatar (Laptop + Glasses element style)

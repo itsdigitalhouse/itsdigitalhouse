@@ -27,7 +27,8 @@ const timelineData = [
 const AboutTimelineWave = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-74%"]);
+  // Adjusted transform ratio slightly to ensure full scroll on mobile as well
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-80%"]);
 
   const handleSkip = () => {
     if (targetRef.current) {
@@ -38,19 +39,18 @@ const AboutTimelineWave = () => {
 
   return (
     <div>
-
       {/* ── SECTION 1: HEADING + PARAGRAPH ── */}
-      <section className="w-full bg-white py-24 px-6">
+      <section className="w-full bg-white py-16 md:py-24 px-4 md:px-6 overflow-hidden">
         <div className="h-0.5 w-full mb-0" style={{ background: `linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)` }} />
-        <div className="max-w-5xl mx-auto text-center pt-16 pb-4">
+        <div className="max-w-5xl mx-auto text-center pt-10 md:pt-16 pb-4">
 
-          <div className="inline-flex items-center gap-3 mb-5">
-            <div className="h-px w-10" style={{ background: '#e1b054' }} />
-            <span className="text-[10px] uppercase font-bold tracking-[0.45em]" style={{ color: '#e1b054' }}>Our Journey</span>
-            <div className="h-px w-10" style={{ background: '#e1b054' }} />
+          <div className="inline-flex items-center gap-2 md:gap-3 mb-5">
+            <div className="h-px w-6 md:w-10" style={{ background: '#e1b054' }} />
+            <span className="text-[9px] md:text-[10px] uppercase font-bold tracking-[0.3em] md:tracking-[0.45em]" style={{ color: '#e1b054' }}>Our Journey</span>
+            <div className="h-px w-6 md:w-10" style={{ background: '#e1b054' }} />
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-none" style={{ color: '#0a0a0a' }}>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 md:mb-8 leading-none" style={{ color: '#0a0a0a' }}>
             HOW WE{' '}
             <span style={{
               background: `linear-gradient(135deg, #e1b054, #d24a8a, #ee3444)`,
@@ -62,14 +62,14 @@ const AboutTimelineWave = () => {
             </span>
           </h2>
 
-          <p className="text-base md:text-lg leading-relaxed max-w-3xl mx-auto" style={{ color: '#64748b' }}>
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl mx-auto px-2" style={{ color: '#64748b' }}>
             From a tight-knit team of creators to a full-service digital authority — driven by relentless innovation, bridging creative vision with high-performance execution across global markets.
           </p>
 
           {/* Decorative dots row */}
-          <div className="flex justify-center gap-2 mt-10">
+          <div className="flex justify-center gap-1.5 md:gap-2 mt-8 md:mt-10">
             {COLORS.map((c, i) => (
-              <div key={i} className="w-2 h-2 rounded-full" style={{ background: c }} />
+              <div key={i} className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full" style={{ background: c }} />
             ))}
           </div>
 
@@ -77,33 +77,34 @@ const AboutTimelineWave = () => {
       </section>
 
       {/* ── SECTION 2: SCROLL/SKIP + WAVE + CARDS ── */}
-      <section ref={targetRef} className="relative w-full h-[750vh]" style={{ background: '#fafafa' }}>
-        <div className="sticky top-20 h-screen w-full flex flex-col justify-center overflow-hidden">
+      {/* Changed height from fixed 750vh to responsive (450vh mobile, 750vh desktop) */}
+      <section ref={targetRef} className="relative w-full h-[450vh] md:h-[750vh]" style={{ background: '#fafafa' }}>
+        <div className="sticky top-16 md:top-20 h-screen w-full flex flex-col justify-center overflow-hidden">
 
           {/* Scroll / Skip Controller */}
-          <div className="max-w-3xl mx-auto w-full px-6 relative z-30 mb-8">
+          <div className="max-w-3xl mx-auto w-full px-4 md:px-6 relative z-30 mb-4 md:mb-8">
             <div
-              className="w-full flex justify-between items-center select-none py-4 px-6 rounded-2xl border"
+              className="w-full flex justify-between items-center select-none py-3 md:py-4 px-4 md:px-6 rounded-xl md:rounded-2xl border"
               style={{ borderColor: '#ebebeb', background: '#ffffff', boxShadow: '0 2px 20px 0 rgba(0,0,0,0.05)' }}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-bold shadow"
+                  className="w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center text-white text-sm md:text-lg font-bold shadow"
                   style={{ background: `linear-gradient(135deg, #7361a7, #d24a8a)` }}
                 >→</div>
-                <span className="text-sm font-black tracking-[0.25em] uppercase" style={{ color: '#7361a7' }}>Scroll</span>
+                <span className="text-[10px] md:text-sm font-black tracking-[0.15em] md:tracking-[0.25em] uppercase" style={{ color: '#7361a7' }}>Scroll</span>
               </div>
 
-              <div className="flex gap-1.5">
+              <div className="hidden sm:flex gap-1.5">
                 {COLORS.map((c, i) => (
-                  <div key={i} className="w-2 h-2 rounded-full" style={{ background: c, opacity: 0.45 }} />
+                  <div key={i} className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full" style={{ background: c, opacity: 0.45 }} />
                 ))}
               </div>
 
-              <button onClick={handleSkip} className="flex items-center gap-3 group border-none bg-transparent outline-none cursor-pointer">
-                <span className="text-sm font-black tracking-[0.25em] uppercase transition-opacity group-hover:opacity-60" style={{ color: '#ee3444' }}>Skip</span>
+              <button onClick={handleSkip} className="flex items-center gap-2 md:gap-3 group border-none bg-transparent outline-none cursor-pointer">
+                <span className="text-[10px] md:text-sm font-black tracking-[0.15em] md:tracking-[0.25em] uppercase transition-opacity group-hover:opacity-60" style={{ color: '#ee3444' }}>Skip</span>
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-white text-lg font-bold shadow group-hover:scale-105 transition-transform"
+                  className="w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center text-white text-sm md:text-lg font-bold shadow group-hover:scale-105 transition-transform"
                   style={{ background: `linear-gradient(135deg, #ee3444, #f1574d)` }}
                 >
                   <span className="rotate-90 inline-block">→</span>
@@ -113,11 +114,11 @@ const AboutTimelineWave = () => {
           </div>
 
           {/* WAVE + CARDS */}
-          <div className="relative w-full overflow-hidden h-[480px]">
-            <motion.div style={{ x }} className="absolute left-0 top-0 flex items-center h-full pl-[10vw]">
+          <div className="relative w-full overflow-hidden h-[500px] md:h-[480px]">
+            <motion.div style={{ x }} className="absolute left-0 top-0 flex items-center h-full pl-[5vw] md:pl-[10vw]">
 
               {/* WAVE SVG */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none w-[11500px] z-0">
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none w-[8000px] md:w-[11500px] z-0">
                 <svg viewBox="0 0 11500 200" fill="none" className="w-full">
                   <defs>
                     <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -149,45 +150,49 @@ const AboutTimelineWave = () => {
               </div>
 
               {/* CARDS */}
-              <div className="flex gap-[14vw] relative z-10 pr-[400px]">
+              {/* Made gaps smaller for mobile, normal for md screens */}
+              <div className="flex gap-12 md:gap-[14vw] relative z-10 pr-10 md:pr-[400px]">
                 {timelineData.map((node, index) => (
-                  <div key={index} className="inline-block w-[400px] flex-shrink-0 text-center relative">
+                  // Card width is 85vw on mobile so it fits the screen, 400px on desktop
+                  <div key={index} className="inline-block w-[85vw] md:w-[400px] flex-shrink-0 text-center relative">
 
                     {/* FLOATING ICON */}
-                    <div className="h-32 flex items-center justify-center mb-4">
+                    <div className="h-24 md:h-32 flex items-center justify-center mb-4 md:mb-6">
                       {node.itemType === "balloon" && (
                         <motion.div
                           animate={{ y: [0, -14, 0], rotate: [0, 4, -4, 0] }}
                           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                         >
-                          <HouseImage size={90} />
+                          <div className="scale-75 md:scale-100">
+                            <HouseImage size={90} />
+                          </div>
                         </motion.div>
                       )}
                       {node.itemType === "balloon-large" && (
                         <motion.div
                           animate={{ y: [0, -22, 0] }}
                           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                          className="flex flex-col items-center"
+                          className="flex flex-col items-center scale-75 md:scale-100"
                         >
                           <HouseImage size={175} />
                         </motion.div>
                       )}
                       {node.itemType === "bubble-group" && (
-                        <div className="relative w-24 h-24">
+                        <div className="relative w-20 h-20 md:w-24 md:h-24 scale-90 md:scale-100">
                           <motion.div
-                            className="absolute top-1 left-3 w-12 h-12 rounded-full"
+                            className="absolute top-1 left-3 w-10 h-10 md:w-12 md:h-12 rounded-full"
                             style={{ background: node.color + '18', border: `1.5px solid ${node.color}40` }}
                             animate={{ y: [0, -18, 0], x: [0, 8, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                           />
                           <motion.div
-                            className="absolute bottom-1 right-2 w-8 h-8 rounded-full"
+                            className="absolute bottom-1 right-2 w-6 h-6 md:w-8 md:h-8 rounded-full"
                             style={{ background: node.color + '25', border: `1.5px solid ${node.color}50` }}
                             animate={{ y: [0, -10, 0], x: [0, -6, 0] }}
                             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                           />
                           <motion.div
-                            className="absolute top-8 right-6 w-5 h-5 rounded-full"
+                            className="absolute top-8 right-6 w-4 h-4 md:w-5 md:h-5 rounded-full"
                             style={{ background: node.color + '30', border: `1px solid ${node.color}40` }}
                             animate={{ y: [0, -8, 0] }}
                             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -198,7 +203,7 @@ const AboutTimelineWave = () => {
 
                     {/* CARD */}
                     <div
-                      className="p-7 rounded-3xl text-left transition-all duration-300 hover:-translate-y-1"
+                      className="p-5 md:p-7 rounded-2xl md:rounded-3xl text-left transition-all duration-300 hover:-translate-y-1 mx-2 md:mx-0"
                       style={{
                         background: '#ffffff',
                         border: `1px solid #f0f0f0`,
@@ -208,16 +213,16 @@ const AboutTimelineWave = () => {
                       onMouseLeave={e => e.currentTarget.style.boxShadow = `0 4px 32px 0 rgba(0,0,0,0.06)`}
                     >
                       <span
-                        className="inline-block text-[10px] font-black tracking-[0.3em] uppercase px-3 py-1 rounded-full mb-3"
+                        className="inline-block text-[9px] md:text-[10px] font-black tracking-[0.2em] md:tracking-[0.3em] uppercase px-3 py-1 rounded-full mb-3"
                         style={{ background: node.color + '15', color: node.color }}
                       >
                         {node.year}
                       </span>
                       <div className="w-8 h-0.5 rounded-full mb-3" style={{ background: node.color }} />
-                      <h3 className="text-lg font-black uppercase tracking-tight mb-3 leading-tight" style={{ color: '#0a0a0a' }}>
+                      <h3 className="text-base md:text-lg font-black uppercase tracking-tight mb-2 md:mb-3 leading-tight" style={{ color: '#0a0a0a' }}>
                         {node.title}
                       </h3>
-                      <p className="text-xs leading-relaxed" style={{ color: '#64748b' }}>
+                      <p className="text-[11px] md:text-xs leading-relaxed" style={{ color: '#64748b' }}>
                         {node.desc}
                       </p>
                     </div>
