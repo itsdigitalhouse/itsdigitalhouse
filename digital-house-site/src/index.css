@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Red Hat Display", sans-serif;
+  --font-redhat: "Red Hat Display", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    background-color: #FAFAFA; /* Hero section white hai, toh body bhi white honi chahiye */
+    overflow-x: hidden;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float { 
+  animation: float 5s ease-in-out infinite; 
+}

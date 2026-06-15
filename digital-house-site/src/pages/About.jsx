@@ -1,0 +1,49 @@
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import AboutHero from '../components/AboutHero';
+import AgencyVision from '../components/AgencyVision';
+import GlobalReach from '../components/GlobalReach';
+import AboutTimelineWave from '../components/AboutTimelineWave';
+import SEOEngine from '../components/SEOEngine';
+import AboutContactForm from '../components/AboutContactForm';
+import FoundersNote from '../components/FoundersNote';
+import OurTeam from '../components/OurTeam';
+
+const About = () => {
+  return (
+    <div className="bg-white min-h-screen selection:bg-[#d24a8a] selection:text-white">
+      <Helmet>
+        <title>About Us | Its Digital House - Creative Digital Agency</title>
+        <meta name="description" content="Learn about Its Digital House — a globally recognized creative digital agency with a passionate team dedicated to building iconic digital experiences through design, strategy, and technology." />
+        <meta name="keywords" content="about digital agency, creative agency team, digital house agency, agency vision, global digital agency, digital marketing experts, web design company, agency founders, digital transformation company" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Its Digital House" />
+        <link rel="canonical" href="https://www.itsdigitalhouse.com/about" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="About Us | Its Digital House - Creative Digital Agency" />
+        <meta property="og:description" content="Meet the team behind Its Digital House — building powerful digital experiences that drive growth worldwide." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.itsdigitalhouse.com/about" />
+        <meta property="og:site_name" content="Its Digital House" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Us | Its Digital House" />
+        <meta name="twitter:description" content="Globally recognized creative digital agency. Learn our story, vision, and the team behind our success." />
+        <meta name="twitter:site" content="@Itsdigitalhouse" />
+      </Helmet>
+
+      <AboutHero />
+      <AgencyVision />
+      <GlobalReach />
+      <AboutTimelineWave />
+      <SEOEngine />
+      <FoundersNote />
+      <OurTeam />
+      <AboutContactForm />
+    </div>
+  );
+};
+
+export default About;

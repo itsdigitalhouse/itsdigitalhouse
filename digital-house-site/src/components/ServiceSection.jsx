@@ -1,0 +1,253 @@
+﻿import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+// --- Imports ---
+import webDev from '../assets/web-dev.jpg';
+import brandingImg from '../assets/branding.jpg';
+import uiuxImg from '../assets/uiux.jpg';
+import digitalImg from '../assets/digital-marketing.png';
+import contentImg from '../assets/content-strategy.png';
+import ecommerceImg from '../assets/ecommerce.jpg';
+import animationVideo from '../assets/animation.mp4';
+
+const ServiceSection = () => {
+  const [active, setActive] = useState(null);
+  const [mobileActive, setMobileActive] = useState(null);
+
+  const services = [
+    { id: 1, title: "WEBSITE DEVELOPMENT", sub: "WEB & APP",       img: webDev,       accent: '#ee3444' },
+    { id: 2, title: "BRANDING & IDENTITY",  sub: "VISUALS",         img: brandingImg,  accent: '#d24a8a' },
+    { id: 3, title: "UI/UX EXPERIENCE",     sub: "DESIGN",          img: uiuxImg,      accent: '#7361a7' },
+    { id: 4, title: "DIGITAL MARKETING",    sub: "GROWTH",          img: digitalImg,   accent: '#e1b054' },
+    { id: 5, title: "CONTENT STRATEGY",     sub: "COPYWRITING",     img: contentImg,   accent: '#75b0d2' },
+    { id: 6, title: "E-COMMERCE",           sub: "SCALABLE",        img: ecommerceImg, accent: '#f1574d' }
+  ];
+
+  const handleMobileTap = (s) => {
+    setMobileActive(prev => prev?.id === s.id ? null : s);
+  };
+
+  return (
+    // ✅ FIX 1: h-[100dvh] — screen ke hisab se height
+    <section className="w-full h-[100dvh] relative overflow-hidden">
+
+      {/* ===================== DESKTOP LAYOUT (lg+) ===================== */}
+      <div className="hidden lg:flex items-center justify-center w-full h-full relative overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-[#0a0a1a] pointer-events-none" />
+        <motion.div
+          animate={{ opacity: active ? 0 : 1 }}
+          transition={{ duration: 0.4 }}
+          className="absolute inset-0 z-[1] pointer-events-none"
+        >
+          <video
+            src={animationVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover scale-[1.05]"
+          />
+        </motion.div>
+        <AnimatePresence mode="wait">
+          {active && (
+            <motion.img
+              key={active.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              src={active.img}
+              className="absolute inset-0 w-full h-full object-cover z-[2] scale-105 pointer-events-none"
+            />
+          )}
+        </AnimatePresence>
+        <div className={`absolute inset-0 z-[3] pointer-events-none transition-all duration-500 ${
+          active ? 'bg-[#0a0a1a]/75 backdrop-blur-sm' : 'bg-transparent backdrop-blur-none'
+        }`} />
+        <div className="w-full max-w-7xl mx-auto z-[4] flex items-center justify-center gap-16 px-10 h-full">
+          <div className="flex flex-col justify-center gap-5 w-1/2">
+            {services.map((s, index) => (
+              <div
+                key={s.id}
+                onMouseEnter={() => setActive(s)}
+                onMouseLeave={() => setActive(null)}
+                className="cursor-pointer group flex items-baseline gap-4"
+              >
+                <span
+                  className="text-2xl font-bold transition-colors duration-300"
+                  style={{ color: active?.id === s.id ? s.accent : 'rgba(255,255,255,0.4)' }}
+                >
+                  0{index + 1}.
+                </span>
+                <div className="flex flex-col">
+                  <h2
+                    className="text-3xl font-black transition-all duration-300"
+                    style={{
+                      color: active?.id === s.id ? s.accent : 'white',
+                      transform: active?.id === s.id ? 'translateX(8px)' : 'translateX(0)'
+                    }}
+                  >
+                    {s.title}
+                  </h2>
+                  <span
+                    className="text-[10px] tracking-[0.3em] mt-1 uppercase font-bold transition-colors duration-300"
+                    style={{ color: active?.id === s.id ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.5)' }}
+                  >
+                    {s.sub}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="w-[240px] h-[480px] bg-black rounded-[40px] border-[8px] border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.6)] overflow-hidden relative flex-shrink-0">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={active?.id || 'default'}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+                src={active ? active.img : webDev}
+                className="w-full h-full object-cover"
+              />
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+
+      {/* ===================== MOBILE / TABLET LAYOUT (< lg) ===================== */}
+      {/* ✅ FIX 2: h-full instead of h-full — parent se inherit hoga */}
+      <div className="lg:hidden w-full h-full relative overflow-hidden">
+
+        {/* Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0" />
+          <video
+            src={animationVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover scale-[1.05]"
+          />
+          {/* ✅ FIX 3: Ajeeb overlay HATAYA — bg-[#0a0a1a]/85 ki jagah sirf halka overlay */}
+          <div className="absolute inset-0" />
+        </div>
+
+        {/* Mobile content */}
+        {/* ✅ FIX 4: h-full properly set + overflow scroll */}
+        <div className="relative z-10 h-full overflow-y-auto py-12 px-5 sm:px-8">
+
+          {/* Header */}
+          <p
+            className="text-[10px] tracking-[0.35em] font-bold uppercase mb-2"
+            style={{ color: '#e1b054' }}
+          >
+            Our Services
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-black text-white uppercase leading-tight mb-8">
+            What We Do
+          </h2>
+
+          {/* Service accordion cards */}
+          <div className="flex flex-col gap-3 pb-6">
+            {services.map((s, index) => {
+              const isOpen = mobileActive?.id === s.id;
+              return (
+                <motion.div
+                  key={s.id}
+                  layout
+                  onClick={() => handleMobileTap(s)}
+                  className="rounded-2xl overflow-hidden cursor-pointer"
+                  style={{
+                    border: `1px solid ${isOpen ? s.accent : 'rgba(255,255,255,0.12)'}`,
+                    background: isOpen ? 'rgba(255,255,255,0.04)' : 'transparent',
+                    transition: 'border-color 0.3s, background 0.3s'
+                  }}
+                >
+                  {/* Header row */}
+                  <div
+                    className="flex items-center justify-between px-5 py-4"
+                    style={{
+                      background: isOpen
+                        ? `linear-gradient(135deg, ${s.accent}22, ${s.accent}11)`
+                        : 'rgba(255,255,255,0.06)',
+                      backdropFilter: 'blur(12px)',
+                      borderBottom: isOpen ? `1px solid ${s.accent}44` : '1px solid transparent',
+                      transition: 'background 0.3s'
+                    }}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Number badge */}
+                      <span
+                        className="text-xs font-black w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                          background: isOpen ? s.accent : 'rgba(255,255,255,0.08)',
+                          color: isOpen ? '#fff' : 'rgba(255,255,255,0.4)',
+                          transition: 'all 0.3s'
+                        }}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+
+                      <div>
+                        <p className="text-sm sm:text-base font-black uppercase text-white tracking-wide">
+                          {s.title}
+                        </p>
+                        <p
+                          className="text-[9px] tracking-[0.3em] font-bold uppercase mt-0.5"
+                          style={{ color: isOpen ? s.accent : 'rgba(255,255,255,0.4)', transition: 'color 0.3s' }}
+                        >
+                          {s.sub}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Plus / Minus icon */}
+                    <motion.div
+                      animate={{ rotate: isOpen ? 45 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{
+                        border: `1px solid ${isOpen ? s.accent : 'rgba(255,255,255,0.2)'}`,
+                        color: isOpen ? s.accent : 'rgba(255,255,255,0.5)',
+                        transition: 'border-color 0.3s, color 0.3s'
+                      }}
+                    >
+                      <span className="text-lg font-thin leading-none">+</span>
+                    </motion.div>
+                  </div>
+
+                  {/* Expandable image */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 180, opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: 'easeInOut' }}
+                        className="overflow-hidden relative"
+                      >
+                        <img src={s.img} alt={s.title} className="w-full h-[180px] object-cover" />
+                        <div
+                          className="absolute inset-0"
+                          style={{ background: `linear-gradient(to top, ${s.accent}55, transparent)` }}
+                        />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+    </section>
+  );
+};
+
+export default ServiceSection;
