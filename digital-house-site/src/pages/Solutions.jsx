@@ -23,12 +23,16 @@ const Solutions = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/solutions" />
         <meta property="og:site_name" content="Its Digital House" />
+        <meta property="og:image" content="https://www.itsdigitalhouse.com/og-solutions.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Digital Solutions | Its Digital House" />
         <meta name="twitter:description" content="Transform your business with our end-to-end digital solutions. ERP, AI, eCommerce & more worldwide." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
+        <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-solutions.jpeg" />
       </Helmet>
 
       <SolutionHero />

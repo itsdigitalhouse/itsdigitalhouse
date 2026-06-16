@@ -22,12 +22,17 @@ const Contact = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/contact" />
         <meta property="og:site_name" content="Its Digital House" />
+        <meta property="og:image" content="https://www.itsdigitalhouse.com/og-contact.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Us | Its Digital House" />
         <meta name="twitter:description" content="Let's build something extraordinary together. Get in touch with our global digital agency team." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
+        <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-contact.jpeg" />
       </Helmet>
 
       <ContactHero />

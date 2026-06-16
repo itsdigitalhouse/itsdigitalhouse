@@ -26,12 +26,16 @@ const About = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/about" />
         <meta property="og:site_name" content="Its Digital House" />
+        <meta property="og:image" content="https://www.itsdigitalhouse.com/og-about.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us | Its Digital House" />
         <meta name="twitter:description" content="Globally recognized creative digital agency. Learn our story, vision, and the team behind our success." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
+        <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-about.jpeg" />
       </Helmet>
 
       <AboutHero />

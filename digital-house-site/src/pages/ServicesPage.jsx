@@ -22,12 +22,16 @@ const ServicesPage = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/services" />
         <meta property="og:site_name" content="Its Digital House" />
+        <meta property="og:image" content="https://www.itsdigitalhouse.com/og-services.jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Our Services | Its Digital House" />
         <meta name="twitter:description" content="SEO, Paid Media, Web Dev, Mobile Apps, AI Solutions & more. Global digital agency serving clients worldwide." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
+        <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-services.jpeg" />
       </Helmet>
 
       <ServicesHero />
