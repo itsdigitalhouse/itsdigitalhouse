@@ -54,11 +54,11 @@ const ServicesHero = () => {
             <h1 className="text-2xl md:text-4xl lg:text-[2.6rem] text-left block whitespace-nowrap text-white">
               CREATIVE SOLUTIONS
             </h1>
-            
-            <h1 className="text-2xl md:text-4xl lg:text-[2.6rem] text-left block whitespace-nowrap pl-[12%] md:pl-[15%] lg:pl-[18%] text-white mt-1">
+
+            <h2 className="text-2xl md:text-4xl lg:text-[2.6rem] text-left block whitespace-nowrap pl-[12%] md:pl-[15%] lg:pl-[18%] text-white mt-1">
               BUILDING BRANDS
-            </h1>
-          </motion.div>
+            </h2>
+                      </motion.div>
         </div>
 
         <div className="lg:col-span-4 flex justify-center items-center relative w-full min-h-[420px] lg:min-h-[580px] order-2 z-10 overflow-visible cursor-pointer">

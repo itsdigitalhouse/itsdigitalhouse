@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const InsightGrid = () => {
   const [activeCategory, setActiveCategory] = useState('All');
-  const categories = ['All', 'Development', 'Branding', 'Marketing'];
+  const categories = ['All', 'Development', 'Branding', 'Marketing', 'AI'];
 
   const articles = [
     { category: "Development", date: "April 20, 2026", title: "Scalable App Architecture: Building for the Next Billion Users", desc: "Explore how leveraging modern frameworks like React Native and Flutter enables cross-platform performance without compromising on native-like speed.", readTime: "5 min read" },
@@ -13,12 +13,16 @@ const InsightGrid = () => {
     { category: "Marketing", date: "April 20, 2026", title: "Automating Your Sales Pipeline: The Digital Hunter Advantage", desc: "Discover how we integrate custom Python scripts to scale lead generation and streamline outreach for international markets.", readTime: "7 min read" },    
     { category: "Marketing", date: "April 28, 2026", title: "Data-Driven Outreach: Targeting UK & Middle East Markets", desc: "Insights into building efficient lead tracking systems and strategic marketing campaigns that resonate with international audiences.", readTime: "7 min read" },
     { category: "Marketing", date: "May 11, 2026", title: "Turning Digital Footprints into Revenue Streams", desc: "A strategic look at how our agency uses full-service digital marketing solutions to transform online identity into measurable business growth.", readTime: "7 min read" },
+    { category: "AI",date: "June 17, 2026", title: "How AI is Transforming Digital Marketing for UK Businesses in 2026", desc: "Discover how UK businesses are leveraging AI-powered marketing strategies to automate campaigns, generate leads, and achieve measurable growth in a competitive digital landscape.", readTime: "6 min read"},
     { category: "Marketing", date: "May 19, 2026", title: "The Science of Lead Conversion for Enterprise Clients", desc: "Breaking down the systems and processes we use to capture, nurture, and convert high-value prospects into long-term clients.", readTime: "7 min read" },
+    
 
     { category: "Branding", date: "April 20, 2026", title: "The Art of Premium Motion: Elevating Brands with GSAP", desc: "Learn how high-end web animations and interactive design elements transform a standard interface into a memorable, premium brand identity.", readTime: "4 min read" },
     { category: "Branding", date: "April 28, 2026", title: "Crafting a High-Tech Aesthetic for Modern Brands", desc: "How we combine minimal design, 3D effects, and smooth transitions to help brands stand out in a competitive digital world.", readTime: "4 min read" },
     { category: "Branding", date: "May 11, 2026", title: "Identity Beyond the Logo: Building a Cohesive Digital Presence", desc: "An exploration of how design, technology, and strategy work together to create seamless experiences that strengthen branding.", readTime: "4 min read" },
     { category: "Branding", date: "May 19, 2026", title: "Visual Authority: Why Aesthetics Impact Conversion Rates", desc: "Analyzing the link between premium digital design and user trust, specifically for businesses looking to project growth and innovation.", readTime: "4 min read" },
+
+    
 
  ];
 

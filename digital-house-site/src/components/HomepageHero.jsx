@@ -35,9 +35,9 @@ const HomepageHero = () => {
 
       {/* Background Typo - pt-5 se pt-10 kiya, thora neeche */}
       <div className="absolute inset-0 flex items-start justify-center pt-18 md:pt-5 pointer-events-none">
-        <h1 className="text-[28vw] sm:text-[26vw] lg:text-[30vw] font-black uppercase text-[#F0F0F0] leading-none select-none tracking-tighter">
-          DIGITAL
-        </h1>
+        <div className="text-[28vw] sm:text-[26vw] lg:text-[30vw] font-black uppercase text-[#F0F0F0] leading-none select-none tracking-tighter">
+  DIGITAL
+</div>
       </div>
 
       {/* ── MOBILE LAYOUT ── */}
@@ -58,10 +58,10 @@ const HomepageHero = () => {
 
         {/* Heading + Paragraph */}
         <div className="mt-auto flex flex-col gap-2 w-full pb-14">
-          <h2 className="font-black uppercase tracking-tighter leading-[0.9]
+          <h1 className="font-black uppercase tracking-tighter leading-[0.9]
             text-[11vw] xs:text-[10.5vw] sm:text-[9vw]">
             Where Ideas <br /> Made Digital.
-          </h2>
+          </h1>
           <p className="font-medium leading-relaxed opacity-70
             text-[11px] xs:text-[12px] sm:text-[13px] max-w-[300px]">
             BUILDING POWERFUL DIGITAL EXPERIENCES THAT DRIVE GROWTH THROUGH DESIGN, DEVELOPMENT & STRATEGY.
@@ -90,9 +90,9 @@ const HomepageHero = () => {
 
         {/* Bottom text */}
         <div className="mt-auto grid grid-cols-2 items-end z-30 pb-20">
-          <h2 className="font-black uppercase tracking-tighter leading-[0.9] text-[6vw] lg:text-[4vw]">
+          <h1 className="font-black uppercase tracking-tighter leading-[0.9] text-[6vw] lg:text-[4vw]">
             Where Ideas <br /> Made Digital.
-          </h2>
+          </h1>
           <div className="flex justify-end">
             <p className="text-[15px] max-w-[450px] font-medium leading-relaxed opacity-70 text-right mb-10">
               BUILDING POWERFUL DIGITAL EXPERIENCES THAT DRIVE GROWTH THROUGH DESIGN, DEVELOPMENT & STRATEGY.
