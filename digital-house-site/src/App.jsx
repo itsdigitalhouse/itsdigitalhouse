@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import ServicesPage from './pages/ServicesPage';
-import Contact from './pages/Contact';
-import Solutions from './pages/Solutions';
-import Insights from './pages/Insights';
+import Home from './pages/Home'; // 🚀 Home ko normal import rakha taake 1-second ka flash khatam ho jaye
 import ScrollToTop from './components/ScrollToTop';
 // import WelcomePopup from './components/WelcomePopup';
 import GlobalLoader from './components/GlobalLoader';
-import ChatWidget from './components/ChatWidget'; // 🚀 AI Chat Bot Widget Import Kiya
-import ServiceDetailPage from './components/ServiceDetailPage';
-import SolutionDetailPage from './components/SolutionDetailPage'; // 🚀 Naya Dynamic Solution Page Import Kiya
+import ChatWidget from './components/ChatWidget'; 
 import CustomCursor from './components/CustomCursor';
+
+// 🚀 Baqi saare pages lazy load hote rahenge (Unused JS ka masla hal rahega)
+const About = lazy(() => import('./pages/About'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Solutions = lazy(() => import('./pages/Solutions'));
+const Insights = lazy(() => import('./pages/Insights'));
+const ServiceDetailPage = lazy(() => import('./components/ServiceDetailPage'));
+const SolutionDetailPage = lazy(() => import('./components/SolutionDetailPage')); 
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,29 +48,33 @@ function App() {
         {/* <WelcomePopup /> */}
 
         <main>
-          {/* Routes ke andar sirf woh pages hain jin par content show hoga */}
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<ServicesPage />} />
-            
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/solutions" element={<Solutions />} />
-            <Route path="/insights" element={<Insights />} /> 
+          {/* Internal pages jab load hon to smooth fallback spinner ya screen aaye */}
+          <Suspense 
+            fallback={
+              <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white font-sans text-xs uppercase tracking-[0.2em]">
+                Loading...
+              </div>
+            }
+          >
+            <Routes>
+              {/* Home ab instantly render hoga bagair kisi jhatke ke */}
+              <Route path="/" element={<Home />} />
+              
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/solutions" element={<Solutions />} />
+              <Route path="/insights" element={<Insights />} /> 
 
-            {/* SERVICES DYNAMIC ROUTE */}
-            <Route path="/services/:category/:slug" element={<ServiceDetailPage />} />
-
-            {/* 🚀 NAYA SOLUTIONS DYNAMIC ROUTE */}
-            {/* Ab /solutions/retail-erp ho ya /solutions/zakya-pos, sab is ek route se handle honge */}
-            <Route path="/solutions/:slug" element={<SolutionDetailPage />} />
-
-          </Routes>
+              {/* DYNAMIC ROUTES */}
+              <Route path="/services/:category/:slug" element={<ServiceDetailPage />} />
+              <Route path="/solutions/:slug" element={<SolutionDetailPage />} />
+            </Routes>
+          </Suspense>
         </main>
         
         <Footer />
 
-        {/* 🚀 AI Bot floating dynamic layer (Puri Website Par Har Page Par Float Karega) */}
         <ChatWidget />
         <CustomCursor />
       </div>

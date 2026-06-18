@@ -41,9 +41,10 @@ const ChatWidget = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-[99999] font-sans">
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button (Added dynamic aria-label for Accessibility) */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close Chatbot" : "Open Chatbot"}
         className="w-14 h-14 bg-slate-950 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#ee3444] transition-all transform active:scale-95"
       >
         {isOpen ? (

@@ -14,7 +14,7 @@ const About = () => {
     <div className="bg-white min-h-screen selection:bg-[#d24a8a] selection:text-white">
       <Helmet>
         <title>About Us | Its Digital House - Creative Digital Agency</title>
-        <meta name="description" content="Learn about Its Digital House — a globally recognized creative digital agency with a passionate team dedicated to building iconic digital experiences through design, strategy, and technology." />
+        <meta name="description" content="Discover Its Digital House—a global creative agency building iconic digital experiences through high-end design, strategy, and modern technology." />
         <meta name="keywords" content="about digital agency, creative agency team, digital house agency, agency vision, global digital agency, digital marketing experts, web design company, agency founders, digital transformation company" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Its Digital House" />
@@ -22,7 +22,7 @@ const About = () => {
 
         {/* Open Graph */}
         <meta property="og:title" content="About Us | Its Digital House - Creative Digital Agency" />
-        <meta property="og:description" content="Meet the team behind Its Digital House — building powerful digital experiences that drive growth worldwide." />
+        <meta property="og:description" content="Discover Its Digital House—a global creative agency building iconic digital experiences through high-end design, strategy, and modern technology." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/about" />
         <meta property="og:site_name" content="Its Digital House" />
@@ -33,7 +33,7 @@ const About = () => {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About Us | Its Digital House" />
-        <meta name="twitter:description" content="Globally recognized creative digital agency. Learn our story, vision, and the team behind our success." />
+        <meta name="twitter:description" content="Discover Its Digital House—a global creative agency building iconic digital experiences through high-end design, strategy, and modern technology." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
         <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-about.jpeg" />
       </Helmet>

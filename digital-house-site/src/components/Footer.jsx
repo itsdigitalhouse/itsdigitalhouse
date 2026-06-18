@@ -25,13 +25,14 @@ const Footer = () => {
     }
   };
 
+  // Har social link ke sath 'name' add kiya hai accessibility ke liye
   const socials = [
-    { icon: <FaFacebookF />,  color: "#1877F2", href: "https://www.facebook.com/Itsdigitalhousee/" },
-    { icon: <FaInstagram />,  color: "#E4405F", href: "https://www.instagram.com/itsdigitalhouse/" },
-    { icon: <FaLinkedinIn />, color: "#0A66C2", href: "https://www.linkedin.com/company/its-digital-house/" },
-    { icon: <FaPinterestP />, color: "#BD081C", href: "https://www.pinterest.com/itsdigitalhouse/" },
-    { icon: <FaXTwitter />,   color: "#ffffff", href: "https://x.com/Itsdigitalhouse" },
-    { icon: <FaTiktok />,     color: "#ffffff", href: "https://www.tiktok.com/@its.digital.house" },
+    { name: "Facebook", icon: <FaFacebookF />,  color: "#1877F2", href: "https://www.facebook.com/Itsdigitalhousee/" },
+    { name: "Instagram", icon: <FaInstagram />,  color: "#E4405F", href: "https://www.instagram.com/itsdigitalhouse/" },
+    { name: "LinkedIn", icon: <FaLinkedinIn />, color: "#0A66C2", href: "https://www.linkedin.com/company/its-digital-house/" },
+    { name: "Pinterest", icon: <FaPinterestP />, color: "#BD081C", href: "https://www.pinterest.com/itsdigitalhouse/" },
+    { name: "X (Twitter)",   icon: <FaXTwitter />,   color: "#ffffff", href: "https://x.com/Itsdigitalhouse" },
+    { name: "TikTok",    icon: <FaTiktok />,     color: "#ffffff", href: "https://www.tiktok.com/@its.digital.house" },
   ];
 
   return (
@@ -115,6 +116,7 @@ const Footer = () => {
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Follow Its Digital House on ${item.name}`} // Dynamic aria-label add kar diya
               whileHover={{ scale: 1.25, color: "#ffffff", y: -8 }}
               style={{ color: item.color }}
               className="text-lg sm:text-xl md:text-3xl p-3 sm:p-3.5 md:p-4 bg-white/5 rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm border border-white/5"
@@ -134,6 +136,7 @@ const Footer = () => {
         href="https://wa.me/yournumber"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp" // Idhar bhi safe side ke liye aria-label de diya
         className="fixed bottom-5 left-5 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8 z-[999] bg-[#25D366] p-3 sm:p-3.5 md:p-4 rounded-full shadow-2xl hover:scale-110 transition-all"
       >
         <img

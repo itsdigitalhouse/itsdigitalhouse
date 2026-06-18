@@ -10,7 +10,7 @@ const Contact = () => {
     <div className="w-full bg-slate-950 text-white">
       <Helmet>
         <title>Contact Us | Its Digital House - Let's Build Something Great</title>
-        <meta name="description" content="Get in touch with Its Digital House. Whether you need web design, SEO, digital marketing, AI solutions, or custom software — our global team is ready to help you grow." />
+        <meta name="description" content="Get in touch with Its Digital House. Our global team is ready to help you grow with web design, SEO, digital marketing, and AI solutions." />
         <meta name="keywords" content="contact digital agency, hire digital agency, digital marketing consultation, web design quote, SEO consultation, contact Its Digital House, digital agency inquiry, schedule a call, project brief, digital agency contact" />
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Its Digital House" />
@@ -18,7 +18,7 @@ const Contact = () => {
 
         {/* Open Graph */}
         <meta property="og:title" content="Contact Us | Its Digital House" />
-        <meta property="og:description" content="Ready to build something extraordinary? Contact Its Digital House for web design, SEO, AI, and digital marketing services worldwide." />
+        <meta property="og:description" content="Get in touch with Its Digital House. Our global team is ready to help you grow with web design, SEO, digital marketing, and AI solutions." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.itsdigitalhouse.com/contact" />
         <meta property="og:site_name" content="Its Digital House" />
@@ -30,7 +30,7 @@ const Contact = () => {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contact Us | Its Digital House" />
-        <meta name="twitter:description" content="Let's build something extraordinary together. Get in touch with our global digital agency team." />
+        <meta name="twitter:description" content="Get in touch with Its Digital House. Our global team is ready to help you grow with web design, SEO, digital marketing, and AI solutions." />
         <meta name="twitter:site" content="@Itsdigitalhouse" />
         <meta name="twitter:image" content="https://www.itsdigitalhouse.com/og-contact.jpeg" />
       </Helmet>
