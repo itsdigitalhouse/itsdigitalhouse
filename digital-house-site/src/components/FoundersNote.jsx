@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import websiteelevateImg from '../assets/websitetoelevate.jpg';
+import buildingrobustImg from '../assets/buildinfrobust.jpg';
+import bridgeitgapImg from '../assets/bridgethegap.jpg';
+import highperformanceImg from '../assets/high-performance.jpg';
+import managingandscalingImg from '../assets/managingandscaling.jpg';
+import digitalstrategyImg from '../assets/digitalstrategy.jpg';
+import artificialintelligenceImg from '../assets/artificial-intelligence.jpg';
 
 const services = [
   {
@@ -7,7 +14,7 @@ const services = [
     title: "WEB DESIGN",
     tag: "01",
     description: "Crafting visually stunning and highly functional websites to elevate your online presence and engage your audience.",
-    image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=800",
+    image: websiteelevateImg,
     accent: "#e1b054",
     keywords: ["Figma", "Motion", "Typography", "Responsive"]
   },
@@ -16,7 +23,7 @@ const services = [
     title: "WEB DEVELOPMENT",
     tag: "02",
     description: "Building robust, scalable backends and high-performance frontends that turn complex visions into reality.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
+    image: buildingrobustImg,
     accent: "#ee3444",
     keywords: ["React", "Next.js", "Node", "APIs"]
   },
@@ -25,7 +32,7 @@ const services = [
     title: "UX / UI DESIGN",
     tag: "03",
     description: "Designing intuitive user experiences that bridge the gap between human needs and technical innovation.",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800",
+    image: bridgeitgapImg,
     accent: "#75b0d2",
     keywords: ["Research", "Wireframes", "Prototypes", "Testing"]
   },
@@ -34,7 +41,7 @@ const services = [
     title: "APP DEVELOPMENT",
     tag: "04",
     description: "Developing high-performance, cross-platform mobile apps with fluid animations and seamless user interfaces.",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
+    image: highperformanceImg,
     accent: "#7361a7",
     keywords: ["Flutter", "React Native", "iOS", "Android"]
   },
@@ -43,7 +50,7 @@ const services = [
     title: "SOCIAL MEDIA",
     tag: "05",
     description: "Managing and scaling your brand footprint across social structures with premium aesthetic content creation.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800",
+    image: managingandscalingImg,
     accent: "#d24a8a",
     keywords: ["Content", "SMM", "Branding", "Graphics"]
   },
@@ -52,7 +59,7 @@ const services = [
     title: "DIGITAL MARKETING",
     tag: "06",
     description: "Driving hyper-targeted growth campaigns and analytical structures to accelerate ROI and visibility.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    image: "digitalstrategyImg",
     accent: "#f1574d",
     keywords: ["SEO", "Growth", "PPC Campaigns", "Strategy"]
   },
@@ -61,7 +68,7 @@ const services = [
     title: "ARTIFICIAL INTELLIGENCE",
     tag: "07",
     description: "Integrating modern AI workflows, intelligent automation, and custom algorithms into your workflow architecture.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&q=80&w=800",
+    image: "artificialintelligenceImg",
     accent: "#34d399",
     keywords: ["LLMs", "Automation", "SaaS", "Integrations"]
   },
