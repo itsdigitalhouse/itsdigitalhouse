@@ -50,7 +50,7 @@ const GlobalReach = () => {
             className="relative w-full h-[350px] sm:h-[450px] lg:h-[500px] rounded-3xl overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.06)] group border border-gray-100"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-[#e1b054]/10 via-[#ee3444]/5 to-transparent z-10 transition-opacity duration-500 opacity-60 group-hover:opacity-100" />
-            <img src="{teamconceptImg}" alt="Global" className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <img src={teamconceptImg} alt="Global" className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out" />
           </motion.div>
 
         </div>

@@ -24,7 +24,7 @@ const SEOEngine = () => {
               transition={{ duration: 0.8 }}
               className="relative rounded-3xl overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.07)] border border-gray-100 h-[400px] md:h-[500px]"
             >
-              <img src="{digitalstrategyImg}" alt="SEO" className="w-full h-full object-cover" />
+              <img src={digitalstrategyImg} alt="SEO" className="w-full h-full object-cover" />
             </motion.div>
             
             <motion.div 

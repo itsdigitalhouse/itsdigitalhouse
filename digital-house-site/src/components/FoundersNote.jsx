@@ -59,7 +59,7 @@ const services = [
     title: "DIGITAL MARKETING",
     tag: "06",
     description: "Driving hyper-targeted growth campaigns and analytical structures to accelerate ROI and visibility.",
-    image: "digitalstrategyImg",
+    image: digitalstrategyImg,
     accent: "#f1574d",
     keywords: ["SEO", "Growth", "PPC Campaigns", "Strategy"]
   },
@@ -68,7 +68,7 @@ const services = [
     title: "ARTIFICIAL INTELLIGENCE",
     tag: "07",
     description: "Integrating modern AI workflows, intelligent automation, and custom algorithms into your workflow architecture.",
-    image: "artificialintelligenceImg",
+    image: artificialintelligenceImg,
     accent: "#34d399",
     keywords: ["LLMs", "Automation", "SaaS", "Integrations"]
   },
