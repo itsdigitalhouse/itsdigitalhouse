@@ -48,7 +48,7 @@ const AboutContactForm = () => {
   };
 
   return (
-    <div className="w-full relative bg-white py-16 md:py-28 overflow-hidden font-sans">
+    <div className="w-full relative bg-[#f4f6f8] py-16 md:py-28 overflow-hidden font-sans">
 
       {/* BACKGROUND FLOATING SHAPES */}
       <motion.div

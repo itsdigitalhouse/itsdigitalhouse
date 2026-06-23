@@ -35,7 +35,7 @@ const ScreenSolutions = () => {
     <section
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full bg-white overflow-hidden font-sans cursor-default
+      className="relative w-full bg-[white] overflow-hidden font-sans cursor-default
                  py-14 sm:py-16 md:py-20 lg:py-0 lg:min-h-screen lg:flex lg:items-center"
       style={{ perspective: '1500px' }}
     >
@@ -88,9 +88,8 @@ const ScreenSolutions = () => {
 
             {/* CTA */}
             <button>
-              <a 
-  href="/contact" 
-  className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4
+              <a href="/contact" 
+             className="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4
              bg-slate-950 text-white rounded-full
              font-black uppercase tracking-[0.2em]
              text-[10px] sm:text-xs

@@ -46,7 +46,7 @@ const DigitalPartners = () => {
   const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section className="relative w-full min-h-screen bg-[#f4f6f8] flex flex-col justify-center items-center py-16 lg:py-24 overflow-hidden">
+    <section className="relative w-full min-h-screen bg-[white] flex flex-col justify-center items-center py-16 lg:py-24 overflow-hidden">
       <div className="container mx-auto px-6 lg:px-10 flex flex-col items-center w-full">
 
         {/* ── HEADING: Single line requirement ── */}
