@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import digitalstrategyImg from '../assets/digitalstrategy.jpg';
 
 const SEOEngine = () => {
   const neonGradient = "linear-gradient(to right, #e1b054, #d24a8a, #ee3444, #75b0d2, #7361a7, #f1574d)";
@@ -23,7 +24,7 @@ const SEOEngine = () => {
               transition={{ duration: 0.8 }}
               className="relative rounded-3xl overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.07)] border border-gray-100 h-[400px] md:h-[500px]"
             >
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" alt="SEO" className="w-full h-full object-cover" />
+              <img src="{digitalstrategyImg}" alt="SEO" className="w-full h-full object-cover" />
             </motion.div>
             
             <motion.div 

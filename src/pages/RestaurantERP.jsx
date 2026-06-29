@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import restaurantImg from '../assets/restaurant.jpg';
 
 const RestaurantERP = () => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -89,7 +90,7 @@ const RestaurantERP = () => {
               className="w-full h-[350px] sm:h-[450px] rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-100"
             >
               <img 
-                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80" 
+                src="{restaurantImg}" 
                 alt="High Performance Enterprise Restaurant ERP Management System Display" 
                 className="w-full h-full object-cover"
               />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import legalmanagementImg from '../assets/legalmanagement.jpg';
 
 const LegalManagement = () => {
   const [activeFaq, setActiveFaq] = useState(null);
@@ -89,7 +90,7 @@ const LegalManagement = () => {
               className="w-full h-[350px] sm:h-[450px] rounded-[3rem] overflow-hidden shadow-2xl relative border border-slate-100"
             >
               <img 
-                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80" 
+                src="{legalmanagementImg}" 
                 alt="Enterprise Grade Corporate Legal Management Software Layout" 
                 className="w-full h-full object-cover"
               />

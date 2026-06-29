@@ -1,4 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import yorktestImg from '../assets/yorktest.jpg';
+import ideal4financeImg from '../assets/ideal4finance.jpg';
+import sofaluxuryImg from '../assets/luxurysofa.jpg';
+import logisticsandmineralsImg from '../assets/logisticsandminerals.jpg';
+import rawmaterialsImg from '../assets/rawmaterials.jpg';
+import digitalstrategyImg from '../assets/digitalstrategy.jpg';
+import commercialportalImg from '../assets/commercialportal.jpg';
+import minderalsandmetalImg from '../assets/minderalsandmetal.jpg';
 
 const CorePillars = () => {
   // Words rotation list
@@ -12,7 +20,7 @@ const CorePillars = () => {
       client: 'YorkTest',
       category: 'PPC',
       headline: '63% More PPC Revenue for Leading Health Brand',
-      mockupImage: 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'yorktestImg',
       bgColor: 'linear-gradient(135deg, #1d2b64 0%, #2a5298 100%)',
       waveColor: '#ee3444'
     },
@@ -21,7 +29,7 @@ const CorePillars = () => {
       client: 'Ideal4Finance',
       category: 'PPC & CRO',
       headline: <>70% More Conversions for <br />SME Finance Broker</>,
-      mockupImage: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'ideal4financeImg',
       bgColor: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
       waveColor: '#00B4A4'
     },
@@ -30,7 +38,7 @@ const CorePillars = () => {
       client: 'XOX Jewels',
       category: 'UX/UI Architecture',
       headline: 'Luxury Interactive E-Commerce Experience Built with Fabric.js',
-      mockupImage: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'luxurysofaImg',
       bgColor: 'linear-gradient(135deg, #7F00FF 0%, #E100FF 100%)',
       waveColor: '#ee3444'
     },
@@ -39,7 +47,7 @@ const CorePillars = () => {
       client: 'Bathia Ocean Gold',
       category: 'Agro-Mining Portal',
       headline: 'Global Asset Tracking & Logistics Framework Architecture',
-      mockupImage: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'logisticsandmineralsImg',
       bgColor: 'linear-gradient(135deg, #0f2027 0%, #203a43 100%)',
       waveColor: '#75b0d2'
     },
@@ -48,7 +56,7 @@ const CorePillars = () => {
       client: 'Portcity Traders',
       category: 'Agro Import-Export',
       headline: 'Raw Materials & Agro Supply Chain Enterprise System',
-      mockupImage: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'rawmaterialsImg',
       bgColor: 'linear-gradient(135deg, #e65c00 0%, #F9D423 100%)',
       waveColor: '#F9D423'
     },
@@ -57,7 +65,7 @@ const CorePillars = () => {
       client: 'Its Digital House',
       category: 'Agency Portfolio',
       headline: 'Premium Next-Gen Digital Strategy & Web Experiences',
-      mockupImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'digitalstrategyImg',
       bgColor: 'linear-gradient(135deg, #00c6ff 0%, #0072ff 100%)',
       waveColor: '#00c6ff'
     },
@@ -66,7 +74,7 @@ const CorePillars = () => {
       client: 'Khaki & Co',
       category: 'Real Estate & Building',
       headline: 'Interactive Infrastructure Commercial Portal Engine',
-      mockupImage: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'commercialportalImg',
       bgColor: 'linear-gradient(135deg, #30475e 0%, #f05454 100%)',
       waveColor: '#f05454'
     },
@@ -75,7 +83,7 @@ const CorePillars = () => {
       client: 'BOG Minerals',
       category: 'Agro-Mining',
       headline: 'Precious Minerals & Metals Logistics Management Portal',
-      mockupImage: 'https://images.unsplash.com/photo-1610374792793-f016b77ca51a?q=80&w=1200&auto=format&fit=crop',
+      mockupImage: 'minderalsandmetalImg',
       bgColor: 'linear-gradient(135deg, #141e30 0%, #243b55 100%)',
       waveColor: '#f3b05a'
     }

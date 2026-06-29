@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import usersgraphImg from '../assets/usersgraph.jpg';
+import digitalstrategyImg from '../assets/digitalstrategyImg'
 
 const PRAgencyERP = () => {
   const [activeSegment, setActiveSegment] = useState("media_crm");
@@ -160,7 +162,7 @@ const PRAgencyERP = () => {
             
             <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800">
               <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1800&q=80" 
+                src="{usersgraphImg}" 
                 alt="PR ERP Analytical Node Dashboard Look" 
                 className="w-full h-full object-cover object-center brightness-90 contrast-105 group-hover:scale-[1.01] transition-transform duration-700 pointer-events-none"
               />
@@ -262,7 +264,7 @@ const PRAgencyERP = () => {
             <div className="lg:col-span-5 sticky top-28 bg-slate-50 p-4 border border-slate-200/60 rounded-3xl shadow-sm">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-slate-950">
                 <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" 
+                  src="{digitalstrategyImg}" 
                   alt="UK Communication Strategy Core Operational Concept Map" 
                   className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700 pointer-events-none"
                 />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import manufacturingImg from '../assets/manufacturing.jpg';
 
 const ManufacturingERP = () => {
   const [activeTab, setActiveTab] = useState("line_1");
@@ -327,7 +328,7 @@ const ManufacturingERP = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 group shadow-sm">
             <img 
-              src="https://images.unsplash.com/photo-1565891741441-64926e441838?auto=format&fit=crop&w=2000&q=80" 
+              src="{manufacturingImg}" 
               alt="Advanced Automated Manufacturing Facility and Assembly Line" 
               className="w-full h-full object-cover brightness-[0.85] contrast-105 group-hover:scale-[1.01] transition-all duration-700 pointer-events-none"
             />
